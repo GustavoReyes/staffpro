@@ -1,0 +1,34 @@
+src/
+├── users/
+│   ├── user.entity.ts
+│   ├── users.module.ts
+│   ├── users.service.ts
+│   ├── users.controller.ts
+│   └── dto/
+├── empleados/
+│   ├── empleado.entity.ts
+│   ├── empleados.module.ts
+│   ├── empleados.service.ts
+│   ├── empleados.controller.ts
+│   └── dto/
+├── payroll/
+│   ├── payroll.entity.ts
+│   ├── payroll.module.ts
+│   ├── payroll.service.ts
+│   ├── payroll.controller.ts
+│   └── dto/
+├── leaves/
+│   ├── leave.entity.ts
+│   ├── leaves.module.ts
+│   ├── leaves.service.ts
+│   ├── leaves.controller.ts
+│   └── dto/
+├── departments/
+│   ├── department.entity.ts
+│   ├── departments.module.ts
+│   ├── departments.service.ts
+│   ├── departments.controller.ts
+│   └── dto/
+├── app.module.ts
+
+
