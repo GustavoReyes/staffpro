@@ -20,7 +20,7 @@ export class UserService {
  * @memberof UserService
  */
 async create(user: User):Promise<User> {
-return await this.userRepository.save(user)
+return await this.userRepository.create(user)
 }
 
 /**
