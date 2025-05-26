@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './user.model';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 
  
 @Injectable()
@@ -63,10 +63,10 @@ async findByDepartmentId(departmentId: number): Promise<User[]> {
  * @return {*}  {Promise<User[]>}
  * @memberof UserService
  */
-async findByRoleAndDepartmentId(role:string, departmentId:number) :Promise<User[]>{
+async findByRoleAndDepartmentId(role:string, department_id:number) :Promise<User[]>{
 return await this.userRepository.find({where: {
 role: role,
- departmentId: departmentId,
+ department_id: department_id,
  },});
 }
 
@@ -98,7 +98,7 @@ async update(dni: string, updateData: Partial<User>): Promise<User > {
  * @memberof UserService
  */
 async delete(dni: string): Promise<boolean> {
-  const result = await this.userRepository.delete({ dni });
-  return result.affected !== 0;
+  const result:DeleteResult = await this.userRepository.delete({ dni:dni });
+  return result.affected > 0;
 }
 }

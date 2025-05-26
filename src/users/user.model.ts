@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Department } from 'src/departments/departments.model';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity('users') 
 export class User {
@@ -18,7 +19,11 @@ export class User {
   password?: string;
 
   @Column({ nullable: true })
-  departmentId?: number;
+  department_id?: number;
+
+  @ManyToOne(() => Department, (department) => department.users)
+  @JoinColumn({ name: 'department_id' }) 
+  department: Department;
 }
 
 

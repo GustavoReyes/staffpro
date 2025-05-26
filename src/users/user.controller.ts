@@ -50,4 +50,32 @@ async findAll(): Promise<User[]> {
 async findByDni(@Param ('dni')dni:string): Promise<User> {
        return await this.userService.findByDni(dni);
   }
+
+@Get("findByDepartmentId/:departmentId")
+async findByDepartmentId(@Param ('departmentId')departmentId:number): Promise<User[]> {
+       return await this.userService.findByDepartmentId(departmentId);
+  }
+@Get("findByRoleAndDepartment/:role/:department_id")
+async findByRoleAndDepartment(
+  @Param('role') role: string,
+  @Param('department_id') department_id: number,
+): Promise<User[]> {
+  return await this.userService.findByRoleAndDepartmentId(role, department_id);
+}
+@Patch(':dni')
+async updateUser(@Param('dni') dni: string, @Body() updateData: Partial<User>): Promise<User> {
+  return await this.userService.update(dni, updateData);
+}
+
+@Delete(':dni')
+async deleteUser(@Param('dni') dni: string, @Res() res: Response) {
+  const resultado = await this.userService.delete(dni);
+  if (resultado) {
+    res.status(204).send(); 
+  } else {
+    res.status(404).json({ message: 'Usuario no encontrado' });
+  }
+}
+
+
 }
