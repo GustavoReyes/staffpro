@@ -2,7 +2,7 @@ import {
   Controller,
 } from '@nestjs/common';
 
-import { PayrollService } from 'src/Service/payroll.service';
+import { PayrollService } from 'src/payroll/payroll.service';
 
 @Controller('payroll')
 export class PayrollController {

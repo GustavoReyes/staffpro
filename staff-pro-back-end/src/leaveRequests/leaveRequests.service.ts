@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { LeaveRequests } from 'src/Model/LeaveRequests';
+import { LeaveRequests } from 'src/leaveRequests/leaveRequests.entity';
 
 @Injectable()
 export class LeaveRequestService {
