@@ -19,7 +19,7 @@ export class Payroll{
     @Column()
     total?:string;
 
-    constructor(id:number,employee_dni:string,month:string,year:string,base_salary:string,bonuses:string,deductions:string,total:string){
+    constructor(id:number,employee_dni?:string,month?:string,year?:string,base_salary?:string,bonuses?:string,deductions?:string,total?:string){
         this.id=id
         this.employee_dni=employee_dni
         this.month=month

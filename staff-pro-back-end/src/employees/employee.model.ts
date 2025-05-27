@@ -10,15 +10,15 @@ export class Employee{
     position?:string;
     @Column()
     salary?:string;
-    @Column({nullable:true})
-    hire_date?:string;
+    @Column({type:"datetime"})
+    hire_date?:Date;
 
-    constructor(id:number,user_dni:string,position:string,salary:string,hire_date?:string){
+    constructor(id:number,user_dni?:string,position?:string,salary?:string,hire_date?:Date){
         this.id=id
         this.user_dni=user_dni
         this.position=position
         this.salary=salary
-        this.hire_date=hire_date
+        this.hire_date=hire_date || new Date();
     }
 
 }
