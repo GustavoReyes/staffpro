@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Imports de los modelos //
 
-import { Users } from './users.entity';
+import { Users } from './user.model';
 
 // Imports de los controladores //
 

@@ -1,19 +1,19 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("leaveRequests")
-export class LeaveRequests{
+@Entity("leaveRequest")
+export class LeaveRequest{
     @PrimaryGeneratedColumn("identity")
     id:number;
     @Column()
-    employee_dni:string;
+    employee_dni?:string;
     @Column({nullable:true})
-    type:string;
+    type?:string;
     @Column({nullable:true})
-    start_date:string;
+    start_date?:string;
     @Column({nullable:true})
-    end_date:string;
+    end_date?:string;
     @Column()
-    status:string;
+    status?:string;
 
     constructor(id:number,employee_dni:string,type:string,start_date:string,end_date:string,status:string){
         this.id=id

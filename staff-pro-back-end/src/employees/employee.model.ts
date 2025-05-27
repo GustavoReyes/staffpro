@@ -1,17 +1,17 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("Employees")
-export class Employees{
+@Entity("Employee")
+export class Employee{
     @PrimaryGeneratedColumn("identity")
     id:number;
     @Column()
-    user_dni:string;
+    user_dni?:string;
     @Column()
-    position:string;
+    position?:string;
     @Column()
-    salary:string;
+    salary?:string;
     @Column({nullable:true})
-    hire_date:string;
+    hire_date?:string;
 
     constructor(id:number,user_dni:string,position:string,salary:string,hire_date?:string){
         this.id=id

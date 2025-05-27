@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Imports de los modelos //
 
-import { Payroll } from './payroll.entity';
+import { Payroll } from './payroll.model';
 
 // Imports de los controladores //
 

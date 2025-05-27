@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Imports de los modelos //
 
-import { LeaveRequests } from './leaveRequests.entity';
+import { LeaveRequests } from './leaveRequest.model';
 
 // Imports de los controladores //
 

@@ -1,19 +1,19 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("Users")
-export class Users{
+@Entity("User")
+export class User{
     @PrimaryGeneratedColumn("identity")
     dni:string;
     @Column()
-    name:string;
+    name?:string;
     @Column({nullable:true})
-    email:string;
+    email?:string;
     @Column({nullable:true})
-    password:string;
+    password?:string;
     @Column()
-    role:string;
+    role?:string;
     @Column()
-    departmentId:number;
+    departmentId?:number;
 
     constructor(dni:string,name:string,email:string,password:string,role:string,departmentId:number){
         this.dni=dni

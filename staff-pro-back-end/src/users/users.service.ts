@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Users } from './users.entity';
+import { User } from './user.model';
 
 @Injectable()
 
 export class UsersService {
- constructor(@InjectRepository(Users)
- private readonly userRepository: Repository<Users>){
+ constructor(@InjectRepository(User)
+ private readonly userRepository: Repository<User>){
 }
 
 
@@ -19,7 +19,7 @@ export class UsersService {
  * @return {*}  {Promise<User>} El usuario creado, con todos sus campos completos desde la base de datos.
  * @memberof UserService
  */
-async create(user: Users):Promise<Users> {
+async create(user: User):Promise<User> {
 return await this.userRepository.create(user)
 }
 
@@ -29,7 +29,7 @@ return await this.userRepository.create(user)
  * @return {*}  {Promise<User[]>}
  * @memberof UserService
  */
-async findAll():Promise<Users[]> {
+async findAll():Promise<User[]> {
 return await this.userRepository.find();
 }
 
@@ -40,7 +40,7 @@ return await this.userRepository.find();
  * @return {*}  {Promise<User>} devuelve los datos de usuario. Puede dar null
  * @memberof UserService
  */
-async findByDni(dni: string): Promise<Users> {
+async findByDni(dni: string): Promise<User> {
   return await this.userRepository.findOneBy({ dni });
 }
 
@@ -51,7 +51,7 @@ async findByDni(dni: string): Promise<Users> {
  * @return {*}  {Promise<User[]>}
  * @memberof UserService
  */
-async findByDepartmentId(departmentId: number): Promise<Users[]> {
+async findByDepartmentId(departmentId: number): Promise<User[]> {
   return await this.userRepository.find( );
 }
 
@@ -63,7 +63,7 @@ async findByDepartmentId(departmentId: number): Promise<Users[]> {
  * @return {*}  {Promise<User[]>}
  * @memberof UserService
  */
-async findByRoleAndDepartmentId(role:string, departmentId:number) :Promise<Users[]>{
+async findByRoleAndDepartmentId(role:string, departmentId:number) :Promise<User[]>{
 return await this.userRepository.find({where: {
 role: role,
  departmentId: departmentId,
@@ -80,7 +80,7 @@ role: role,
  * @return {*}  {(Promise<User>)} por si no hay un usuario encontrado
  * @memberof UserService
  */
-async update(dni: string, updateData: Partial<Users>): Promise<Users> {
+async update(dni: string, updateData: Partial<User>): Promise<User> {
   const user = await this.userRepository.findOneBy({ dni });
   if (!user) {
     return null; 

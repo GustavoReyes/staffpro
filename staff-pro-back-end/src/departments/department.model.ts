@@ -1,11 +1,11 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("Departments")
-export class Departments{
+@Entity("Department")
+export class Department{
     @PrimaryGeneratedColumn("identity")
     id:number;
     @Column({nullable:true})
-    name:string;
+    name?:string;
 
     constructor(id:number,name:string){
         this.id=id

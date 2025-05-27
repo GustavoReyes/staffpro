@@ -5,19 +5,19 @@ export class Payroll{
     @PrimaryGeneratedColumn("identity")
     id:number;
     @Column()
-    employee_dni:string;
+    employee_dni?:string;
     @Column({nullable:true})
-    month:string;
+    month?:string;
     @Column({nullable:true})
-    year:string;
+    year?:string;
     @Column()
-    base_salary:string;
+    base_salary?:string;
     @Column()
-    bonuses:string;
+    bonuses?:string;
     @Column()
-    deductions:string;
+    deductions?:string;
     @Column()
-    total:string;
+    total?:string;
 
     constructor(id:number,employee_dni:string,month:string,year:string,base_salary:string,bonuses:string,deductions:string,total:string){
         this.id=id

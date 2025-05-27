@@ -9,7 +9,7 @@ import {
 import { Response } from 'express';
 
 import { UsersService } from './users.service';
-import { Users } from './users.entity';
+import { Users } from './user.model';
 
 @Controller('users')
 export class UsersController {
