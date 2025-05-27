@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Imports de los modelos //
 
-import { LeaveRequests } from './leaveRequest.model';
+import { LeaveRequest } from './leaveRequest.model';
 
 // Imports de los controladores //
 
@@ -16,7 +16,7 @@ import { LeaveRequestService } from './leaveRequests.service';
 // Modulo principal
 
 @Module({
-  imports: [TypeOrmModule.forFeature([LeaveRequests])],
+  imports: [TypeOrmModule.forFeature([LeaveRequest])],
   controllers: [LeaveRequestController],
   providers: [LeaveRequestService],
 })

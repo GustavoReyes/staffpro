@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Imports de los modelos //
 
-import { Users } from './user.model';
+import { User } from './user.model';
 
 // Imports de los controladores //
 
@@ -16,7 +16,7 @@ import { UsersService } from './users.service';
 // Modulo principal
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Users])],
+  imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
   providers: [UsersService],
   exports: [UsersService]

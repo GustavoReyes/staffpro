@@ -1,8 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn } from "typeorm";
 
-@Entity("User")
+@Entity("users")
 export class User{
-    @PrimaryGeneratedColumn("identity")
+    @PrimaryColumn()
     dni:string;
     @Column()
     name?:string;
@@ -13,15 +13,15 @@ export class User{
     @Column()
     role?:string;
     @Column()
-    departmentId?:number;
+    department_id?:number;
 
-    constructor(dni:string,name?:string,email?:string,password?:string,role?:string,departmentId?:number){
+    constructor(dni:string,name?:string,email?:string,password?:string,role?:string,department_id?:number){
         this.dni=dni
         this.name=name
         this.email=email
         this.password=password
         this.role=role
-        this.departmentId=departmentId
+        this.department_id=department_id
     }
 
 }

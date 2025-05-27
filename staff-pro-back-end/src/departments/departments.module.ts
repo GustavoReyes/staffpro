@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Imports de los modelos //
 
-import { Departments } from './department.model';
+import { Department } from './department.model';
 
 // Imports de los controladores //
 
@@ -16,7 +16,7 @@ import { DepartmentsService } from './departments.service';
 // Modulo principal
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Departments])],
+  imports: [TypeOrmModule.forFeature([Department])],
   controllers: [DepartmentsController],
   providers: [DepartmentsService],
 })

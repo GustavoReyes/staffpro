@@ -3,14 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { User } from './user.model';
-
 @Injectable()
 
 export class UsersService {
  constructor(@InjectRepository(User)
  private readonly userRepository: Repository<User>){
 }
-
 
 /**
  *Crea un nuevo usuario en la base de datos, el método save: si ya estaba creado lo actualiza
@@ -47,30 +45,28 @@ async findByDni(dni: string): Promise<User> {
 /**
  *Encuentra todos los empleados de un mismo departamento
  *
- * @param {number} departmentId del 1 al 4
+ * @param {number} department_id del 1 al 4
  * @return {*}  {Promise<User[]>}
  * @memberof UserService
  */
-async findByDepartmentId(departmentId: number): Promise<User[]> {
-  return await this.userRepository.find( );
+async findByDepartmentId(department_id: number): Promise<User[]> {
+  return await this.userRepository.findBy({department_id});
 }
 
 /**
  *Encuentra todos los usuarios de un mismo rol y departamento
  *
  * @param {string} role Puede ser jefe(chief), empleado(employee) o recursos humanos(hr)
- * @param {number} departmentId 1 de recursos humanos,puede ser 2,3, o 4
+ * @param {number} department_id 1 de recursos humanos,puede ser 2,3, o 4
  * @return {*}  {Promise<User[]>}
  * @memberof UserService
  */
-async findByRoleAndDepartmentId(role:string, departmentId:number) :Promise<User[]>{
+async findByRoleAndDepartmentId(role:string, department_id:number) :Promise<User[]>{
 return await this.userRepository.find({where: {
 role: role,
- departmentId: departmentId,
+ department_id: department_id,
  },});
 }
-
-  
 
 /**
  *Actualizar información de un usuario.

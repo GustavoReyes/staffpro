@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Imports de los modelos //
 
-import { Employees } from './employee.model';
+import { Employee } from './employee.model';
 
 // Imports de los controladores //
 
@@ -16,7 +16,7 @@ import { EmployeesService } from './employees.service';
 // Modulo principal
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Employees])],
+  imports: [TypeOrmModule.forFeature([Employee])],
   controllers: [EmployeesController],
   providers: [EmployeesService],
 })
