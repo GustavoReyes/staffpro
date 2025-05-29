@@ -15,6 +15,8 @@ export class User{
     @Column()
     department_id?:number;
 
+    
+
     constructor(dni:string,name?:string,email?:string,password?:string,role?:string,department_id?:number){
         this.dni=dni
         this.name=name

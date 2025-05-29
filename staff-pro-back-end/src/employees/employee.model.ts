@@ -1,8 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("Employee")
+@Entity("employees")
 export class Employee{
-    @PrimaryGeneratedColumn("identity")
+    @PrimaryGeneratedColumn()
     id:number;
     @Column()
     user_dni?:string;

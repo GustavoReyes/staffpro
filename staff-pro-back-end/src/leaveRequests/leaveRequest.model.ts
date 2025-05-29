@@ -1,8 +1,9 @@
+//PERMISOS
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("leaveRequest")
+@Entity("leave_request")
 export class LeaveRequest{
-    @PrimaryGeneratedColumn("identity")
+    @PrimaryGeneratedColumn()
     id:number;
     @Column()
     employee_dni?:string;
