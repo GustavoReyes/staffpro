@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
-@Entity("employess")
+@Entity("employees")
 export class Employee {
     @PrimaryColumn()
     dni: string;
