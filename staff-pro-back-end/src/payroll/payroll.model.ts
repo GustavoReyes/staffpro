@@ -1,33 +1,64 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("Payroll")
-export class Payroll{
-    @PrimaryGeneratedColumn("identity")
-    id:number;
+@Entity("payroll")
+export class Payroll {
+    @PrimaryGeneratedColumn()
+    id: number;
     @Column()
-    employee_dni?:string;
-    @Column({nullable:true})
-    month?:string;
-    @Column({nullable:true})
-    year?:string;
+    user_dni?: string;
     @Column()
-    base_salary?:string;
+    base_salary: number
+    @Column({ nullable: true })
+    date?: Date;
+    @Column({ nullable: true })
+    bonus_1?: number;
     @Column()
-    bonuses?:string;
+    bonus_2?: number;
     @Column()
-    deductions?:string;
+    bonus_3?: number;
     @Column()
-    total?:string;
-
-    constructor(id:number,employee_dni?:string,month?:string,year?:string,base_salary?:string,bonuses?:string,deductions?:string,total?:string){
-        this.id=id
-        this.employee_dni=employee_dni
-        this.month=month
-        this.year=year
-        this.base_salary=base_salary
-        this.bonuses=bonuses
-        this.deductions=deductions
-        this.total=total
+    social_security?: number;
+    @Column()
+    irpf?: number;
+    @Column()
+    advance?: number;
+    @Column()
+    deduction1?: number;
+    @Column()
+    deduction2?: number;
+    @Column()
+    deduction3?: number;
+    @Column()
+    total?: number;
+    constructor(
+        id?: number,
+        user_dni?: string,
+        base_salary?: number,
+        date?: Date,
+        bonus_1?: number,
+        bonus_2?: number,
+        bonus_3?: number,
+        social_security?: number,
+        irpf?: number,
+        advance?: number,
+        deduction1?: number,
+        deduction2?: number,
+        deduction3?: number,
+        total?: number
+    ) {
+        this.id = id;
+        this.user_dni = user_dni;
+        this.base_salary = base_salary;
+        this.date = date;
+        this.bonus_1 = bonus_1;
+        this.bonus_2 = bonus_2;
+        this.bonus_3 = bonus_3;
+        this.social_security = social_security;
+        this.irpf = irpf;
+        this.advance = advance;
+        this.deduction1 = deduction1;
+        this.deduction2 = deduction2;
+        this.deduction3 = deduction3;
+        this.total = total;
     }
-
-}
+} 

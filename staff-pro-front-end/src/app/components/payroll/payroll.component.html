@@ -1,0 +1,214 @@
+<div class="max-w-5xl mx-auto p-6">
+  <h2 class="text-2xl font-bold mb-4" *ngIf="!editing">Agregar Nómina</h2>
+  <h2 class="text-2xl font-bold mb-4" *ngIf="editing">Editar Nómina</h2>
+  <form
+    (ngSubmit)="editing ? updatePayroll() : addPayroll()"
+    class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white p-6 rounded shadow mb-8"
+  >
+    <div>
+      <label class="block text-sm font-medium mb-1">DNI Usuario</label>
+      <input
+        title="DNI del usuario"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.user_dni"
+        name="user_dni"
+        required
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Salario Base</label>
+      <input
+        title="Salario base del usuario"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.base_salary"
+        name="base_salary"
+        required
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Fecha</label>
+      <input
+        title="Fecha de la nómina"
+        type="date"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.date"
+        name="date"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Bono 1</label>
+      <input
+        title="Bono 1 del usuario"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.bonus_1"
+        name="bonus1"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Bono 2</label>
+      <input
+        title="Bono 2 del usuario"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.bonus_2"
+        name="bonus2"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Bono 3</label>
+      <input
+        title="Bono 3 del usuario"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.bonus_3"
+        name="bonus3"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Seguridad Social</label>
+      <input
+        title="Seguridad Social del usuario"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.social_security"
+        name="social_security"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">IRPF</label>
+      <input
+        title="IRPF del usuario"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.irpf"
+        name="irpf"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Anticipo</label>
+      <input
+        title="Anticipo del usuario"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.advance"
+        name="advance"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Deducción 1</label>
+      <input
+        title="Deducción 1 del usuario"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.deduction1"
+        name="deduction1"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Deducción 2</label>
+      <input
+        title="Deducción 2 del usuario"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.deduction2"
+        name="deduction2"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Deducción 3</label>
+      <input
+        title="Deducción 3 del usuario"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.deduction3"
+        name="deduction3"
+      />
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Total</label>
+      <input
+        title="Total de la nómina"
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        [(ngModel)]="payroll.total"
+        name="total"
+      />
+    </div>
+    <div class="col-span-1 md:col-span-3 flex gap-2 mt-4">
+      <button
+        type="submit"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+      >
+        {{ editing ? "Actualizar" : "Agregar" }}
+      </button>
+      <button
+        *ngIf="editing"
+        type="button"
+        (click)="cancelEdit()"
+        class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 transition"
+      >
+        Cancelar
+      </button>
+    </div>
+  </form>
+
+  <h2 class="text-xl font-bold mb-2">Lista de Nóminas</h2>
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white rounded shadow">
+      <thead>
+        <tr>
+          <th class="px-2 py-1 border">ID</th>
+          <th class="px-2 py-1 border">DNI</th>
+          <th class="px-2 py-1 border">Salario Base</th>
+          <th class="px-2 py-1 border">Fecha</th>
+          <th class="px-2 py-1 border">Bono 1</th>
+          <th class="px-2 py-1 border">Bono 2</th>
+          <th class="px-2 py-1 border">Bono 3</th>
+          <th class="px-2 py-1 border">Seg. Social</th>
+          <th class="px-2 py-1 border">IRPF</th>
+          <th class="px-2 py-1 border">Anticipo</th>
+          <th class="px-2 py-1 border">Deducción 1</th>
+          <th class="px-2 py-1 border">Deducción 2</th>
+          <th class="px-2 py-1 border">Deducción 3</th>
+          <th class="px-2 py-1 border">Total</th>
+          <th class="px-2 py-1 border">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of payrolls">
+          <td class="px-2 py-1 border">{{ p.id }}</td>
+          <td class="px-2 py-1 border">{{ p.user_dni }}</td>
+          <td class="px-2 py-1 border">{{ p.base_salary }}</td>
+          <td class="px-2 py-1 border">{{ p.date | date : "yyyy-MM-dd" }}</td>
+          <td class="px-2 py-1 border">{{ p.bonus_1 }}</td>
+          <td class="px-2 py-1 border">{{ p.bonus_2 }}</td>
+          <td class="px-2 py-1 border">{{ p.bonus_3 }}</td>
+          <td class="px-2 py-1 border">{{ p.social_security }}</td>
+          <td class="px-2 py-1 border">{{ p.irpf }}</td>
+          <td class="px-2 py-1 border">{{ p.advance }}</td>
+          <td class="px-2 py-1 border">{{ p.deduction1 }}</td>
+          <td class="px-2 py-1 border">{{ p.deduction2 }}</td>
+          <td class="px-2 py-1 border">{{ p.deduction3 }}</td>
+          <td class="px-2 py-1 border">{{ p.total }}</td>
+          <td class="px-2 py-1 border flex gap-2">
+            <button
+              (click)="editPayroll(p)"
+              class="bg-yellow-400 text-white px-2 py-1 rounded hover:bg-yellow-500 transition"
+            >
+              Editar
+            </button>
+            <button
+              (click)="deletePayroll(p.id)"
+              class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 transition"
+            >
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<router-outlet></router-outlet>
