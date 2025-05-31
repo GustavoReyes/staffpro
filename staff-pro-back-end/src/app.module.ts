@@ -4,10 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 // Imports de los modulos //
 
 import { DepartmentsModule } from './departments/departments.module';
-import { EmployeesModule } from './employees/employees.module';
 import { LeaveRequestsModule } from './leaveRequests/leaveRequests.module';
 import { PayrollModule } from './payroll/payroll.module';
-import { UsersModule } from './users/users.module';
+import { EmployeeModule } from './employee/employee.module';
 
 
 // Modulo principal
@@ -24,10 +23,9 @@ entities: [__dirname + '/**/*.model{.ts,.js}'],
 synchronize: false,
     }),
     DepartmentsModule,
-    EmployeesModule,
+    EmployeeModule,
     LeaveRequestsModule,
-    PayrollModule,
-    UsersModule
+    PayrollModule
   ],
 })
 export class AppModule {}
