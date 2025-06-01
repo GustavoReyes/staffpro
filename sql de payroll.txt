@@ -9,7 +9,7 @@ CREATE TABLE `payroll` (
   `bonus_1` decimal(12,2) DEFAULT NULL,
   `bonus_2` decimal(12,2) DEFAULT NULL,
   `bonus_3` decimal(12,2) DEFAULT NULL,
-  `seguridad_social` decimal(12,2) DEFAULT NULL,
+  `social_security` decimal(12,2) DEFAULT NULL,
   `irpf` decimal(12,2) DEFAULT NULL,
   `advance` decimal(12,2) DEFAULT NULL,
   `deduction_1` decimal(12,2) DEFAULT NULL,
