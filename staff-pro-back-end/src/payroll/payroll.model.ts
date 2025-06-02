@@ -23,11 +23,11 @@ export class Payroll {
     @Column()
     advance?: number;
     @Column()
-    deduction1?: number;
+    deduction_1?: number;
     @Column()
-    deduction2?: number;
+    deduction_2?: number;
     @Column()
-    deduction3?: number;
+    deduction_3?: number;
     @Column()
     total?: number;
     constructor(
@@ -41,9 +41,9 @@ export class Payroll {
         social_security?: number,
         irpf?: number,
         advance?: number,
-        deduction1?: number,
-        deduction2?: number,
-        deduction3?: number,
+        deduction_1?: number,
+        deduction_2?: number,
+        deduction_3?: number,
         total?: number
     ) {
         this.id = id;
@@ -56,9 +56,9 @@ export class Payroll {
         this.social_security = social_security;
         this.irpf = irpf;
         this.advance = advance;
-        this.deduction1 = deduction1;
-        this.deduction2 = deduction2;
-        this.deduction3 = deduction3;
+        this.deduction_1 = deduction_1;
+        this.deduction_2 = deduction_2;
+        this.deduction_3 = deduction_3;
         this.total = total;
     }
-} 
+}  

@@ -1,0 +1,30 @@
+<div class="min-h-screen flex bg-gradient-to-br from-[#181C1F] to-[#23272A]">
+  <!-- Menú lateral derecho -->
+  <aside class="w-64 bg-[#181C1F] flex flex-col items-center py-10 shadow-2xl">
+    <div class="mb-10">
+      <img src="logo.png" alt="Logo" class=" object-fit tshadow-lg" />
+    </div>
+    <nav class="flex flex-col gap-6 w-full px-6">
+      <a
+        routerLink="/login"
+        routerLinkActive="bg-green-400 text-black"
+        class="block py-3 px-4 rounded-xl text-white hover:bg-green-400 hover:text-black transition text-center"
+        >Login</a
+      >
+      <a
+        routerLink="/payroll"
+        routerLinkActive="bg-green-400 text-black"
+        class="block py-3 px-4 rounded-xl text-white hover:bg-green-400 hover:text-black transition text-center"
+        >Nómina</a
+      >
+    </nav>
+    <div class="mt-auto text-gray-500 text-xs px-6 text-center">
+      © 2025 StaffPro
+    </div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="flex-1 flex items-center justify-center">
+    <router-outlet></router-outlet>
+  </main>
+</div>
