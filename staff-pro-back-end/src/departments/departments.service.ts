@@ -6,8 +6,25 @@ import { Department } from './department.model';
 
 @Injectable()
 export class DepartmentsService {
-  constructor(@InjectRepository(Department) private contactosRepository:Repository<Department>){}
+  constructor(@InjectRepository(Department) private departmentRepository: Repository<Department>) { }
 
-  // TODO: Controller con las funcionalidades que tendra la columna de Departments
+  async findAll(): Promise<Department[]> {
+    return await this.departmentRepository.find();
+  }
+  async findById(id: number): Promise<Department> {
+    return this.departmentRepository.findOneBy({ id });
+  }
+
+  create(department: Department): void {
+    this.departmentRepository.save(department);
+  }
+
+  update(id: number, department: Department): void {
+    this.departmentRepository.update(id, department);
+  }
+
+  delete(id: number): void {
+    this.departmentRepository.delete(id);
+  }
 
 }
