@@ -1,11 +1,14 @@
 import { Employee } from "src/employee/employee.model";
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { LeaveRequest } from "src/leaveRequests/leaveRequest.model";
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity("users")
 export class User {
     @PrimaryGeneratedColumn()
     id_user: number;
+    @OneToMany(() => LeaveRequest, leaveRequest => leaveRequest.user)
+    leaveRequests: LeaveRequest[];
     @Column()
     email: string;
     @Column()
