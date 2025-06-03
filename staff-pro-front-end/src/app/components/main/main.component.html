@@ -12,10 +12,14 @@
   </button>
 
   <!-- Menú lateral derecho -->
-  <aside
+<aside
+  class="fixed top-0 right-0 h-full w-72 bg-[#181C1F] flex flex-col items-center py-10 shadow-2xl z-40 transition-all duration-300 md:relative md:block"
+  [ngClass]="{'hidden': !menuOpen, 'block': menuOpen, 'md:block': true}"
+>
+  <!-- <aside
     class="fixed top-0 right-0 h-full w-70 bg-[#181C1F] flex flex-col items-center py-10 shadow-2xl z-40 transform transition-transform duration-300 md:relative md:translate-x-0"
     [ngClass]="{'translate-x-full': !menuOpen, 'translate-x-0': menuOpen, 'md:!translate-x-0': true}"
-  >
+  > -->
     <!-- Botón cerrar (solo móvil) -->
     <button
       class="absolute top-4 left-4 md:hidden text-gray-400 hover:text-white"
