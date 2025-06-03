@@ -7,8 +7,6 @@ import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typ
 export class User {
     @PrimaryGeneratedColumn()
     id_user: number;
-    @OneToMany(() => LeaveRequest, leaveRequest => leaveRequest.user)
-    leaveRequests: LeaveRequest[];
     @Column()
     email: string;
     @Column()
@@ -26,4 +24,6 @@ export class User {
     }
     @OneToOne(() => Employee, employee => employee.user)
     employee: Employee;
+    @OneToMany(() => LeaveRequest, leaveRequest => leaveRequest.user)
+    leaveRequests: LeaveRequest[];
 }
