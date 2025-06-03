@@ -11,8 +11,6 @@ export class Employee {
     @Column()
     id_user?: number;
     @Column()
-    role?: string;
-    @Column()
     department_id?: number;
     @Column()
     work_day?: number;
@@ -25,12 +23,10 @@ export class Employee {
     @Column()
     hire_day?: Date;
 
-
     constructor(
         dni: string,
         name?: string,
         id_user?: number,
-        role?:string,
         department_id?: number,
         work_day?: number,
         work_hour?: number,
@@ -41,7 +37,6 @@ export class Employee {
         this.dni = dni;
         this.name = name;
         this.id_user = id_user;
-        this.role = role;
         this.department_id = department_id;
         this.work_day = work_day;
         this.work_hour = work_hour;

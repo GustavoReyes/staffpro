@@ -18,7 +18,7 @@ export class UsersController {
     }
   }
 
-  @Get('finAll')
+  @Get('findAll')
   async getAllUsers(@Res() response: Response) {
     const users = await this.usersService.findAll();
     if (!users || users.length == 0) {
