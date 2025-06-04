@@ -15,7 +15,7 @@ export class LeaveRequest{
     @Column({type:"datetime"})
     start_date?:Date;
     @Column({nullable:true})
-    end_date?:string;
+    end_date?:Date;
     @Column()
     status?:string;
 
@@ -23,13 +23,13 @@ export class LeaveRequest{
         id?:number,
         type?:string,
         start_date?:Date,
-        end_date?:string,
+        end_date?:Date,
         status?:string
     ){
         this.id=id
         this.type=type
         this.start_date=start_date || new Date();
-        this.end_date=end_date
+        this.end_date=end_date || new Date();
         this.status=status
     }
 

@@ -3,6 +3,6 @@ export class LeaveRequestDto {
   id_user_fk: number;
   type?: string;
   start_date?: Date;
-  end_date?: string;
+  end_date?: Date;
   status?: string;
 }
