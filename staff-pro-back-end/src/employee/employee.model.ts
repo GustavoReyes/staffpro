@@ -21,7 +21,7 @@ export class Employee {
     @Column()
     position?: string;
     @Column()
-    hire_day?: Date;
+    hire_date?: Date;
 
     constructor(
         dni: string,
@@ -32,7 +32,7 @@ export class Employee {
         work_hour?: number,
         base_salary?: number,
         position?: string,
-        hire_day?: Date
+        hire_date?: Date
     ) {
         this.dni = dni;
         this.name = name;
@@ -42,7 +42,7 @@ export class Employee {
         this.work_hour = work_hour;
         this.base_salary = base_salary;
         this.position = position;
-        this.hire_day = hire_day;
+        this.hire_date = hire_date;
     }
 
     @ManyToOne(() => Department, (department) => department.employees)
