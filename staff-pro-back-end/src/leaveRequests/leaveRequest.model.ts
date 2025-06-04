@@ -1,7 +1,7 @@
 //PERMISOS
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("leave_request")
+@Entity("leave_requests")
 export class LeaveRequest{
     @PrimaryGeneratedColumn()
     id:number;
