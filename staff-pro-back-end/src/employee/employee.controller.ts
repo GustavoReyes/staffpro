@@ -16,14 +16,14 @@ import { Employee } from './employee.model';
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) { }
 
-
+  
   @Post("alta")
   async create(@Body() employee: Employee, @Res() response: Response) {
     const result = await this.employeeService.create(employee);
     if (result) {
-      response.status(200).send('Empleado agregado correctamente');
+      response.status(200).send();
     } else {
-      response.status(409).send('Hubo un error al agragar el empleado');
+      response.status(409).send();
     }
   }
 
@@ -33,7 +33,7 @@ export class EmployeeController {
   }
 
   @Get("findByUser/:id_user")
-  async findByUser(@Param('id_user') id_user: number) {
+  async findByUser(@Param('id_user') id_user: number){
     return await this.employeeService.findByUserId(id_user);
   }
 
@@ -42,13 +42,13 @@ export class EmployeeController {
     return await this.employeeService.findByDepartmentId(department_id);
   }
 
-  @Patch('path/:id_user')
-  async update(@Param('id_user') id_user: number, @Body() updateData: Employee) {
+  @Patch('patch/:id_user')
+  async update(@Param('id_user') id_user: number, @Body() updateData: Employee){
     return await this.employeeService.update(id_user, updateData);
-  }
+  } 
 
   @Delete('delete/:id_user')
   async delete(@Param('id_user') id_user: number) {
     return await this.employeeService.delete(id_user);
-  }
+  } 
 }
