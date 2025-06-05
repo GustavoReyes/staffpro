@@ -26,16 +26,5 @@ export class UsersController {
       return response.status(200).json(users);
     }
   }
-  @Post('alta')
-  async createUser(@Body() datos: any, @Res() response: Response) {
-
-    // Verificar si el usuario ya existe
-    const existing = await this.usersService.findByEmail(datos.email);
-    if (existing) {
-      return response.status(400).json({ message: 'El usuario ya existe' });
-    } else {
-      const newUser = await this.usersService.create(datos);
-      response.status(201).json(newUser);
-    }
-  }
+  
 }
