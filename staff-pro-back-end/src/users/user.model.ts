@@ -1,5 +1,6 @@
 import { Employee } from "src/employee/employee.model";
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { LeaveRequest } from "src/leaveRequests/leaveRequest.model";
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity("users")
@@ -23,4 +24,6 @@ export class User {
     }
     @OneToOne(() => Employee, employee => employee.user)
     employee: Employee;
+    @OneToMany(() => LeaveRequest, leaveRequest => leaveRequest.user)
+    leaveRequests: LeaveRequest[];
 }

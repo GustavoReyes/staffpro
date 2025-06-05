@@ -9,7 +9,7 @@ export class PayrollService {
   constructor(@InjectRepository(Payroll) private payrollRepository: Repository<Payroll>) {}
 
   // TODO: Controller con las funcionalidades que tendra la columna de Payroll
-create(payroll: Payroll): Promise<Payroll> {
+  create(payroll: Payroll): Promise<Payroll> {
     return this.payrollRepository.save(payroll);
   }
 

@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
-
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -18,7 +17,7 @@ export class UsersController {
     }
   }
 
-  @Get('finAll')
+  @Get('findAll')
   async getAllUsers(@Res() response: Response) {
     const users = await this.usersService.findAll();
     if (!users || users.length == 0) {
@@ -27,16 +26,5 @@ export class UsersController {
       return response.status(200).json(users);
     }
   }
-  @Post('alta')
-  async createUser(@Body() datos: any, @Res() response: Response) {
-
-    // Verificar si el usuario ya existe
-    const existing = await this.usersService.findByEmail(datos.email);
-    if (existing) {
-      return response.status(400).json({ message: 'El usuario ya existe' });
-    } else {
-      const newUser = await this.usersService.create(datos);
-      response.status(201).json(newUser);
-    }
-  }
+  
 }
