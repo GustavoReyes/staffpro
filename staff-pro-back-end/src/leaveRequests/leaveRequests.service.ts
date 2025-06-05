@@ -20,9 +20,13 @@ export class LeaveRequestService {
     });
   }
 
-  async create(dto: LeaveRequestDto): Promise<{success: boolean; message: string; data: LeaveRequestDto}> {
+async create(dto: LeaveRequestDto): Promise<{success: boolean; message: string; data?: LeaveRequestDto}> {
+  try {
     const leaveRequest = this.leaveRequestRepository.create({
-      ...dto,
+      type: dto.type,
+      start_date: dto.start_date ? new Date(dto.start_date) : undefined,
+      end_date: dto.end_date ? new Date(dto.end_date) : undefined,
+      status: dto.status,
       user: { id_user: dto.id_user_fk } as any
     });
     const requestSaved = await this.leaveRequestRepository.save(leaveRequest);
@@ -30,16 +34,21 @@ export class LeaveRequestService {
       success: true,
       message: 'Solicitud creada correctamente.',
       data: {
-      ...requestSaved,
-      id_user_fk: dto.id_user_fk
+        id: requestSaved.id,
+        id_user_fk: dto.id_user_fk,
+        type: requestSaved.type,
+        start_date: requestSaved.start_date,
+        end_date: requestSaved.end_date,
+        status: requestSaved.status
       }
     };
   } catch (error) {
     return {
       success: false,
       message: 'No se creó la solicitud. (create_error)'
-    }
+    };
   }
+}
 
 async update(id: number, dto: Partial<LeaveRequestDto>): Promise<LeaveRequest> {
   const leaveRequest = await this.leaveRequestRepository.findOne({
