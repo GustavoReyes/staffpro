@@ -8,11 +8,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  register(data: { email: string; password: string }): Observable<any> {
-    return this.http.post(this.apiUrl + 'login/register/', data);
-  }
-
-  getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  login(data: { email: string; password: string }): Observable<any> {
+    return this.http.post(this.apiUrl + 'login/login', data);
   }
 }

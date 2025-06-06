@@ -17,10 +17,10 @@ export class UsersService {
   async findAll(): Promise<User[]> {
     return await this.userRepository.find();
   }
-  async findById(id_user: number): Promise<User | null> {
+  /* async findById(id_user: number): Promise<User | null> {
     const user = await this.userRepository.findOne({ where: { id_user } });
     return user || null;
-  }
+  } */
 
   async create(userData: Partial<User>): Promise<User> {
     const user = this.userRepository.create(userData);
