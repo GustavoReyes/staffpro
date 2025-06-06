@@ -43,7 +43,7 @@
   </button>
   <!-- Menú lateral Izquierdo -->
   <aside
-    class="flex flex-col h-screen fixed left-0 w-72 bg-[#181C1F] py-10 z-40 transition-all duration-300 md:relative md:block "
+    class="flex flex-col h-screen fixed left-0 w-72 bg-[#181C1F] py-10 z-40 transition-all duration-300  "
     [ngClass]="{
       '-translate-x-full': !menuOpen,
       'translate-x-0': menuOpen,
@@ -58,12 +58,14 @@
       <nav class="flex flex-col gap-6 w-full px-6 mt-10 md:mt-0">
         <a
           routerLink="/login"
+          (click)="menuOpen = !menuOpen"
           routerLinkActive="bg-green-400 text-black"
           class="block py-3 px-4 rounded-xl text-white hover:bg-green-400 hover:text-black transition text-center"
           >Login</a
         >
         <a
           routerLink="/register"
+          (click)="menuOpen = !menuOpen"
           routerLinkActive="bg-green-400 text-black"
           class="block py-3 px-4 rounded-xl text-white hover:bg-green-400 hover:text-black transition text-center"
           >Registar Usuario</a
@@ -82,7 +84,9 @@
   </aside>
 
   <!-- Contenido principal -->
-  <main class="flex-1 flex bg-[#1E2226] items-center justify-center">
+  <main class="flex-1 flex bg-[#1E2226] items-center justify-center pl-0  md:pl-72 transition-all duration-300"
+  [ngClass]="{ 'blur-sm pointer-events-none': menuOpen && !isDesktop }">
+
     <router-outlet></router-outlet>
   </main>
 </div>
