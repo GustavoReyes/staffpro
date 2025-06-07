@@ -2,11 +2,9 @@ import { Controller, Post, Body, Res, UseGuards, Get, Req } from '@nestjs/common
 import { Response } from 'express';
 import { LoginService } from './login.service';
 import { LoginGuard } from './login.guard';
-
-
 @Controller('login')
 export class LoginController {
-  constructor(private readonly loginService: LoginService) {}
+  constructor(private readonly loginService: LoginService) { }
 
   @Post('register')
   async register(
@@ -17,9 +15,7 @@ export class LoginController {
     if (!email || !password) {
       return response.status(400).json({ message: 'Email y contraseña son requeridos' });
     }
-
     const user = await this.loginService.register(email, password);
-
     if (user) {
       response.status(201).json({ message: 'Usuario registrado', user });
     } else {
@@ -41,11 +37,10 @@ export class LoginController {
       response.status(401).json({ message: 'Credenciales inválidas' });
     }
   }
-//ruta protegida con LoginGuard
-@UseGuards(LoginGuard)
+  //ruta protegida con LoginGuard
+  @UseGuards(LoginGuard)
   @Get('perfil')
   getProfile(@Req() req) {
-    return req.user; 
+    return req.user;
   }
 }
- 

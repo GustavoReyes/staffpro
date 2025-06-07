@@ -1,27 +1,35 @@
-//PERMISOS
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+// PERMISOS
+
+import { User } from "src/users/user.model";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("leave_requests")
 export class LeaveRequest{
     @PrimaryGeneratedColumn()
     id:number;
-    @Column()
-    employee_dni:string;
+    @ManyToOne(() => User, user => user.leaveRequests)
+    @JoinColumn({ name: "id_user_fk", referencedColumnName: "id_user", foreignKeyConstraintName: "relationUserId" })
+    user?: User;
     @Column({nullable:true})
     type:string;
     @Column({type:"datetime"})
     start_date:Date;
     @Column({nullable:true})
-    end_date:string;
+    end_date?:Date;
     @Column()
     status:string;
 
-    constructor(id:number,employee_dni?:string,type?:string,start_date?:Date,end_date?:string,status?:string){
+    constructor(
+        id?:number,
+        type?:string,
+        start_date?:Date,
+        end_date?:Date,
+        status?:string
+    ){
         this.id=id
-        this.employee_dni=employee_dni
         this.type=type
         this.start_date=start_date || new Date();
-        this.end_date=end_date
+        this.end_date=end_date || new Date();
         this.status=status
     }
 
