@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Employee } from "src/employee/employee.model";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("payroll")
 export class Payroll {
@@ -30,6 +31,12 @@ export class Payroll {
     deduction_3?: number;
     @Column()
     total?: number;
+
+    @ManyToOne(() => Employee, employee => employee.payrolls)
+    @JoinColumn({ name: 'user_dni', referencedColumnName: 'dni' })
+    employee: Employee;
+
+
     constructor(
         id?: number,
         user_dni?: string,

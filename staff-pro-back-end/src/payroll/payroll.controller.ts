@@ -26,7 +26,7 @@ export class PayrollController {
   }
 
   @Post("alta")
-  create(@Body("payroll") payroll: Payroll) {
+  create(@Body() payroll: Payroll) {
     return this.payrollService.create(payroll);
   }
 

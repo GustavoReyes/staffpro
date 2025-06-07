@@ -1,6 +1,7 @@
 import { Department } from 'src/departments/department.model';
+import { Payroll } from 'src/payroll/payroll.model';
 import { User } from 'src/users/user.model';
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 
 @Entity("employees")
 export class Employee {
@@ -53,6 +54,10 @@ export class Employee {
     @OneToOne(() => User, user => user.employee, { eager: true })
     @JoinColumn({ name: 'id_user' })
     user: User;
+
+    @OneToMany(() => Payroll, payroll => payroll.user_dni)
+    @JoinColumn({ name: 'dni' })
+    payrolls?: Payroll[];
 
 }
 

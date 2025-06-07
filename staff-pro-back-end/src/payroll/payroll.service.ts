@@ -6,7 +6,7 @@ import { Payroll } from './payroll.model';
 
 @Injectable()
 export class PayrollService {
-  constructor(@InjectRepository(Payroll) private payrollRepository: Repository<Payroll>) {}
+  constructor(@InjectRepository(Payroll) private payrollRepository: Repository<Payroll>) { }
 
   // TODO: Controller con las funcionalidades que tendra la columna de Payroll
   create(payroll: Payroll): Promise<Payroll> {
@@ -14,7 +14,9 @@ export class PayrollService {
   }
 
   findAll(): Promise<Payroll[]> {
-    return this.payrollRepository.find();
+    return this.payrollRepository.find({
+      relations: ['employee']
+    });
   }
 
   findOne(id: number): Promise<Payroll> {

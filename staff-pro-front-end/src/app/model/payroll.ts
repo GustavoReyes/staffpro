@@ -13,6 +13,9 @@ export class Payroll {
   deduction_2?: number;
   deduction_3?: number;
   total?: number;
+
+  
+
   constructor(
     id: number,
     user_dni: string,
