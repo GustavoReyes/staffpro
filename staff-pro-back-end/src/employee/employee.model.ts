@@ -10,7 +10,7 @@ export class Employee {
     @Column()
     name: string;
     @Column()
-    id_user?: number;
+    id_user: number;
     @Column()
     department_id: number;
     @Column()

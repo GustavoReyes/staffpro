@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Employee } from './employee.model';
+import { EmployeeAltaDto } from './dtos/employeeAltaDto';
+import { employeeDatosDto } from './dtos/employeeDatos.dto';
 
 @Injectable()
 
@@ -10,26 +12,34 @@ export class EmployeeService {
   private readonly employeeRepository: Repository<Employee>) {
   }
 
-  async create(employee: Employee): Promise<Employee> {
+  async create(employee: EmployeeAltaDto): Promise<employeeDatosDto> {
     return await this.employeeRepository.save(employee)
   }
 
-  async findAll(): Promise<Employee[]> {
+  async findAll(): Promise<employeeDatosDto[]> {
     return await this.employeeRepository.find();
   }
 
-  async findByDepartmentId(department_id: number): Promise<Employee[]> {
+  async findByDepartmentId(department_id: number): Promise<employeeDatosDto[]> {
     return await this.employeeRepository.findBy({ department_id });
   }
 
-  async findByUserId(id_user: number): Promise<Employee> {
+  async findByEmail(email: string): Promise<employeeDatosDto | null> {
+    return this.employeeRepository.findOne({  
+      where: { user: { email: email } },
+      relations: ['user'],
+    }); 
+  }
+
+
+  async findByUserId(id_user: number): Promise<employeeDatosDto> {
     return this.employeeRepository.findOne({
       where: { user: { id_user: id_user } },
       relations: ['user'],
     });
   }
 
-  async update(id_user: number, updateData: Employee): Promise<Employee | null> {
+  async update(id_user: number, updateData: EmployeeAltaDto): Promise<employeeDatosDto | null> {
     const user = await this.employeeRepository.findOneBy({ id_user });
     if (!user) {
       return null;

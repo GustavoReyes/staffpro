@@ -1,6 +1,8 @@
-export class employeePerfilDto{
+export class employeeDatosDto{
         dni: string;
         name: string;
+        id_user: number;
+        department_id: number;
         work_day: number;
         work_hour: number;
         base_salary: number;
@@ -10,6 +12,8 @@ export class employeePerfilDto{
            constructor(
             dni: string,
             name: string,
+            id_user: number,
+            department_id: number,
             work_day?: number,
             work_hour?: number,
             base_salary?: number,
@@ -18,6 +22,8 @@ export class employeePerfilDto{
         ) {
             this.dni = dni;
             this.name = name;
+            this.id_user = id_user;
+            this.department_id = department_id;
             this.work_day = work_day;
             this.work_hour = work_hour;
             this.base_salary = base_salary;
