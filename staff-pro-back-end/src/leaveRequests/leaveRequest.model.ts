@@ -6,15 +6,15 @@ export class LeaveRequest{
     @PrimaryGeneratedColumn()
     id:number;
     @Column()
-    employee_dni?:string;
+    employee_dni:string;
     @Column({nullable:true})
-    type?:string;
+    type:string;
     @Column({type:"datetime"})
-    start_date?:Date;
+    start_date:Date;
     @Column({nullable:true})
-    end_date?:string;
+    end_date:string;
     @Column()
-    status?:string;
+    status:string;
 
     constructor(id:number,employee_dni?:string,type?:string,start_date?:Date,end_date?:string,status?:string){
         this.id=id
