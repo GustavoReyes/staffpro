@@ -6,9 +6,9 @@ export class Department{
     @PrimaryGeneratedColumn(  )
     id:number;
     @Column( )
-    name:string;
+    name?:string;
 
-    constructor(id:number,name:string){
+    constructor(id:number,name?:string){
         this.id=id
         this.name=name
 

@@ -1,4 +1,4 @@
-// PERMISOS
+//PERMISOS
 
 import { User } from "src/users/user.model";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";

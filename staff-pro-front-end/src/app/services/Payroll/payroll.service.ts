@@ -7,7 +7,7 @@ import { Payroll } from '../../model/payroll';
   providedIn: 'root'
 })
 export class PayrollService {
-  private apiUrl = 'http://localhost:3000/payroll';
+  private apiUrl = 'http://localhost:3000/payroll/';
 
   constructor(private http: HttpClient) {}
 
@@ -16,7 +16,7 @@ export class PayrollService {
   }
 
   createPayroll(payroll: Payroll): Observable<Payroll> {
-    return this.http.post<Payroll>(`${this.apiUrl}alta`, payroll);
+    return this.http.post<Payroll>(this.apiUrl, payroll);
   }
 
   updatePayroll(id: number, payroll: Payroll): Observable<Payroll> {

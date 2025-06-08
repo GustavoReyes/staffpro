@@ -26,14 +26,16 @@ export class LoginService {
     const user = await this.usersService.findByEmail(email);
     if (!user) {
         return {};
-    }     
+    }
+         
+
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid)  {
        return {}; 
     } 
+
     const payload = { sub: user.id_user, email: user.email };
     const token = this.jwtService.sign(payload);
-    console.log("Accediste");
     return { access_token: token };
   }
 }
