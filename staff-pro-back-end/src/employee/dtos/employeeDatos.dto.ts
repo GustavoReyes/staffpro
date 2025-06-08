@@ -1,4 +1,4 @@
-export class employeeDatosDto{
+export class EmployeeDatosDto{
         dni: string;
         name: string;
         id_user: number;
