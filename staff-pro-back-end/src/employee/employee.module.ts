@@ -12,11 +12,15 @@ import { EmployeeController } from './employee.controller';
 // Imports de los servicios //
 
 import { EmployeeService } from './employee.service';
+import { User } from 'src/users/user.model';
+import { Department } from 'src/departments/department.model';
+import { Payroll } from 'src/payroll/payroll.model';
+import { LeaveRequest } from 'src/leaveRequests/leaveRequest.model';
 
 // Modulo principal
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Employee])],
+  imports: [TypeOrmModule.forFeature([User, Employee, Department, Payroll, LeaveRequest])],
   controllers: [EmployeeController],
   providers: [EmployeeService],
   exports: [EmployeeService]

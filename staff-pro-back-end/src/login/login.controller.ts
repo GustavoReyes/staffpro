@@ -2,25 +2,18 @@ import { Controller, Post, Body, Res, UseGuards, Get, Req } from '@nestjs/common
 import { Response } from 'express';
 import { LoginService } from './login.service';
 import { LoginGuard } from './login.guard';
+import { UserDto } from 'src/users/dto/userDto';
 @Controller('login')
 export class LoginController {
   constructor(private readonly loginService: LoginService) { }
 
-  @Post('register')
-  async register(
-    @Body('email') email: string,
-    @Body('password') password: string,
-    @Res() response: Response
-  ) {
-    if (!email || !password) {
-      return response.status(400).json({ message: 'Email y contraseña son requeridos' });
+ @Post('register')
+  async register(@Body() userDto: UserDto) {
+    const result = await this.loginService.register(userDto.email, userDto.password);
+    if (!result) {
+      return { message: 'Usuario ya existe o datos inválidos' };
     }
-    const user = await this.loginService.register(email, password);
-    if (user) {
-      response.status(201).json({ message: 'Usuario registrado', user });
-    } else {
-      response.status(409).json({ message: 'El email ya está registrado' });
-    }
+    return result;
   }
 
   @Post('login')

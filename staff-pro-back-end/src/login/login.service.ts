@@ -1,7 +1,10 @@
+
 import { Injectable } from '@nestjs/common';
  
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+
+
 import { User } from 'src/users/user.model';
  
 import { UsersService } from 'src/users/users.service';
@@ -19,7 +22,7 @@ export class LoginService {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await this.usersService.create({ email, password: hashedPassword });
-    return newUser;
+   return newUser;
   }
 
   async login(email: string, password: string): Promise<{ access_token?: string }> {

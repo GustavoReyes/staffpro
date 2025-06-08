@@ -11,7 +11,7 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
   ) { }
 
-  async findByEmail(email: string): Promise<UserDto | null> {
+  async findByEmail(email: string): Promise<User | null> {
     return await this.userRepository.findOne({ where: { email } });
   }
 
@@ -23,7 +23,7 @@ export class UsersService {
     return user || null;
   } */
 
-  async create(userData: Partial<UserDto>): Promise<UserDto> {
+  async create(userData: UserDto): Promise<User> {
     const user = this.userRepository.create(userData);
     return await this.userRepository.save(user);
   }
