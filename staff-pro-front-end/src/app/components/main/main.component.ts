@@ -1,5 +1,5 @@
 import { CommonModule, NgClass } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -17,11 +17,6 @@ export class MainComponent {
 
   closeMenu() {
     this.menuOpen = false;
-  }
-  isDesktop = window.innerWidth >= 768;
-  @HostListener('window:resize')
-  onResize() {
-    this.isDesktop = window.innerWidth >= 768;
   }
 
 }
