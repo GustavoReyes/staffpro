@@ -11,6 +11,7 @@ import {
 import { Response } from 'express';
 import { EmployeeService } from './employee.service';
 import { Employee } from './employee.model';
+import { EmployeeDatosDto } from './dtos/employeeDatos.dto';
 
 @Controller('employees')
 export class EmployeeController {
@@ -28,7 +29,7 @@ export class EmployeeController {
   }
 
   @Get("findAll")
-  findAll(): Promise<Employee[]> {
+  findAll(): Promise<EmployeeDatosDto[]> {
     return this.employeeService.findAll();
   }
 

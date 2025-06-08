@@ -3,32 +3,52 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "t
 
 @Entity("payroll")
 export class Payroll {
+
     @PrimaryGeneratedColumn()
     id: number;
+
     @Column()
     user_dni?: string;
+
     @Column()
     base_salary: number
+
     @Column({ nullable: true })
     date?: Date;
+
+    @Column()
+    period_in: Date;
+
+    @Column()
+    period_out: Date;
+
     @Column({ nullable: true })
     bonus_1?: number;
+
     @Column()
     bonus_2?: number;
+
     @Column()
     bonus_3?: number;
+
     @Column()
     social_security?: number;
+
     @Column()
     irpf?: number;
+
     @Column()
     advance?: number;
+
     @Column()
     deduction_1?: number;
+
     @Column()
     deduction_2?: number;
+
     @Column()
     deduction_3?: number;
+
     @Column()
     total?: number;
 

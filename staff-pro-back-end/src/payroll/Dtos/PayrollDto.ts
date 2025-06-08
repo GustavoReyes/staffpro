@@ -1,15 +1,26 @@
-import { IsNumber, IsOptional, IsString, IsDateString } from 'class-validator';
+import { IsNumber, IsOptional, IsString, IsDateString, IsNotEmpty, IsDate } from 'class-validator';
 
 export class PayrollDto {
+    
     @IsString()
+    @IsNotEmpty()
     user_dni: string;
 
     @IsNumber()
+    @IsNotEmpty()
     base_salary: number;
 
     @IsOptional()
-    @IsDateString()
-    date?: Date;
+    @IsDate()
+    date?: Date; 
+
+    @IsDate()
+    @IsNotEmpty()
+    period_in: Date;
+
+    @IsDate()
+    @IsNotEmpty()
+    period_out: Date;
 
     @IsOptional()
     @IsNumber()
