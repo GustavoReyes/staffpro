@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { Employee } from './employee.model';
 import { EmployeeAltaDto } from './dtos/employeeAltaDto';
-
 import { User } from 'src/users/user.model';
 import { EmployeeDatosDto } from './dtos/employeeDatos.dto';
 
@@ -31,7 +30,7 @@ export class EmployeeService {
   .where('employee.user.id_user = :id_user', { id_user: user.id_user })
   .getOne();  
   if (existingEmployee) {
-    throw new ConflictException('Ese usuario ya tiene una ficha de empleado asociado');
+    throw new ConflictException('Ese usuario ya tiene una ficha de empleado asociada');
   }
   const newEmployee = this.employeeRepository.create({
     ...employee,
@@ -43,11 +42,11 @@ export class EmployeeService {
   return savedEmployee;
   }
 
-  async findAll(): Promise<employeeDatosDto[]> {
+  async findAll(): Promise<EmployeeDatosDto[]> {
     return await this.employeeRepository.find();
   }
 
-  async findByDepartmentId(department_id: number): Promise<employeeDatosDto[]> {
+  async findByDepartmentId(department_id: number): Promise<EmployeeDatosDto[]> {
     return await this.employeeRepository.findBy({ department_id });
   }
 
@@ -66,7 +65,7 @@ export class EmployeeService {
 }
 
 
-  async findByUserId(id_user: number): Promise<employeeDatosDto> {
+  async findByUserId(id_user: number): Promise<EmployeeDatosDto> {
     return this.employeeRepository.findOne({
       where: { user: { id_user: id_user } },
       relations: ['user'],
