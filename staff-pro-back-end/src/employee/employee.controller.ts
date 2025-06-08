@@ -22,9 +22,9 @@ export class EmployeeController {
   async create(@Param('email') email: string, @Body() employee: EmployeeAltaDto, @Res() response: Response) {
     const result = await this.employeeService.create( employee, email);
     if (result) {
-      response.status(200).send();
+      response.status(200).send('Empleado agregado correctamente');
     } else {
-      response.status(409).send();
+      response.status(409).send('Hubo un error al agregar el empleado');
     }
   }
 
