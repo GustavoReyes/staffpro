@@ -3,23 +3,24 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Department } from './department.model';
+import { DepartmentDto } from './dtos/DepartmentDto';
 
 @Injectable()
 export class DepartmentsService {
   constructor(@InjectRepository(Department) private departmentRepository: Repository<Department>) { }
 
-  async findAll(): Promise<Department[]> {
+  async findAll(): Promise<DepartmentDto[]> {
     return await this.departmentRepository.find();
   }
-  async findById(id: number): Promise<Department> {
+  async findById(id: number): Promise<DepartmentDto> {
     return this.departmentRepository.findOneBy({ id });
   }
 
-  create(department: Department): void {
+  create(department: DepartmentDto): void {
     this.departmentRepository.save(department);
   }
 
-  update(id: number, department: Department): void {
+  update(id: number, department: DepartmentDto): void {
     this.departmentRepository.update(id, department);
   }
 

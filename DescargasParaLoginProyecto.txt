@@ -1,0 +1,11 @@
+instalar para contrasenas cifradas: 
+npm install bcrypt
+npm install --save-dev @types/bcrypt
+
+npm install @nestjs/jwt
+npm install --save-dev @types/jsonwebtoken
+
+npm install passport passport-jwt @nestjs/passport
+npm install --save-dev @types/passport-jwt
+
+en login module. contrasena secreta=  'contraseña_secreta', 

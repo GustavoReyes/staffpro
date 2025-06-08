@@ -10,13 +10,14 @@ import {
 
 import { DepartmentsService } from './departments.service';
 import { Department } from './department.model';
+import { DepartmentDto } from './dtos/DepartmentDto';
 
 @Controller('departments')
 export class DepartmentsController {
   constructor(private readonly departmentsService: DepartmentsService) { }
 
   @Post("alta")
-  create(@Body() department: Department) {
+  create(@Body() department: DepartmentDto) {
     this.departmentsService.create(department);
   }
 
@@ -31,7 +32,7 @@ export class DepartmentsController {
   }
 
   @Patch('actualizar/:id')
-  async update(@Param('id') id: number, @Body() updateData: Department) {
+  async update(@Param('id') id: number, @Body() updateData: DepartmentDto) {
     return await this.departmentsService.update(id, updateData);
   }
 

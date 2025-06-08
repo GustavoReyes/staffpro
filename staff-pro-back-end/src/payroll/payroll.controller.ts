@@ -10,6 +10,7 @@ import {
 
 import { PayrollService } from './payroll.service';
 import { Payroll } from './payroll.model';
+import { PayrollDto } from './Dtos/PayrollDto';
 
 @Controller('payroll')
 export class PayrollController {
@@ -25,9 +26,9 @@ export class PayrollController {
     return this.payrollService.findOne(id);
   }
 
-  @Post("alta")
-  create(@Body("payroll") payroll: Payroll) {
-    return this.payrollService.create(payroll);
+  @Post('alta')
+  create(@Body() PayrollDto: PayrollDto) {
+    return this.payrollService.create(PayrollDto);
   }
 
   @Put(':id')
