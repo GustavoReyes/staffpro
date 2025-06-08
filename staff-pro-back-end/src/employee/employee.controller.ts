@@ -18,14 +18,13 @@ import { EmployeeDatosDto } from './dtos/employeeDatos.dto';
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) { }
 
-
   @Post("alta/:email")
   async create(@Param('email') email: string, @Body() employee: EmployeeAltaDto, @Res() response: Response) {
     const result = await this.employeeService.create( employee, email);
     if (result) {
-      response.status(200).send('Empleado agregado correctamente');
+      response.status(200).send();
     } else {
-      response.status(409).send('Hubo un error al agragar el empleado');
+      response.status(409).send();
     }
   }
 
@@ -35,7 +34,7 @@ export class EmployeeController {
   }
 
   @Get("findByUser/:id_user")
-  async findByUser(@Param('id_user') id_user: number) {
+  async findByUser(@Param('id_user') id_user: number){
     return await this.employeeService.findByUserId(id_user);
   }
   @Get("findByEmail/:email")
@@ -47,7 +46,7 @@ export class EmployeeController {
   async findByDepart(@Param('department_id') department_id: number) {
     return await this.employeeService.findByDepartmentId(department_id);
   }
-
+  
   @Patch('patch/:email')
 async updateByEmail(
   @Param('email') email: string,

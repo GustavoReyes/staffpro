@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+
  registerData = { email: '', password: '' };
   users: any[] = [];
 
