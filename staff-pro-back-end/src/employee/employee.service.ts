@@ -43,11 +43,11 @@ export class EmployeeService {
   return savedEmployee;
   }
 
-  async findAll(): Promise<EmployeeDatosDto[]> {
+  async findAll(): Promise<employeeDatosDto[]> {
     return await this.employeeRepository.find();
   }
 
-  async findByDepartmentId(department_id: number): Promise<EmployeeDatosDto[]> {
+  async findByDepartmentId(department_id: number): Promise<employeeDatosDto[]> {
     return await this.employeeRepository.findBy({ department_id });
   }
 
@@ -66,7 +66,7 @@ export class EmployeeService {
 }
 
 
-  async findByUserId(id_user: number): Promise<EmployeeDatosDto> {
+  async findByUserId(id_user: number): Promise<employeeDatosDto> {
     return this.employeeRepository.findOne({
       where: { user: { id_user: id_user } },
       relations: ['user'],

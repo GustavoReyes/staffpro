@@ -30,7 +30,7 @@ export class EmployeeController {
   }
 
   @Get("findAll")
-  findAll()  {
+  findAll(): Promise<EmployeeDatosDto[]> {
     return this.employeeService.findAll();
   }
 
