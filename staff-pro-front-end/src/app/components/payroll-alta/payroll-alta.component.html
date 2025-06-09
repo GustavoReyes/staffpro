@@ -1,98 +1,162 @@
-<div class="min-h-screen flex items-center justify-center bg-[#1e2226] px-2">
+<div class="min-h-screen flex items-center justify-center bg-[#1e2226] p-2">
   <div
-    class="w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6"
+    class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6"
   >
     <form
-      class="w-full"
+      class="w-full space-y-8"
       (ngSubmit)="addPayroll()"
       #payrollForm="ngForm"
       autocomplete="off"
     >
-      <h2 class="text-2xl font-bold text-white mb-10 text-center">
-        Crear Nómina
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-        <!-- DNI Empleado -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Empleado</label>
+      <!-- Sección: Selección de Departamento y Empleado -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <label class="block text-gray-300 text-base font-bold mb-2"
+            >Departamento</label
+          >
+          <select
+            title="department"
+            name="department"
+            [(ngModel)]="selectedDepartment"
+            (change)="onDepartmentChange()"
+            required
+            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
+          >
+            <option value="" disabled selected>Selecciona departamento</option>
+            <option *ngFor="let dept of filteredDepartments" [value]="dept.id">
+              {{ dept.name }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-gray-300 text-base font-bold mb-2"
+            >Empleado</label
+          >
+          <!-- Selector de empleados -->
           <select
             title="Dni"
             name="user_dni"
             [(ngModel)]="payroll.user_dni"
-            (change)="onEmployeeChange(); updateTotal()"
+            (change)="onEmployeeChange()"
             required
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
+            [disabled]="!selectedDepartment"
+            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
           >
-            <option value="" disabled selected>Selecciona empleado</option>
-            <option *ngFor="let emp of employees" [value]="emp.dni">
+            <option value="" disabled selected>
+              {{
+                selectedDepartment
+                  ? "Selecciona empleado"
+                  : "Primero selecciona un departamento"
+              }}
+            </option>
+            <option *ngFor="let emp of filteredEmployees" [value]="emp.dni">
               {{ emp.dni }} - {{ emp.name }}
             </option>
           </select>
         </div>
-        <!-- Salario Base -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Salario Base</label>
-          <input
-            title="Salario"
-            type="number"
-            name="base_salary"
-            [(ngModel)]="payroll.base_salary"
-            [readonly]="true"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white opacity-70 cursor-not-allowed"
-          />
+      </div>
+
+      <!-- Sección: Información del Empleado -->
+      <div class="bg-[#181C1F] p-6 rounded-lg shadow-inner">
+        <h3 class="text-lg font-semibold text-white mb-4">
+          Información del Empleado
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label class="block text-gray-300 text-sm font-bold mb-2"
+              >Nombre</label
+            >
+            <input
+              title="nombre"
+              type="text"
+              [value]="selectedEmployee?.name || ''"
+              readonly
+              class="w-full px-4 py-3 rounded bg-[#23272A] border border-[#23272A] text-white opacity-70"
+            />
+          </div>
+          <div>
+            <label class="block text-gray-300 text-sm font-bold mb-2"
+              >DNI</label
+            >
+            <input
+              title="Dni"
+              type="text"
+              [value]="selectedEmployee?.dni || ''"
+              readonly
+              class="w-full px-4 py-3 rounded bg-[#23272A] border border-[#23272A] text-white opacity-70"
+            />
+          </div>
+          <div>
+            <label class="block text-gray-300 text-sm font-bold mb-2"
+              >Salario Base</label
+            >
+            <input
+              title="Salario"
+              type="number"
+              [value]="selectedEmployee?.base_salary || ''"
+              readonly
+              class="w-full px-4 py-3 rounded bg-[#23272A] border border-[#23272A] text-white opacity-70"
+            />
+          </div>
         </div>
-        <!-- Fecha -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Fecha</label>
+      </div>
+
+      <!-- Sección: Fechas y días trabajados -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <label class="block text-gray-300 text-sm font-bold mb-2"
+            >Fecha Nómina</label
+          >
           <input
-            title="Dia de Nómina"
+            title="F. Nómina"
             type="date"
             name="date"
             [(ngModel)]="payroll.date"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
+            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
           />
         </div>
-        <!-- Periodo Inicio -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Periodo Inicio</label>
+        <div>
+          <label class="block text-gray-300 text-sm font-bold mb-2"
+            >Periodo Inicio</label
+          >
           <input
-            title="period_in"
+            title="P.Inicio"
             type="date"
             name="period_in"
             [(ngModel)]="payroll.period_in"
-            (change)="onPeriodChange()"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
+            (change)="onPeriodChange(); updateTotal()"
+            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
           />
         </div>
-        <!-- Periodo Fin -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Periodo Fin</label>
+        <div>
+          <label class="block text-gray-300 text-sm font-bold mb-2"
+            >Periodo Fin</label
+          >
           <input
-            title="period_out"
+            title="P.Final"
             type="date"
             name="period_out"
             [(ngModel)]="payroll.period_out"
-            (change)="onPeriodChange()"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
+            (change)="onPeriodChange(); updateTotal()"
+            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
           />
         </div>
-        <!-- Días Trabajados -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Días Trabajados</label>
+        <div class="md:col-span-3">
+          <label class="block text-gray-300 text-sm font-bold mb-2"
+            >Días Trabajados</label
+          >
           <input
-            title="Dias Trabajados"
+            title="D. Trabajados"
             type="text"
             [value]="
               periodoInvalido
-                ? 'Error las Fechas'
+                ? 'Error en las Fechas'
                 : diasPeriodo > 0
                 ? diasPeriodo
                 : ''
             "
             readonly
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white opacity-70 cursor-not-allowed"
+            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white opacity-70"
             [ngClass]="{
               'border-red-600 text-red-400': periodoInvalido,
               'border-green-600 text-green-400':
@@ -100,134 +164,176 @@
             }"
           />
         </div>
-        <!-- Seguridad Social -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Seguridad Social</label>
-          <input
-            title="Seguro Social"
-            type="number"
-            name="social_security"
-            [(ngModel)]="payroll.social_security"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
+      </div>
+
+      <!-- Sección: Ingresos positivos y Deducciones -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Ingresos positivos -->
+        <div class="bg-green-50/10 p-6 rounded-lg">
+          <h3 class="text-lg font-semibold text-green-300 mb-4">
+            Ingresos Positivos
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-gray-300 text-sm font-bold mb-2"
+                >Bono 1</label
+              >
+              <input
+                title="Bono1"
+                type="number"
+                name="bonus_1"
+                [(ngModel)]="payroll.bonus_1"
+                (change)="updateTotal()"
+                class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-300 text-sm font-bold mb-2"
+                >Bono 2</label
+              >
+              <input
+                title="Bono2"
+                type="number"
+                name="bonus_2"
+                [(ngModel)]="payroll.bonus_2"
+                (change)="updateTotal()"
+                class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-300 text-sm font-bold mb-2"
+                >Bono 3</label
+              >
+              <input
+                title="Bono3"
+                type="number"
+                name="bonus_3"
+                [(ngModel)]="payroll.bonus_3"
+                (change)="updateTotal()"
+                class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-300 text-sm font-bold mb-2"
+                >Anticipo</label
+              >
+              <input
+                title="Anticipo"
+                type="number"
+                name="advance"
+                [(ngModel)]="payroll.advance"
+                (change)="updateTotal()"
+                class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
+              />
+            </div>
+          </div>
         </div>
-        <!-- IRPF -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">IRPF</label>
-          <input
-            title="IRPF"
-            type="number"
-            name="irpf"
-            [(ngModel)]="payroll.irpf"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
+        <!-- Deducciones -->
+        <div class="bg-red-50/10 p-6 rounded-lg">
+          <h3 class="text-lg font-semibold text-red-300 mb-4">Deducciones</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-gray-300 text-sm font-bold mb-2"
+                >Deducción 1</label
+              >
+              <input
+                title="Deducción1"
+                type="number"
+                name="deduction_1"
+                [(ngModel)]="payroll.deduction_1"
+                (change)="updateTotal()"
+                class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-300 text-sm font-bold mb-2"
+                >Deducción 2</label
+              >
+              <input
+                title="Deducción2"
+                type="number"
+                name="deduction_2"
+                [(ngModel)]="payroll.deduction_2"
+                (change)="updateTotal()"
+                class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-300 text-sm font-bold mb-2"
+                >Deducción 3</label
+              >
+              <input
+                title="Deducción3"
+                title="Deducción1"
+                type="number"
+                name="deduction_3"
+                [(ngModel)]="payroll.deduction_3"
+                (change)="updateTotal()"
+                class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-300 text-sm font-bold mb-2"
+                >Seguridad Social</label
+              >
+              <input
+                title="SS"
+                type="number"
+                name="social_security"
+                [(ngModel)]="payroll.social_security"
+                (change)="updateTotal()"
+                class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-300 text-sm font-bold mb-2"
+                >IRPF</label
+              >
+              <input
+                title="IRPF"
+                type="number"
+                name="irpf"
+                [(ngModel)]="payroll.irpf"
+                (change)="updateTotal()"
+                class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white"
+              />
+            </div>
+          </div>
         </div>
-        <!-- Bono 1 -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Bono 1</label>
-          <input
-            title="Bono"
-            type="number"
-            name="bonus_1"
-            [(ngModel)]="payroll.bonus_1"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
-        </div>
-        <!-- Bono 2 -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Bono 2</label>
-          <input
-            title="Bono"
-            type="number"
-            name="bonus_2"
-            [(ngModel)]="payroll.bonus_2"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
-        </div>
-        <!-- Bono 3 -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Bono 3</label>
-          <input
-            title="Bono"
-            type="number"
-            name="bonus_3"
-            [(ngModel)]="payroll.bonus_3"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
-        </div>
-        <!-- Anticipo -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Anticipo</label>
-          <input
-            title="Anticipo"
-            type="number"
-            name="advance"
-            [(ngModel)]="payroll.advance"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
-        </div>
-        <!-- Deducción 1 -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Deducción 1</label>
-          <input
-            title="Deducción 1"
-            type="number"
-            name="deduction_1"
-            [(ngModel)]="payroll.deduction_1"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
-        </div>
-        <!-- Deducción 2 -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Deducción 2</label>
-          <input
-            title="Deducción 2"
-            type="number"
-            name="deduction_2"
-            [(ngModel)]="payroll.deduction_2"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
-        </div>
-        <!-- Deducción 3 -->
-        <div class="mb-6">
-          <label class="block text-gray-300 mb-2">Deducción 3</label>
-          <input
-            title="Deducción 3"
-            type="number"
-            name="deduction_3"
-            [(ngModel)]="payroll.deduction_3"
-            (change)="updateTotal()"
-            class="w-full px-4 py-3 rounded bg-[#181C1F] border border-[#23272A] text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-          />
-        </div>
-        </div>
-      <!-- Total y Botón Guardar -->
-      <div class="flex items-center justify-between mb-2">
-        <div class="flex-1">
-          <label class="block text-gray-300 font-bold text-lg">Total</label>
+      </div>
+      <div
+        class="flex flex-col md:flex-row items-center justify-end gap-4 mt-6 mb-2"
+      >
+        <!-- Total - más compacto y alineado con los botones -->
+        <div class="flex items-center gap-4 w-full md:w-auto">
+          <label class="text-gray-300 font-bold text-lg"
+            >Total</label
+          >
           <input
             title="Total"
             type="text"
-            [value]="payroll.total || 0"
+            [value]="(payroll.total || 0) | currency:'EUR':'symbol':'1.2-2'"
             readonly
-            class="w-full max-w-xs px-1 py-1 rounded bg-[#181C1F] border-1 border-green-400 text-green-300 text-xl font-bold opacity-90 cursor-not-allowed"
+            class="w-full mr-0  md:w-48 px-2 py-1.5 rounded bg-[#181C1F] border-2 border-green-400 text-green-300 text-xl font-bold opacity-90 cursor-not-allowed text-right"
           />
         </div>
-        <button
-          type="submit"
-          [disabled]="payrollForm.invalid"
-          class="mx-2 w-auto px-8 py-2 bg-green-400 text-black text-base font-medium rounded hover:bg-green-500 transition-colors"
-        >
-          Guardar Nómina
-        </button>
+        <!-- Botones -->
+        <div class="flex gap-4 w-full md:w-auto">
+          <button
+            type="button"
+            (click)="resetForm()"
+            class="w-full md:w-auto px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+          >
+            Reset
+          </button>
+          <button
+            type="submit"
+            [disabled]="payrollForm.invalid"
+            class="w-full md:w-auto px-8 py-2 bg-green-400 text-black text-base font-medium rounded hover:bg-green-500 transition-colors"
+          >
+            Guardar Nómina
+          </button>
+        </div>
       </div>
     </form>
   </div>

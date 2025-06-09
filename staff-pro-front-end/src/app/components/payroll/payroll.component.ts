@@ -40,7 +40,7 @@ export class PayrollComponent implements OnInit {
   }
 
   updatePayroll() {
-    this.payrollService.updatePayroll(this.payroll.id, this.payroll).subscribe(() => {
+    this.payrollService.updatePayroll(this.payroll.id!, this.payroll).subscribe(() => {
       this.loadPayrolls();
       this.payroll = new Payroll(0, '');
       this.editing = false;
