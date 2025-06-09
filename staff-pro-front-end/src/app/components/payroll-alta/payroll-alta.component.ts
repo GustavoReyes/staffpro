@@ -174,4 +174,5 @@ export class PayrollAltaComponent implements OnInit {
       (p.irpf || 0);
     p.total = ingresos - deducciones;
   }
+  
 }

@@ -6,6 +6,7 @@ import { PayrollAltaComponent } from './components/payroll-alta/payroll-alta.com
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserLeaveComponent } from './components/user-leave/user-leave.component';
+import { PayrollListComponent } from './components/payroll-list/payroll-list.component';
 
 export const routes: Routes = [
 
@@ -21,7 +22,10 @@ export const routes: Routes = [
     path: "payrollAlta",
     component: PayrollAltaComponent,
   },
-
+{
+    path: "payrollLista",
+    component: PayrollListComponent,
+  },
   {
     path: "register",
     component: RegisterComponent,

@@ -16,7 +16,7 @@ export class PayrollService {
   }
 
   createPayroll(payroll: Payroll): Observable<Payroll> {
-    return this.http.post<Payroll>(`${this.apiUrl}alta`, payroll);
+    return this.http.post<Payroll>(`${this.apiUrl}/alta`, payroll);
   }
 
   updatePayroll(id: number, payroll: Payroll): Observable<Payroll> {
