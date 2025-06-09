@@ -24,11 +24,11 @@ export class EmployeesService {
     return this.http.get<Employee[]>(url);
   }
 
-
   employeesByDepartment(department_id: number): Observable<Employee[]> {
  const url:string =`${this.apiUrl} findByDepart/${department_id}`;
     return this.http.get<Employee[]>(url);
   }
+
 employeeByEmail(email: string): Observable<Employee> {
  const url:string =`${this.apiUrl} findByEmail/${email}`;
     return this.http.get<Employee>(url);
