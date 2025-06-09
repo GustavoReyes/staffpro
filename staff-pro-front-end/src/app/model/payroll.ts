@@ -1,5 +1,5 @@
 export class Payroll {
-  id: number;
+  id?: number;
   user_dni?: string;
   base_salary?: number
   date?: Date;
@@ -19,7 +19,7 @@ export class Payroll {
 
 
   constructor(
-    id: number,
+    id?: number,
     user_dni?: string,
     base_salary?: number,
     date?: Date,
@@ -36,7 +36,7 @@ export class Payroll {
     deduction_3?: number,
     total?: number
   ) {
-    this.id = id;
+    this.id = id || undefined;
     this.user_dni = user_dni;
     this.base_salary = base_salary || undefined;
     this.date = date;

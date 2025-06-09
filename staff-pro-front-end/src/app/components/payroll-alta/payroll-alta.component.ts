@@ -5,6 +5,7 @@ import { Payroll } from '../../model/payroll';
 import { PayrollService } from '../../services/Payroll/payroll.service';
 import { Employee } from '../../model/employee';
 import { EmployeesService } from '../../services/Employees/employees.service';
+import { DepartmentsService } from '../../services/Departments/departments.service';
 
 @Component({
   selector: 'app-payroll-alta',
@@ -19,12 +20,38 @@ export class PayrollAltaComponent implements OnInit {
   diasPeriodo: number = 0;
   periodoInvalido: boolean = false;
   employees: Employee[] = [];
+  filteredEmployees: Employee[] = [];
+  selectedEmployee: Employee | null = null;
 
-  constructor(private payrollService: PayrollService,private employeesService: EmployeesService) {}
-    ngOnInit(): void {
-      this.loadPayrolls();
-      this.employeesService.getEmployees().subscribe(data => {
-      this.employees = data;
+  // Cargar desde tu servicio de departamentos
+  departments: any[] = [];
+  filteredDepartments: any[] = [];
+  departmentSearch: string = '';
+  selectedDepartment: string = '';
+
+  constructor(private payrollService: PayrollService, private employeesService: EmployeesService, private departmentsService: DepartmentsService) { }
+  ngOnInit(): void {
+    this.loadPayrolls();
+    this.departmentsService.allDepartmenst().subscribe({
+        next: (data) => {
+            console.log('Departamentos cargados:', data);
+            this.departments = data;
+            this.filteredDepartments = data;
+        },
+        error: (error) => console.error('Error cargando departamentos:', error)
+    });
+
+    // Luego carga empleados
+    this.employeesService.getEmployees().subscribe({
+        next: (data) => {
+            console.log('Empleados cargados:', data);
+            this.employees = data.map(emp => {
+                // Asegúrate de que department_id sea número
+                emp.department_id = Number(emp.department_id);
+                return emp;
+            });
+        },
+        error: (error) => console.error('Error cargando empleados:', error)
     });
   }
   //Verificar que el perido de inicio y final del calculo de la nomina sea el correcto
@@ -47,11 +74,40 @@ export class PayrollAltaComponent implements OnInit {
       this.diasPeriodo = 0;
     }
   }
+  filterDepartments() {
+    this.filteredDepartments = this.departments.filter(dept =>
+      dept.name.toLowerCase().includes(this.departmentSearch.toLowerCase())
+    );
+  }
   onEmployeeChange() {
-    const emp = this.employees.find(e => e.dni === this.payroll.user_dni);
+    const emp = this.filteredEmployees.find(e => e.dni === this.payroll.user_dni);
+    this.selectedEmployee = emp || null;
     this.payroll.base_salary = emp ? emp.base_salary : undefined;
+    this.updateTotal();
   }
 
+  onDepartmentChange() {
+  if (this.selectedDepartment) {
+    // Convierte selectedDepartment a número para comparar correctamente
+    const departmentId = Number(this.selectedDepartment);
+
+    this.filteredEmployees = this.employees.filter(emp =>
+      emp.department_id === departmentId
+    );
+
+    // Depuración
+    console.log('Departamento ID:', departmentId);
+    console.log('Todos los empleados:', this.employees);
+    console.log('Empleados filtrados:', this.filteredEmployees);
+
+    // Reset los valores relacionados con el empleado
+    this.payroll.user_dni = '';
+    this.selectedEmployee = null;
+    this.payroll.base_salary = undefined;
+  } else {
+    this.filteredEmployees = [];
+  }
+}
   loadPayrolls() {
     this.payrollService.getPayrolls().subscribe(data => {
       this.payrolls = data;
@@ -62,6 +118,7 @@ export class PayrollAltaComponent implements OnInit {
     this.payrollService.createPayroll(this.payroll).subscribe(() => {
       this.loadPayrolls();
       this.payroll = new Payroll(0, '');
+      this.resetForm();
     });
   }
 
@@ -71,7 +128,7 @@ export class PayrollAltaComponent implements OnInit {
   }
 
   updatePayroll() {
-    this.payrollService.updatePayroll(this.payroll.id, this.payroll).subscribe(() => {
+    this.payrollService.updatePayroll(this.payroll.id!, this.payroll).subscribe(() => {
       this.loadPayrolls();
       this.payroll = new Payroll(0, '');
       this.editing = false;
@@ -84,35 +141,37 @@ export class PayrollAltaComponent implements OnInit {
     });
   }
 
+  resetForm() {
+    this.payroll = new Payroll();
+    this.selectedDepartment = '';
+    this.departmentSearch = '';
+    this.selectedEmployee = null;
+    this.filteredEmployees = [];
+    this.filterDepartments();
+    this.diasPeriodo = 0;
+    this.periodoInvalido = false;
+  }
+
   cancelEdit() {
     this.payroll = new Payroll(0, '');
     this.editing = false;
   }
   updateTotal() {
-    const {
-      base_salary = 0,
-      social_security = 0,
-      irpf = 0,
-      bonus_1 = 0,
-      bonus_2 = 0,
-      bonus_3 = 0,
-      advance = 0,
-      deduction_1 = 0,
-      deduction_2 = 0,
-      deduction_3 = 0,
-    } = this.payroll;
-
-    // Suma de ingresos menos deducciones
-    this.payroll.total =
-      Number(base_salary) +
-      Number(bonus_1) +
-      Number(bonus_2) +
-      Number(bonus_3) -
-      (Number(social_security) +
-        Number(irpf) +
-        Number(advance) +
-        Number(deduction_1) +
-        Number(deduction_2) +
-        Number(deduction_3));
+    const p = this.payroll;
+    // Suma de ingresos
+    const ingresos =
+      (p.base_salary || 0) +
+      (p.bonus_1 || 0) +
+      (p.bonus_2 || 0) +
+      (p.bonus_3 || 0) +
+      (p.advance || 0);
+    // Suma de deducciones
+    const deducciones =
+      (p.deduction_1 || 0) +
+      (p.deduction_2 || 0) +
+      (p.deduction_3 || 0) +
+      (p.social_security || 0) +
+      (p.irpf || 0);
+    p.total = ingresos - deducciones;
   }
 }
