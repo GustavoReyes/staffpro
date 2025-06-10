@@ -1,4 +1,3 @@
-import { AdminMenuGestionComponent } from './components/admin-menu-gestion/admin-menu-gestion.component';
 import { Routes } from '@angular/router';
 import { PayrollComponent } from './components/payroll/payroll.component';
 import { LoginComponent } from './components/login/login.component';
@@ -11,6 +10,9 @@ import { PayrollListComponent } from './components/payroll-list/payroll-list.com
 import { UserPayrollComponent } from './components/user-payroll/user-payroll.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 import { AdminEmployeesComponent } from './components/admin-employees/admin-employees.component';
+import { AdminPayrollsComponent } from './components/admin-payrolls/admin-payrolls.component';
+import { AdminLeavesComponent } from './components/admin-leaves/admin-leaves.component';
+import { AdminMenuGestionComponent } from './components/admin-menu-gestion/admin-menu-gestion.component';
 
 export const routes: Routes = [
 
@@ -55,11 +57,19 @@ export const routes: Routes = [
     component: AdminMenuComponent,
   },
     {
-    path: "AdminMenuGestion",
+    path: "adminMenuGestion",
     component: AdminMenuGestionComponent,
   },
     {
-    path: "AdminEmployees",
+    path: "adminEmployees",
     component: AdminEmployeesComponent,
+  },
+     {
+    path: "adminLeaves",
+    component: AdminLeavesComponent,
+  },
+     {
+    path: "adminPayrolls",
+    component: AdminPayrollsComponent,
   },
 ];
