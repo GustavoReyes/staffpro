@@ -43,7 +43,7 @@
   </button>
   <!-- Menú lateral Izquierdo -->
   <aside
-    class="flex flex-col h-screen fixed left-0 w-72 bg-[#181C1F] py-10 z-40 transition-all duration-300  "
+    class="flex flex-col h-screen fixed left-0 w-72 bg-[#181C1F] py-10 z-40 transition-all duration-300"
     [ngClass]="{
       '-translate-x-full': !menuOpen,
       'translate-x-0': menuOpen,
@@ -71,17 +71,23 @@
           >Registar Usuario</a
         >
         <a
-        routerLink="/payrollAlta"
-        routerLinkActive="bg-green-400 text-black"
-        class="block py-3 px-4 rounded-xl text-white hover:bg-green-400 hover:text-black transition text-center"
-        >Crear Nómina</a
-      >
-      <a
-        routerLink="/payrollLista"
-        routerLinkActive="bg-green-400 text-black"
-        class="block py-3 px-4 rounded-xl text-white hover:bg-green-400 hover:text-black transition text-center"
-        >Nóminas</a
-      >
+          routerLink="/payrollAlta"
+          routerLinkActive="bg-green-400 text-black"
+          class="block py-3 px-4 rounded-xl text-white hover:bg-green-400 hover:text-black transition text-center"
+          >Crear Nómina</a
+        >
+        <a
+          routerLink="/payrollLista"
+          routerLinkActive="bg-green-400 text-black"
+          class="block py-3 px-4 rounded-xl text-white hover:bg-green-400 hover:text-black transition text-center"
+          >Nóminas</a
+        >
+        <a
+          routerLink="/userMenu"
+          routerLinkActive="bg-green-400 text-black"
+          class="block py-3 px-4 rounded-xl text-white hover:bg-green-400 hover:text-black transition text-center"
+          >Menu Usuario</a
+        >
       </nav>
     </div>
     <div class="text-gray-500 text-xs px-6 text-center py-4">
@@ -90,9 +96,10 @@
   </aside>
 
   <!-- Contenido principal -->
-  <main class="flex-1 flex bg-[#1E2226] items-center justify-center pl-0  md:pl-72 transition-all duration-300"
-  [ngClass]="{ 'blur-sm pointer-events-none': menuOpen && !isDesktop }">
-
+  <main
+    class="flex-1 flex bg-[#1E2226] items-center justify-center pl-0 md:pl-72 transition-all duration-300"
+    [ngClass]="{ 'blur-sm pointer-events-none': menuOpen && !isDesktop }"
+  >
     <router-outlet></router-outlet>
   </main>
 </div>
