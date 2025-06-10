@@ -12,7 +12,7 @@ import { Response } from 'express';
 import { EmployeeService } from './employee.service';
 import { Employee } from './employee.model';
 import { EmployeeAltaDto } from './dtos/employeeAltaDto';
-import { EmployeeDatosDto } from './dtos/employeeDatos.dto';
+import { EmployeeDatosDto } from './dtos/employeeDatosDto';
 
 @Controller('employees')
 export class EmployeeController {

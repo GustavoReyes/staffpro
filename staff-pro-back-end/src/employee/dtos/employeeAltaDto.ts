@@ -6,7 +6,6 @@ export class EmployeeAltaDto {
     dni: string;
     @IsNotEmpty()
     name: string;
-   
     @IsNotEmpty()
     @IsNumber()
     department_id:number;
@@ -20,7 +19,6 @@ export class EmployeeAltaDto {
     @IsDate()
     hire_date: Date;
  
-
 
     constructor(
         dni: string,
@@ -41,4 +39,5 @@ export class EmployeeAltaDto {
         this.position = position;
         this.hire_date = hire_date;
     }
+    
 }

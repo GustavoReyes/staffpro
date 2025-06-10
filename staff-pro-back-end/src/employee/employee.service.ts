@@ -4,7 +4,7 @@ import { DataSource, Repository } from 'typeorm';
 import { Employee } from './employee.model';
 import { EmployeeAltaDto } from './dtos/employeeAltaDto';
 import { User } from 'src/users/user.model';
-import { EmployeeDatosDto } from './dtos/employeeDatos.dto';
+import { EmployeeDatosDto } from './dtos/employeeDatosDto';
 
 
 @Injectable()
@@ -13,8 +13,7 @@ export class EmployeeService {
   constructor(@InjectRepository(Employee)
   private readonly employeeRepository: Repository<Employee>,
   @InjectRepository(User)
-  private readonly userRepository: Repository<User>,
- private dataSource:DataSource) {
+  private readonly userRepository: Repository<User>) {
   }
   //crear un empleado asociado a un id_user
   //buscar por email, el email es unico y está asociado a un id_user

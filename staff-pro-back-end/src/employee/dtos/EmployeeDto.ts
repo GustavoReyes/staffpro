@@ -1,6 +1,6 @@
 import { IsAlphanumeric, IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
-export class EmployeeAltaDto {
+export class EmployeeDto {
     @IsNotEmpty()
     @IsAlphanumeric()
     dni: string;

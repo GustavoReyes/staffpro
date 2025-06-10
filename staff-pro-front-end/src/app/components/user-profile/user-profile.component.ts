@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { EmployeesService } from '../../services/Employees/employees.service';
+import { Employee } from '../../model/employee';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,11 +9,11 @@ import { EmployeesService } from '../../services/Employees/employees.service';
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
-export class UserProfileComponent {
-  constructor(private employeesService:EmployeesService,private router:Router){
+export class UserProfileComponent  {
 
-  }
-
-   
-
+  
 }
+
+
+
+
