@@ -1,0 +1,36 @@
+<div class="container mx-auto py-16 px-4 bg-gray-900 min-h-screen">
+  <h1 class="text-4xl font-bold text-center text-green-400 mb-14 tracking-wide">
+    Panel de Usuario
+  </h1>
+
+  <div class="flex flex-wrap justify-center gap-10">
+    <!-- Opción: Mi Perfil -->
+    <a [routerLink]="['/userMenu']"
+       class="flex flex-col items-center bg-gray-800 border border-gray-700 rounded-2xl shadow-lg p-6 w-64 h-64 hover:bg-gray-700 transition-all group">
+      <svg class="w-16 h-16 text-green-500 mb-4 group-hover:text-green-400 transition" fill="none"
+           stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M5.121 17.804A9 9 0 1112 21a9 9 0 01-6.879-3.196z" />
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+      <h2 class="text-xl font-semibold text-gray-100 mb-1">Mi Perfil</h2>
+      <p class="text-gray-400 text-sm text-center">Accede a tus datos personales</p>
+    </a>
+
+    <!-- Opción: Gestión Empleados -->
+    <a [routerLink]="['/menuGestion']"
+       class="flex flex-col items-center bg-gray-800 border border-gray-700 rounded-2xl shadow-lg p-6 w-64 h-64 hover:bg-gray-700 transition-all group">
+      <svg class="w-16 h-16 text-green-500 mb-4 group-hover:text-green-400 transition" fill="none"
+           stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M17 20h5v-2a3 3 0 00-5.356-1.857M9 20H4v-2a3 3 0 015.356-1.857M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75m8 4.12V21M8 14.999V21" />
+      </svg>
+      <h2 class="text-xl font-semibold text-gray-100 mb-1">Gestión Empleados</h2>
+      <p class="text-gray-400 text-sm text-center">Administra la plantilla y roles</p>
+    </a>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
+

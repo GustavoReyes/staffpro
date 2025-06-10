@@ -1,0 +1,46 @@
+ <div class="container mx-auto py-16 px-4 bg-gray-900 min-h-screen">
+  <h1 class="text-4xl font-bold text-center text-green-400 mb-14 tracking-wide">
+    Panel de Gestión Administrativa
+  </h1>
+
+  <div class="flex flex-wrap justify-center gap-10">
+    <!-- Opción: Empleados -->
+    <a [routerLink]="['/adminEmployees']"
+       class="flex flex-col items-center bg-gray-800 border border-gray-700 rounded-2xl shadow-lg p-6 w-64 h-64 hover:bg-gray-700 transition-all group">
+      <svg class="w-16 h-16 text-green-500 mb-4 group-hover:text-green-400 transition"
+           fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M17 20h5v-2a3 3 0 00-5.356-1.857M9 20H4v-2a3 3 0 015.356-1.857M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75m8 4.12V21M8 14.999V21" />
+      </svg>
+      <h2 class="text-xl font-semibold text-gray-100 mb-1">Empleados</h2>
+      <p class="text-gray-400 text-sm text-center">Gestiona usuarios y departamentos</p>
+    </a>
+
+    <!-- Opción: Nóminas -->
+    <a [routerLink]="['/adminPayrolls']"
+       class="flex flex-col items-center bg-gray-800 border border-gray-700 rounded-2xl shadow-lg p-6 w-64 h-64 hover:bg-gray-700 transition-all group">
+      <svg class="w-16 h-16 text-green-500 mb-4 group-hover:text-green-400 transition"
+           fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 0V4m0 16v-4" />
+      </svg>
+      <h2 class="text-xl font-semibold text-gray-100 mb-1">Nóminas</h2>
+      <p class="text-gray-400 text-sm text-center">Administra los pagos y salarios</p>
+    </a>
+
+    <!-- Opción: Solicitudes -->
+    <a [routerLink]="['/adminLeaves']"
+       class="flex flex-col items-center bg-gray-800 border border-gray-700 rounded-2xl shadow-lg p-6 w-64 h-64 hover:bg-gray-700 transition-all group">
+      <svg class="w-16 h-16 text-green-500 mb-4 group-hover:text-green-400 transition"
+           fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M8 7V3m8 4V3m-9 8h10m-9 4h6m-7 4h8a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+      <h2 class="text-xl font-semibold text-gray-100 mb-1">Solicitudes</h2>
+      <p class="text-gray-400 text-sm text-center">Revisa licencias y ausencias</p>
+    </a>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
+
