@@ -3,6 +3,7 @@ import { Response } from 'express';
 import { LoginService } from './login.service';
 import { LoginGuard } from './login.guard';
 import { UserDto } from 'src/users/dto/userDto';
+
 @Controller('login')
 export class LoginController {
   constructor(private readonly loginService: LoginService) { }
@@ -31,9 +32,9 @@ export class LoginController {
     }
   }
   //ruta protegida con LoginGuard
-  @UseGuards(LoginGuard)
+  /*@UseGuards(LoginGuard)
   @Get('perfil')
   getProfile(@Req() req) {
     return req.user;
-  }
+  }*/
 }
