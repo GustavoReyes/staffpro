@@ -45,7 +45,7 @@ export class LoginComponent {
             const department_id = employee.department_id;
 
             if (department_id === 1) {
-              this.router.navigate(['/adminMenuGestion']);
+              this.router.navigate(['/adminMenu']);
             } else {
               this.router.navigate(['/userMenu']);
             }
