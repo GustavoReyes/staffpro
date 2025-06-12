@@ -31,10 +31,5 @@ export class LoginController {
       response.status(401).json({ message: 'Credenciales inválidas' });
     }
   }
-  //ruta protegida con LoginGuard
-  /*@UseGuards(LoginGuard)
-  @Get('perfil')
-  getProfile(@Req() req) {
-    return req.user;
-  }*/
+
 }

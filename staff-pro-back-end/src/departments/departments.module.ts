@@ -12,11 +12,13 @@ import { DepartmentsController } from './departments.controller';
 // Imports de los servicios //
 
 import { DepartmentsService } from './departments.service';
+import { EmployeeModule } from 'src/employee/employee.module';
 
 // Modulo principal
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Department])],
+  imports: [TypeOrmModule.forFeature([Department]),
+EmployeeModule],
   controllers: [DepartmentsController],
   providers: [DepartmentsService],
 })

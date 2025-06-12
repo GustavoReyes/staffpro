@@ -21,6 +21,11 @@ export class EmployeesService {
     const url: string = `${this.apiUrl}/findAll`;
     return this.http.get<Employee[]>(url);
   }
+  employeeByUserId(id_user: number): Observable<any> {
+    const url: string = `${this.apiUrl}/findByUserId/${id_user}`;
+    return this.http.get<Employee>(url);
+  }
+
 
   employeesByDepartment(department_id: number): Observable<Employee[]> {
     const url: string = `${this.apiUrl}findByDepart/${department_id}`;

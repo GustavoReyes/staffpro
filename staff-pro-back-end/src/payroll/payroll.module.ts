@@ -14,11 +14,13 @@ import { PayrollController } from './payroll.controller';
 
 import { PayrollService } from './payroll.service';
 import { Employee } from 'src/employee/employee.model';
+import { EmployeeModule } from 'src/employee/employee.module';
 
 // Modulo principal
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Payroll, Employee])],
+  imports: [TypeOrmModule.forFeature([Payroll, Employee]),
+EmployeeModule],
   controllers: [PayrollController],
   providers: [PayrollService],
 })

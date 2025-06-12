@@ -1,11 +1,18 @@
-import { Controller, Get, Param, Res } from '@nestjs/common';
+import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { UsersService } from './users.service';
+import { Roles } from 'src/login/roles.decorator';
+import { LoginGuard } from 'src/login/login.guard';
+import { RolesGuard } from 'src/login/roles.guard';
 
+
+@UseGuards(LoginGuard, RolesGuard)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
+ 
+@Roles('admin')
   @Get('findByEmail/:email')
   async getUserByEmail(@Param('email') email: string, @Res() response: Response) {
     const user = await this.usersService.findByEmail(email);
@@ -16,6 +23,7 @@ export class UsersController {
       response.status(404).json({ message: 'Usuario no encontrado' });
     }
   }
+
 
   @Get('findAll')
   async getAllUsers(@Res() response: Response) {

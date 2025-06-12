@@ -1,12 +1,8 @@
 
 import { Injectable } from '@nestjs/common';
- 
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-
-
 import { User } from 'src/users/user.model';
- 
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
