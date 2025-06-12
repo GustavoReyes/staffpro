@@ -5,12 +5,12 @@ import { ROLES_KEY } from './roles.decorator';
 import { EmployeeService } from 'src/employee/employee.service';
 
 @Injectable()
-export class RolesGuard implements CanActivate {
+ export class RolesGuard implements CanActivate {
  
    constructor(private reflector: Reflector,
                   private employeeService: EmployeeService ) {}
 
-                  
+
   async canActivate( context: ExecutionContext ):  Promise<boolean>   {
       
       const requiredRoles = this.reflector.getAllAndOverride<string[]>(ROLES_KEY, [
