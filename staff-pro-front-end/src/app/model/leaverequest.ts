@@ -4,7 +4,7 @@ export class LeaveRequest {
   type?: string;
   start_date?: string;
   end_date?: string;
-  status?: 'pending' | 'accepted' | 'rejected';
+  status?: 'pending' | 'approved' | 'rejected';
 
  constructor(
     id_user_fk: number,
@@ -12,7 +12,7 @@ export class LeaveRequest {
     type?: string,
     start_date?: string,
     end_date?: string,
-    status: 'pending' | 'accepted' | 'rejected' = 'pending'
+    status: 'pending' | 'approved' | 'rejected' = 'pending'
   ) {
     this.id_user_fk=id_user_fk,
     this.id=id,
