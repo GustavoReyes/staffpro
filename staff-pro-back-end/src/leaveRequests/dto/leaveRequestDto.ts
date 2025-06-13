@@ -9,8 +9,9 @@ export enum LeaveRequestStatus {
 
 export class LeaveRequestDto {
 
+  @IsOptional()
   @IsInt()
-  id: number;
+  id?: number;
 
   @IsInt()
   id_user_fk: number;
