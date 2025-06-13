@@ -10,17 +10,17 @@ import {
   Res,
 } from '@nestjs/common';
 
-import { LeaveRequestService } from './leaveRequests.service';
+import { LeaveRequestsService } from './leaveRequests.service';
 import { LeaveRequestDto } from './dto/leaveRequestDto';
 import { Response } from 'express';
 
 @Controller('leaveRequests')
-export class LeaveRequestController {
-  constructor(private readonly leaveRequestService: LeaveRequestService) {}
+export class LeaveRequestsController {
+  constructor(private readonly leaveRequestsService: LeaveRequestsService) {}
 
   @Get()
   async findAll() {
-    const requests = await this.leaveRequestService.findAll();
+    const requests = await this.leaveRequestsService.findAll();
     return requests.map(request => {
       if (request.user) delete request.user.password;
       return request;
@@ -29,7 +29,7 @@ export class LeaveRequestController {
 
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id:number,@Res() response:Response) {
-    const leaveRequest = await this.leaveRequestService.findOne(id);
+    const leaveRequest = await this.leaveRequestsService.findOne(id);
     if (leaveRequest) {
       if (leaveRequest.user) {
         delete leaveRequest.user.password
@@ -42,13 +42,13 @@ export class LeaveRequestController {
 
   @Post()
   async create(@Body() dto: LeaveRequestDto) {
-    return this.leaveRequestService.create(dto);
+    return this.leaveRequestsService.create(dto);
   }
 
   @Put(':id')
   async update(
     @Param('id', ParseIntPipe) id:number,@Body() dto: Partial<LeaveRequestDto>,@Res() response:Response) {
-      const updated = await this.leaveRequestService.update(id, dto)
+      const updated = await this.leaveRequestsService.update(id, dto)
       if (updated){
         return response.status(200).json(updated)
       } else {
@@ -58,6 +58,6 @@ export class LeaveRequestController {
 
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
-    return this.leaveRequestService.remove(id);
+    return this.leaveRequestsService.remove(id);
   }
 }

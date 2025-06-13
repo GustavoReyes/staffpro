@@ -5,7 +5,7 @@ import { LeaveRequest } from './leaveRequest.model';
 import { LeaveRequestDto } from './dto/leaveRequestDto';
 
 @Injectable()
-export class LeaveRequestService {
+export class LeaveRequestsService {
   constructor(
     @InjectRepository(LeaveRequest) private leaveRequestRepository: Repository<LeaveRequest>){}
 

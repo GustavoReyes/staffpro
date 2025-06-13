@@ -7,17 +7,17 @@ import { LeaveRequest } from './leaveRequest.model';
 
 // Imports de los controladores //
 
-import { LeaveRequestController } from './leaveRequests.controller';
+import { LeaveRequestsController } from './leaveRequests.controller';
 
 // Imports de los servicios //
 
-import { LeaveRequestService } from './leaveRequests.service';
+import { LeaveRequestsService } from './leaveRequests.service';
 
 // Modulo principal
 
 @Module({
   imports: [TypeOrmModule.forFeature([LeaveRequest])],
-  controllers: [LeaveRequestController],
-  providers: [LeaveRequestService],
+  controllers: [LeaveRequestsController],
+  providers: [LeaveRequestsService],
 })
 export class LeaveRequestsModule {}
