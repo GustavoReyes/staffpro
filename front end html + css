@@ -1,0 +1,132 @@
+front end html + css
+este front end basico realiza peticiones al back end NestJS corriendo en : http://localhost:3000/empleados.
+en la carpeta index.html escribir el siguiente codigo:
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Control de Empleados</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Empleados</h1>
+
+    <form id="formEmpleado">
+      <input type="text" name="nombre" placeholder="Nombre" required />
+      <input type="text" name="puesto" placeholder="Puesto" required />
+      <select name="status">
+        <option value="asistio">✔ Asistió</option>
+        <option value="ausente">✖ Ausente</option>
+      </select>
+      <input type="date" name="fechaIngreso" required />
+      <button type="submit">Agregar</button>
+    </form>
+
+    <table id="tablaEmpleados">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Puesto</th>
+          <th>Status</th>
+          <th>Ingreso</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const form = document.getElementById('formEmpleado');
+    const tabla = document.getElementById('tablaEmpleados').querySelector('tbody');
+
+    const cargarEmpleados = async () => {
+      const res = await fetch('http://localhost:3000/empleados');
+      const empleados = await res.json();
+      tabla.innerHTML = '';
+      empleados.forEach(emp => {
+        const fila = `<tr>
+          <td>${emp.nombre}</td>
+          <td>${emp.puesto}</td>
+          <td>${emp.status === 'asistio' ? '✔' : '✖'}</td>
+          <td>${emp.fechaIngreso}</td>
+        </tr>`;
+        tabla.innerHTML += fila;
+      });
+    };
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      await fetch('http://localhost:3000/empleados', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      form.reset();
+      cargarEmpleados();
+    });
+
+    cargarEmpleados();
+  </script>
+</body>
+</html>
+ 
+en la carpeta estilos.css escribir el siguiente codigo:
+body {
+  font-family: sans-serif;
+  background-color: #f1f5f9;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+form input, form select, form button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+form button {
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+table th {
+  background: #f3f4f6;
+}
