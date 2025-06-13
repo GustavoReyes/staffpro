@@ -12,11 +12,11 @@ export class LeaveRequest{
     user?: User;
     @Column({nullable:true})
     type?:string;
-    @Column({type:"datetime"})
+    @Column({ type: "datetime" })
     start_date?:Date;
     @Column({nullable:true})
     end_date?:Date;
-    @Column()
+    @Column({ default: "pending" })
     status?:string;
 
     constructor(

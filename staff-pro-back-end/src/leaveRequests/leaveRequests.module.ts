@@ -12,12 +12,19 @@ import { LeaveRequestsController } from './leaveRequests.controller';
 // Imports de los servicios //
 
 import { LeaveRequestsService } from './leaveRequests.service';
+import { RolesGuard } from 'src/login/roles.guard';
+
+// Import del EmployeesModule para la funcion de roles
+
+import { EmployeeModule } from 'src/employee/employee.module'
 
 // Modulo principal
 
 @Module({
-  imports: [TypeOrmModule.forFeature([LeaveRequest])],
+  imports: [TypeOrmModule.forFeature([LeaveRequest]),
+  EmployeeModule
+],
   controllers: [LeaveRequestsController],
-  providers: [LeaveRequestsService],
+  providers: [LeaveRequestsService, RolesGuard],
 })
 export class LeaveRequestsModule {}

@@ -8,16 +8,22 @@ import {
   Body,
   ParseIntPipe,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 
 import { LeaveRequestsService } from './leaveRequests.service';
 import { LeaveRequestDto } from './dto/leaveRequestDto';
 import { Response } from 'express';
+import { LoginGuard } from 'src/login/login.guard';
+import { RolesGuard } from 'src/login/roles.guard';
+import { Roles } from 'src/login/roles.decorator';
 
+@UseGuards(LoginGuard, RolesGuard)
 @Controller('leaveRequests')
 export class LeaveRequestsController {
   constructor(private readonly leaveRequestsService: LeaveRequestsService) {}
 
+  @Roles('admin')
   @Get()
   async findAll() {
     const requests = await this.leaveRequestsService.findAll();
@@ -27,6 +33,7 @@ export class LeaveRequestsController {
     });
   }
 
+  @Roles('admin','user')
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id:number,@Res() response:Response) {
     const leaveRequest = await this.leaveRequestsService.findOne(id);
@@ -40,11 +47,13 @@ export class LeaveRequestsController {
     }
   }
 
+  @Roles('admin','user')
   @Post()
   async create(@Body() dto: LeaveRequestDto) {
     return this.leaveRequestsService.create(dto);
   }
 
+  @Roles('admin')
   @Put(':id')
   async update(
     @Param('id', ParseIntPipe) id:number,@Body() dto: Partial<LeaveRequestDto>,@Res() response:Response) {
@@ -56,6 +65,7 @@ export class LeaveRequestsController {
       }
   }
 
+  @Roles('admin')
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
     return this.leaveRequestsService.remove(id);
