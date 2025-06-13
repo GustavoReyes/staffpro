@@ -3,10 +3,14 @@ import { Router } from '@angular/router';
 import { EmployeesService } from '../../services/Employees/employees.service';
 import { LoginService } from '../../services/Login/login.service';
 import { AuthService } from '../../services/Auth/auth.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-login',
+  imports: [CommonModule, FormsModule],
+   providers: [AuthService],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'] // corregido: era "styleUrl"
 })
