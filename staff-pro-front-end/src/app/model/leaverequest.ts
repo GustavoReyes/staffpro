@@ -2,16 +2,16 @@ export class LeaveRequest {
   id_user_fk: number;
   id?: number;
   type?: string;
-  start_date?: Date;
-  end_date?: Date;
+  start_date?: string;
+  end_date?: string;
   status?: 'pending' | 'accepted' | 'rejected';
 
  constructor(
     id_user_fk: number,
     id?: number,
     type?: string,
-    start_date?: Date,
-    end_date?: Date,
+    start_date?: string,
+    end_date?: string,
     status: 'pending' | 'accepted' | 'rejected' = 'pending'
   ) {
     this.id_user_fk=id_user_fk,

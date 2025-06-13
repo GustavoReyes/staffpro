@@ -9,12 +9,12 @@ export enum LeaveRequestStatus {
 
 export class LeaveRequestDto {
 
+  @IsInt()
+  id_user_fk: number;
+
   @IsOptional()
   @IsInt()
   id?: number;
-
-  @IsInt()
-  id_user_fk: number;
 
   @IsOptional()
   @IsString()
@@ -35,15 +35,15 @@ export class LeaveRequestDto {
   status?: string;
 
   constructor(
-    id:number,
     id_user_fk:number,
+    id:number,
     type:string,
     start_date:Date,
     end_date:Date,
     status:LeaveRequestStatus
   ){
-    this.id=id,
     this.id_user_fk=id_user_fk,
+    this.id=id,
     this.type=type
     this.start_date=start_date
     this.end_date=end_date

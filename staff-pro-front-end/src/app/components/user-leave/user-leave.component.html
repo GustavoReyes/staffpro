@@ -1,1 +1,87 @@
-<p>user-leave works!</p>
+<div class="min-h-screen bg-[#1e2226] p-4">
+  <div class="max-w-7xl mx-auto">
+    <!-- Filtros -->
+    <div class="bg-[#23272A] p-6 rounded-lg shadow-lg mb-6">
+      <h2 class="text-2xl font-bold text-white mb-4">Mis solicitudes de permiso</h2>
+      <div *ngIf="loading" class="text-center text-gray-300 mb-4">Cargando...</div>
+      <div *ngIf="error" class="text-red-400 text-center mb-4">{{ error }}</div>
+      <!-- Formulario -->
+      <form (ngSubmit)="createLeave()" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+        <div class="flex flex-col">
+          <label for="type" class="mb-1 text-white text-sm">Tipo de permiso</label>
+          <select
+            [(ngModel)]="newLeave.type"
+            name="type"
+            id="type"
+            required
+            class="px-12 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
+          >
+            <option value="" disabled selected hidden>Selecciona una razón...</option>
+            <option value="vacaciones">Vacaciones</option>
+            <option value="enfermedad">Enfermedad</option>
+            <option value="asuntos_propios">Asuntos propios</option>
+          </select>
+        </div>
+        <div class="flex flex-col">
+          <label for="start_date" class="mb-1 text-white text-sm">Fecha de inicio</label>
+          <input
+            [(ngModel)]="newLeave.start_date"
+            name="start_date"
+            id="start_date"
+            type="date"
+            required
+            class="px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="end_date" class="mb-1 text-white text-sm">Fecha de fin</label>
+          <input
+            [(ngModel)]="newLeave.end_date"
+            name="end_date"
+            id="end_date"
+            type="date"
+            required
+            class="px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
+          />
+        </div>
+        <div class="flex flex-col justify-end">
+          <button
+            type="submit"
+            class="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition w-full"
+          >
+            Solicitar
+          </button>
+        </div>
+      </form>
+    <!-- Lista de solicitudes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        *ngFor="let leave of leaveRequests"
+        class="bg-[#23272A] rounded-lg shadow-lg overflow-hidden"
+      >
+        <div class="p-4">
+          <div class="flex justify-between items-center mb-2">
+            <div>
+              <h3 class="text-xl font-bold text-white capitalize">
+                {{ leave.type || 'Sin tipo' }}
+              </h3>
+              <p class="text-gray-400">
+                {{ leave.start_date | date:'dd/MM/yyyy' }} - {{ leave.end_date | date:'dd/MM/yyyy' }}
+              </p>
+            </div>
+            <span
+              class="px-3 py-1 rounded text-xs font-semibold"
+              [ngClass]="{
+                'bg-yellow-100 text-yellow-800': leave.status === 'pending',
+                'bg-green-100 text-green-800': leave.status === 'accepted',
+                'bg-red-100 text-red-800': leave.status === 'rejected'
+              }"
+            >
+              {{ leave.status }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

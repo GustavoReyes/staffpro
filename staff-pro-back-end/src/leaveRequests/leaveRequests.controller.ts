@@ -23,7 +23,7 @@ import { Roles } from 'src/login/roles.decorator';
 export class LeaveRequestsController {
   constructor(private readonly leaveRequestsService: LeaveRequestsService) {}
 
-  @Roles('admin')
+  // @Roles('admin')
   @Get()
   async findAll() {
     const requests = await this.leaveRequestsService.findAll();
@@ -33,7 +33,7 @@ export class LeaveRequestsController {
     });
   }
 
-  @Roles('admin','user')
+  // @Roles('admin','user')
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id:number,@Res() response:Response) {
     const leaveRequest = await this.leaveRequestsService.findOne(id);
@@ -47,13 +47,13 @@ export class LeaveRequestsController {
     }
   }
 
-  @Roles('admin','user')
+  // @Roles('admin','user')
   @Post()
   async create(@Body() dto: LeaveRequestDto) {
     return this.leaveRequestsService.create(dto);
   }
 
-  @Roles('admin')
+  // @Roles('admin')
   @Put(':id')
   async update(
     @Param('id', ParseIntPipe) id:number,@Body() dto: Partial<LeaveRequestDto>,@Res() response:Response) {
@@ -65,7 +65,7 @@ export class LeaveRequestsController {
       }
   }
 
-  @Roles('admin')
+  // @Roles('admin')
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
     return this.leaveRequestsService.remove(id);
