@@ -9,3 +9,6 @@ npm install passport passport-jwt @nestjs/passport
 npm install --save-dev @types/passport-jwt
 
 en login module. contrasena secreta=  'contraseña_secreta', 
+
+npm install jwt-decode 
+en front para decodificar
