@@ -4,12 +4,21 @@ import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  getDecodedToken(): { id_user: number, email: string } | null {
-    const token = localStorage.getItem('token');
-    return token ? jwtDecode(token) as any : null;
-  }
 
+export class AuthService {
+
+   private tokenKey = 'token';
+
+  getDecodedToken(): { id_user: number; email: string } | null {
+  const token = this.getToken();
+  try {
+    const decoded = token ? jwtDecode<{ sub: number; email: string }>(token) : null;
+    return decoded ? { id_user: decoded.sub, email: decoded.email } : null;
+  } catch (err) {
+    console.error('Token inválido:', err);
+    return null;
+  }
+  }
   saveToken(token: string) {
     localStorage.setItem('token', token);
   }
@@ -18,3 +27,5 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 }
+
+
