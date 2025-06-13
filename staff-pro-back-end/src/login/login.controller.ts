@@ -21,8 +21,7 @@ export class LoginController {
   async login(
     @Body('email') email: string,
     @Body('password') password: string,
-    @Res() response: Response
-  ) {
+    @Res() response: Response) {
     const result = await this.loginService.login(email, password);
 
     if (result.access_token) {
