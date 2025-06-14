@@ -11,15 +11,19 @@ import { FormsModule } from '@angular/forms';
 })
 export class RegisterComponent {
 
- registerData = { email: '', password: '' };
-  users: any[] = [];
+ registerData = { email: '', password: '', confirmPassword: '' };
+users: any[] = [];
 
   constructor(private registerService:RegisterService){}
 
  register() {
+    if (this.registerData.password !== this.registerData.confirmPassword) {
+      alert('Las contraseñas no coinciden');
+      return;
+    }
     this.registerService.register(this.registerData).subscribe({
       next: () => {
-        this.registerData = { email: '', password: '' };
+        this.registerData = { email: '', password: '', confirmPassword: '' };
       },
       error: err => alert(err.error.message || 'Error al registrar')
     });
