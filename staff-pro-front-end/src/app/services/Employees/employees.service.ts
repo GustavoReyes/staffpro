@@ -52,13 +52,11 @@ export class EmployeesService {
     return this.http.patch(url, datos, { headers: this.getAuthHeaders() });
   }
 
-  employeeByUserId(id_user: number): Observable<any> {
-    if (!id_user) {
-      return of(null);
-    } else {
+  employeeByUserId(id_user: number): Observable<Employee> {
+
       const url: string = `${this.apiUrl}/findByUser/${id_user}`;
       return this.http.get<Employee>(url, { headers: this.getAuthHeaders() });
-    }
+
   }
 
   employeeByEmail(email:string): Observable<any> {
