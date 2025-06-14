@@ -35,7 +35,7 @@ export class EmployeeController {
       response.status(409).send('Hubo un error al agregar el empleado');
     }
   }
-  @UseGuards(LoginGuard, RolesGuard)
+ @UseGuards(LoginGuard, RolesGuard)
 @Roles('admin')
   @Get("findAll")
   findAll(): Promise<EmployeeDatosDto[]> {
