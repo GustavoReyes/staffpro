@@ -26,6 +26,13 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
+  getUserId(): number | null {
+  const decoded = this.getDecodedToken();
+  return decoded ? decoded.id_user : null;
+}
+
+
 }
 
 
