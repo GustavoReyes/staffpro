@@ -47,6 +47,9 @@ export class LoginComponent {
         this.employeesService.employeeByUserId(id_user).subscribe({
           next: (employee) => {
             const department_id = employee.department_id;
+            if (employee && employee.dni) {
+            localStorage.setItem('userDni', employee.dni);
+    }
 
             if (department_id === 1) {
               this.router.navigate(['/adminMenu']);

@@ -7,19 +7,19 @@ import { jwtDecode } from 'jwt-decode';
 
 export class AuthService {
 
-   private tokenKey = 'token';
+  private tokenKey = 'token';
 
   getDecodedToken(): { id_user: number; email: string } | null {
-  const token = this.getToken();
-  try {
-    const decoded = token ? jwtDecode<{ sub: number; email: string }>(token) : null;
-    return decoded ? { id_user: decoded.sub, email: decoded.email } : null;
-  } catch (err) {
-    console.error('Token inválido:', err);
-    return null;
+    const token = this.getToken();
+    try {
+      const decoded = token ? jwtDecode<{ sub: number; email: string }>(token) : null;
+      return decoded ? { id_user: decoded.sub, email: decoded.email } : null;
+    } catch (err) {
+      console.error('Token inválido:', err);
+      return null;
+    }
   }
-  }
-  
+
   saveToken(token: string) {
     localStorage.setItem('token', token);
   }
@@ -29,10 +29,12 @@ export class AuthService {
   }
 
   getUserId(): number | null {
-  const decoded = this.getDecodedToken();
-  return decoded ? decoded.id_user : null;
-}
-
+    const decoded = this.getDecodedToken();
+    return decoded ? decoded.id_user : null;
+  }
+  getUserDni(): string | null {
+    return localStorage.getItem('userDni');
+  }
 
 }
 
