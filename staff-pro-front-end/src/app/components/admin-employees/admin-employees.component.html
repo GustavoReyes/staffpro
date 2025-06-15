@@ -1,1 +1,71 @@
-<p>admin-employees works!</p>
+<div class="min-h-screen bg-[#1e2226] p-6">
+  <div class="max-w-4xl mx-auto bg-[#23272A] p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold text-green-300 mb-6 text-center">Gestión de Empleados</h2>
+
+    <!-- Input de búsqueda -->
+    <div class="mb-6">
+      <label class="text-sm font-semibold text-gray-300 block mb-2">Buscar por email</label>
+      <div class="flex gap-4">
+        <input [(ngModel)]="email"
+               placeholder="email@dominio.com"
+               class="w-full bg-[#181C1F] text-white border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" />
+        <button (click)="buscarEmpleado()"
+                class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">Buscar</button>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div *ngIf="employee" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <label class="text-sm text-gray-300 mb-1 block">DNI</label>
+        <input [(ngModel)]="employee.dni"
+               class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600" />
+      </div>
+      <div>
+        <label class="text-sm text-gray-300 mb-1 block">Nombre</label>
+        <input [(ngModel)]="employee.name"
+               class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600" />
+      </div>
+      <div>
+        <label class="text-sm text-gray-300 mb-1 block">Departamento</label>
+        <input [(ngModel)]="employee.department_id"
+               class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600" />
+      </div>
+      <div>
+        <label class="text-sm text-gray-300 mb-1 block">Día de trabajo (hrs)</label>
+        <input type="number" [(ngModel)]="employee.work_day"
+               class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600" />
+      </div>
+      <div>
+        <label class="text-sm text-gray-300 mb-1 block">Hora de trabajo</label>
+        <input type="number" [(ngModel)]="employee.work_hour"
+               class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600" />
+      </div>
+      <div>
+        <label class="text-sm text-gray-300 mb-1 block">Salario base (€)</label>
+        <input type="number" [(ngModel)]="employee.base_salary"
+               class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600" />
+      </div>
+      <div class="md:col-span-2">
+        <label class="text-sm text-gray-300 mb-1 block">Cargo</label>
+        <input [(ngModel)]="employee.position"
+               class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600" />
+      </div>
+      <div class="md:col-span-2">
+        <label class="text-sm text-gray-300 mb-1 block">Fecha de contratación</label>
+        <input type="date" [(ngModel)]="employee.hire_date"
+               class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600" />
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="flex justify-center gap-4">
+      <button (click)="registrarEmpleado()"
+              class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition">Registrar</button>
+      <button (click)="actualizarEmpleado()"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition">Actualizar</button>
+      <button (click)="borrarEmpleado()"
+              class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition">Borrar</button>
+    </div>
+  </div>
+</div>
