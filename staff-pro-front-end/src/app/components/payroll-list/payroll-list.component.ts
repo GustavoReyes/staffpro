@@ -6,6 +6,7 @@ import { PayrollService } from '../../services/Payroll/payroll.service';
 import { Employee } from '../../model/employee';
 import { EmployeesService } from '../../services/Employees/employees.service';
 import { DepartmentsService } from '../../services/Departments/departments.service';
+import { AuthService } from '../../services/Auth/auth.service';
 
 @Component({
   selector: 'app-payroll-list',
@@ -38,35 +39,53 @@ export class PayrollListComponent implements OnInit {
     { value: '11', label: 'Noviembre' },
     { value: '12', label: 'Diciembre' }
   ];
+  isAdmin = false;
+  isLoaded = false;
 
   constructor(
     private payrollService: PayrollService,
     private employeesService: EmployeesService,
-    private departmentsService: DepartmentsService
+    private departmentsService: DepartmentsService,
+    private authService: AuthService
   ) { }
 
-  ngOnInit(): void {
-    // Cargar departamentos
-    this.departmentsService.allDepartmenst().subscribe({
-      next: (data) => {
-        this.departments = data;
-      },
-      error: (error) => console.error('Error cargando departamentos:', error)
-    });
+ngOnInit(): void {
+    const userId = this.authService.getUserId();
+    if (!userId) {
+      this.isLoaded = true;
+      this.isAdmin = false;
+      return;
+    }
 
-    // Cargar empleados
+    // Cargar empleados y verificar si el usuario es admin
     this.employeesService.getEmployees().subscribe({
-      next: (data) => {
-        this.employees = data.map(emp => {
-          emp.department_id = Number(emp.department_id);
-          return emp;
-        });
-      },
-      error: (error) => console.error('Error cargando empleados:', error)
-    });
+      next: (employees) => {
+        const employee = employees.find(emp => emp.id_user === userId);
+        // Cambia el número 1 por el department_id que corresponda a admin
+        this.isAdmin = !!employee && employee.department_id === 1;
+        this.isLoaded = true;
 
-    // Cargar todas las nóminas
-    this.loadPayrolls();
+        if (this.isAdmin) {
+          // Cargar departamentos y nóminas solo si es admin
+          this.departmentsService.allDepartmenst().subscribe({
+            next: (data) => { this.departments = data; },
+            error: (error) => console.error('Error cargando departamentos:', error)
+          });
+
+          this.employees = employees.map(emp => {
+            emp.department_id = Number(emp.department_id);
+            return emp;
+          });
+
+          this.loadPayrolls();
+        }
+      },
+      error: (error) => {
+        this.isLoaded = true;
+        this.isAdmin = false;
+        console.error('Error cargando empleados:', error);
+      }
+    });
   }
 
   loadPayrolls() {

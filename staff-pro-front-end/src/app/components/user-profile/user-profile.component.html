@@ -1,43 +1,133 @@
-<div *ngIf="employee">
-<div class="max-w-4xl mx-auto mt-10 bg-gray-900 text-gray-100 rounded-2xl shadow-xl border border-gray-700">
-  <div class="px-6 py-4 border-b border-gray-700 flex items-center justify-between">
-    <h2 class="text-2xl font-semibold text-green-400">
-      <i class="bi bi-person-badge-fill mr-2"></i>TUS DATOS PERSONALES
-    </h2>
-  </div>
-  <div class="px-6 py-6 space-y-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <label class="text-sm font-semibold text-gray-400">Nombre del Empleado</label>
-        <p class="mt-1 text-base">{{ employee.name }}</p>
+<div class="min-h-screen bg-[#1e2226] p-4 flex items-center justify-center">
+  <div class="max-w-4xl w-full mx-auto">
+    <div class="bg-[#23272A] p-6 rounded-lg shadow-lg">
+      <div class="px-6 py-4 border-b border-gray-700 flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-green-300 text-center w-full">
+          <i class="bi bi-person-badge-fill mr-2"></i>TUS DATOS PERSONALES
+        </h2>
       </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-400">DNI del empleado</label>
-        <p class="mt-1 text-base">{{ employee.dni }}</p>
+      <div *ngIf="employee; else loading" class="px-6 py-6 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="text-sm font-semibold text-gray-300 mb-1 block">Nombre</label>
+            <div class="rounded-md bg-[#181C1F]   px-4 py-2 text-green-300 font-semibold">
+              {{ employee.name }}
+            </div>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-300 mb-1 block">DNI</label>
+            <div class="rounded-lg bg-[#181C1F]   px-4 py-2 text-green-300 text-center font-semibold">
+              {{ employee.dni }}
+            </div>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-300 mb-1 block">Horas Semanales</label>
+            <div class="rounded-lg bg-[#181C1F]   px-4 py-2 text-green-300 text-center font-semibold">
+              {{ employee.work_day }}
+            </div>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-300 mb-1 block">Turno</label>
+            <div class="rounded-lg bg-[#181C1F]   px-4 py-2 text-green-300 font-semibold">
+              {{ employee.work_hour }}
+            </div>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-300 mb-1 block">Salario Base (€)</label>
+            <div class="rounded-lg bg-[#181C1F]   px-4 py-2 text-green-300 text-center font-semibold">
+              {{ employee.base_salary | currency : "EUR" : "symbol" : "1.2-2" }}
+            </div>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-300 mb-1 block">Cargo</label>
+            <div class="rounded-lg bg-[#181C1F]   px-4 py-2 text-green-300 text-center font-semibold">
+              {{ employee.position }}
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="text-sm font-semibold text-gray-300 mb-1 block">Fecha de contratación</label>
+          <div class="rounded-lg bg-[#181C1F]   px-4 py-2 text-green-300 text-center font-semibold">
+            {{ employee.hire_date | date : "longDate" }}
+          </div>
+        </div>
       </div>
-     
-      <div>
-        <label class="text-sm font-semibold text-gray-400">Horario (hrs)</label>
-        <p class="mt-1 text-base">{{ employee.work_day }}</p>
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-400">Horas de Trabajo (start)</label>
-        <p class="mt-1 text-base">{{ employee.work_hour }}</p>
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-400">Salario (€)</label>
-        <p class="mt-1 text-base">{{ employee.base_salary | number:'1.0-0' }}</p>
-      </div>
-      <div>
-        <label class="text-sm font-semibold text-gray-400">Cargo</label>
-        <p class="mt-1 text-base">{{ employee.position }}</p>
-      </div>
+      <ng-template #loading>
+        <div class="flex items-center justify-center py-10">
+          <span class="text-gray-300 text-lg">Cargando datos del empleado...</span>
+        </div>
+      </ng-template>
     </div>
-    <div>
-      <label class="text-sm font-semibold text-gray-400">Fecha de contratación</label>
-      <p class="mt-1 text-base">{{ employee.hire_date | date:'longDate' }}</p>
-    </div>
   </div>
-</div>
 </div>
 
+
+<!-- <div class="min-h-screen bg-[#1e2226] p-4 flex items-center justify-center">
+  <div class="max-w-4xl w-full mx-auto">
+    <div class="bg-[#23272A] p-6 rounded-lg shadow-lg">
+      <div
+        class="px-6 py-4 border-b border-gray-700 flex items-center justify-between"
+      >
+        <h2 class="text-2xl font-bold text-green-300 text-center w-full">
+          <i class="bi bi-person-badge-fill mr-2"></i>TUS DATOS PERSONALES
+        </h2>
+      </div>
+      <div *ngIf="employee; else loading" class="px-6 py-6 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="text-sm font-semibold text-gray-300"
+              >Nombre del Empleado</label
+            >
+            <p class="mt-1 text-base text-gray-100">{{ employee.name }}</p>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-300"
+              >DNI del empleado</label
+            >
+            <p class="mt-1 text-base text-gray-100">{{ employee.dni }}</p>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-300"
+              >Horario (hrs)</label
+            >
+            <p class="mt-1 text-base text-gray-100">{{ employee.work_day }}</p>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-300"
+              >Horas de Trabajo (start)</label
+            >
+            <p class="mt-1 text-base text-gray-100">{{ employee.work_hour }}</p>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-300"
+              >Salario (€)</label
+            >
+            <p class="mt-1 text-base text-gray-100">
+              {{ employee.base_salary | number : "1.0-0" }}
+            </p>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-300">Cargo</label>
+            <p class="mt-1 text-base text-gray-100">{{ employee.position }}</p>
+          </div>
+        </div>
+        <div>
+          <label class="text-sm font-semibold text-gray-300"
+            >Fecha de contratación</label
+          >
+          <p class="mt-1 text-base text-gray-100">
+            {{ employee.hire_date | date : "longDate" }}
+          </p>
+        </div>
+      </div>
+      <ng-template #loading>
+        <div class="flex items-center justify-center py-10">
+          <span class="text-gray-300 text-lg"
+            >Cargando datos del empleado...</span
+          >
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+ -->

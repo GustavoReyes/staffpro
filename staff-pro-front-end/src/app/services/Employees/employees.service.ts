@@ -8,17 +8,16 @@ import { Employee } from '../../model/employee';
 export class EmployeesService {
   private apiUrl = 'http://localhost:3000/employees';
 
-  constructor(private http: HttpClient, private authservice:AuthService) {
+  constructor(private http: HttpClient, private authservice: AuthService) {
 
   }
- private getAuthHeaders(): HttpHeaders {
+  private getAuthHeaders(): HttpHeaders {
     const token = this.authservice.getToken();
     let headers = new HttpHeaders();
 
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
-
     return headers;
   }
 
@@ -27,7 +26,6 @@ export class EmployeesService {
       headers: this.getAuthHeaders()
     });
   }
-
 
   getEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.apiUrl}/findAll`, {
@@ -54,18 +52,18 @@ export class EmployeesService {
 
   employeeByUserId(id_user: number): Observable<Employee> {
 
-      const url: string = `${this.apiUrl}/findByUser/${id_user}`;
-      return this.http.get<Employee>(url, { headers: this.getAuthHeaders() });
-
-  }
-
-  employeeByEmail(email:string): Observable<any> {
-        const url: string = `${this.apiUrl}/findByEmail/${email}`;
+    const url: string = `${this.apiUrl}/findByUser/${id_user}`;
     return this.http.get<Employee>(url, { headers: this.getAuthHeaders() });
   }
-deleteByEmail(email: string): Observable<any> {
-  const url: string = `${this.apiUrl}/delete/${email}`;
-  return this.http.delete(url, { headers: this.getAuthHeaders() });
-}
+
+  employeeByEmail(email: string): Observable<any> {
+    const url: string = `${this.apiUrl}/findByEmail/${email}`;
+    return this.http.get<Employee>(url, { headers: this.getAuthHeaders() });
+  }
+
+  deleteByEmail(email: string): Observable<any> {
+    const url: string = `${this.apiUrl}/delete/${email}`;
+    return this.http.delete(url, { headers: this.getAuthHeaders() });
+  }
 
 }

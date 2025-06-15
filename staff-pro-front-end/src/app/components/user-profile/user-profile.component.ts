@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { EmployeesService } from '../../services/Employees/employees.service';
 import { Employee } from '../../model/employee';
 import { AuthService } from '../../services/Auth/auth.service';
@@ -15,12 +15,12 @@ import { CommonModule } from '@angular/common';
 
 export class UserProfileComponent implements OnInit {
 
-   employee?: Employee;
+  employee?: Employee;
 
   constructor(
     private employeesService: EmployeesService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const idUser = this.authService.getDecodedToken();
