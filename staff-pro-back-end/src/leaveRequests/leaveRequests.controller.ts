@@ -21,7 +21,7 @@ import { Roles } from 'src/login/roles.decorator';
 @UseGuards(LoginGuard, RolesGuard)
 @Controller('leaveRequests')
 export class LeaveRequestsController {
-  constructor(private readonly leaveRequestsService: LeaveRequestsService) {}
+  constructor(private readonly leaveRequestsService: LeaveRequestsService) { }
 
   // @Roles('admin')
   @Get()
@@ -35,7 +35,7 @@ export class LeaveRequestsController {
 
   // @Roles('admin','user')
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id:number,@Res() response:Response) {
+  async findOne(@Param('id', ParseIntPipe) id: number, @Res() response: Response) {
     const leaveRequest = await this.leaveRequestsService.findOne(id);
     if (leaveRequest) {
       if (leaveRequest.user) {
@@ -56,13 +56,13 @@ export class LeaveRequestsController {
   // @Roles('admin')
   @Put(':id')
   async update(
-    @Param('id', ParseIntPipe) id:number,@Body() dto: Partial<LeaveRequestDto>,@Res() response:Response) {
-      const updated = await this.leaveRequestsService.update(id, dto)
-      if (updated){
-        return response.status(200).json(updated)
-      } else {
-        return response.status(404).json({ message: 'Solicitud no encontrada' });
-      }
+    @Param('id', ParseIntPipe) id: number, @Body() dto: Partial<LeaveRequestDto>, @Res() response: Response) {
+    const updated = await this.leaveRequestsService.update(id, dto)
+    if (updated) {
+      return response.status(200).json(updated)
+    } else {
+      return response.status(404).json({ message: 'Solicitud no encontrada' });
+    }
   }
 
   // @Roles('admin')

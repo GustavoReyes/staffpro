@@ -5,6 +5,9 @@ export class LeaveRequest {
   start_date?: string;
   end_date?: string;
   status?: 'pending' | 'approved' | 'rejected';
+  user?:{
+    id_user:number;
+  }
 
  constructor(
     id_user_fk: number,

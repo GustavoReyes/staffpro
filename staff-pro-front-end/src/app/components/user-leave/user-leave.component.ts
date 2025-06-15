@@ -1,31 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { LeaveRequestsService } from '../../services/LeaveRequests/leave-requests.service';
-import { LeaveRequest } from '../../model/leaverequest';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LeaveRequestsService } from '../../services/LeaveRequests/leave-requests.service';
 import { AuthService } from '../../services/Auth/auth.service';
+import { LeaveRequest } from '../../model/leaverequest';
 
 @Component({
   selector: 'app-user-leave',
   templateUrl: './user-leave.component.html',
   imports: [CommonModule, FormsModule]
 })
-
 export class UserLeaveComponent implements OnInit {
   leaveRequests: LeaveRequest[] = [];
   newLeave: LeaveRequest;
   loading = false;
   error = '';
 
+  // 1. Tipos de permiso en un array
+  leaveTypes = [
+    { value: 'Vacaciones', label: 'Vacaciones' },
+    { value: 'Enfermedad', label: 'Enfermedad' },
+    { value: 'Asuntos propios', label: 'Asuntos propios' }
+  ];
+
   constructor(
     private leaveRequestsService: LeaveRequestsService,
     private authService: AuthService
   ) {
-    this.newLeave = new LeaveRequest(this.getCurrentUserId());
+    this.newLeave = this.createEmptyLeave();
   }
 
   ngOnInit() {
     this.fetchLeaves();
+  }
+
+  getCurrentUserId(): number {
+    // Ajusta este método según cómo obtienes el id_user en tu AuthService
+    const decoded = this.authService.getDecodedToken?.();
+    return decoded?.id_user || Number(localStorage.getItem('id_user')) || 0;
+  }
+
+  createEmptyLeave(): LeaveRequest {
+    return {
+      id: 0,
+      type: '',
+      start_date: '',
+      end_date: '',
+      status: 'pending',
+      id_user_fk: this.getCurrentUserId()
+    } as LeaveRequest;
   }
 
   fetchLeaves() {
@@ -33,8 +56,9 @@ export class UserLeaveComponent implements OnInit {
     this.leaveRequestsService.getAll().subscribe({
       next: (data) => {
         this.leaveRequests = data.filter(
-          leaveRequest => leaveRequest.id_user_fk === this.getCurrentUserId()
+           leaveRequest => leaveRequest.user && Number(leaveRequest.user.id_user) === this.getCurrentUserId()
         );
+        console.log(data);
         this.loading = false;
       },
       error: () => {
@@ -45,38 +69,37 @@ export class UserLeaveComponent implements OnInit {
   }
 
   createLeave() {
-    const startDate = this.newLeave.start_date
-      ? new Date(this.newLeave.start_date).toISOString()
-      : undefined;
-    const endDate = this.newLeave.end_date
-      ? new Date(this.newLeave.end_date).toISOString()
-      : undefined;
+    this.error = '';
+    // 2. Validar fechas
+    if (!this.newLeave.start_date || !this.newLeave.end_date) {
+      this.error = 'Debes seleccionar ambas fechas.';
+      return;
+    }
 
-    const leaveRequestToSend = {
-      id_user_fk: 1, // Para depurar usando la id de usuario 1, eliminar en un futuro.
-      // id_user_fk: this.getCurrentUserId(), // Comentado para depurar, usar en un futuro.
-      type: this.newLeave.type,
-      start_date: startDate,
-      end_date: endDate,
-      status: this.newLeave.status || 'pending'
-    };
+    const start = new Date(this.newLeave.start_date);
+    const end = new Date(this.newLeave.end_date);
 
-    console.log('Enviando:', leaveRequestToSend); // Para depurar, visualizando la request en consola, eliminar en un futuro.
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      this.error = 'Las fechas seleccionadas no son válidas.';
+      return;
+    }
 
-    this.leaveRequestsService.create(leaveRequestToSend).subscribe({
+    if (end < start) {
+      this.error = 'La fecha de fin no puede ser anterior a la fecha de inicio.';
+      return;
+    }
+    // 3. Status pendiente y 4. id_user_fk del usuario logeado
+    this.newLeave.status = 'pending';
+    this.newLeave.id_user_fk = this.getCurrentUserId();
+
+    this.leaveRequestsService.create(this.newLeave).subscribe({
       next: () => {
         this.fetchLeaves();
-        this.newLeave = new LeaveRequest(this.getCurrentUserId());
+        this.newLeave = this.createEmptyLeave();
       },
-      error: (err) => {
-        this.error = 'Error al crear la solicitud';
-        console.error('Detalles del error:', err.error); // Para depurar y ver el error en la consola, eliminar en un futuro.
+      error: () => {
+        this.error = 'Error al enviar la solicitud';
       }
     });
-  }
-
-  getCurrentUserId(): number {
-    const decoded = this.authService.getDecodedToken();
-    return decoded ? decoded.id_user : 0;
   }
 }
