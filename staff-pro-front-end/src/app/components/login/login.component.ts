@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-login',
   imports: [CommonModule, FormsModule],
-   providers: [AuthService],
+  providers: [AuthService],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'] // corregido: era "styleUrl"
 })
@@ -22,7 +22,7 @@ export class LoginComponent {
     private authService: AuthService,
     private employeesService: EmployeesService,
     private router: Router
-  ) {}
+  ) { }
 
   login() {
     this.loginService.login(this.loginData).subscribe({
@@ -46,14 +46,16 @@ export class LoginComponent {
 
         this.employeesService.employeeByUserId(id_user).subscribe({
           next: (employee) => {
-            const department_id = employee.department_id;
+            const department_id = Number(employee.department_id);
             if (employee && employee.dni) {
-            localStorage.setItem('userDni', employee.dni);
-    }
+              localStorage.setItem('userDni', employee.dni);
+            }
 
             if (department_id === 1) {
+              localStorage.setItem('role', 'ADMIN');
               this.router.navigate(['/adminMenu']);
             } else {
+              localStorage.setItem('role', 'USER');
               this.router.navigate(['/userMenu']);
             }
           },
