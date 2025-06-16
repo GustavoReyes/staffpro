@@ -6,7 +6,7 @@ import { PayrollService } from '../../services/Payroll/payroll.service';
 import { Employee } from '../../model/employee';
 import { EmployeesService } from '../../services/Employees/employees.service';
 import { DepartmentsService } from '../../services/Departments/departments.service';
-
+import { AuthService } from '../../services/Auth/auth.service';
 @Component({
   selector: 'app-payroll-alta',
   imports: [FormsModule, CommonModule],
@@ -22,6 +22,8 @@ export class PayrollAltaComponent implements OnInit {
   employees: Employee[] = [];
   filteredEmployees: Employee[] = [];
   selectedEmployee: Employee | null = null;
+  isAdmin = false;
+  isLoaded = false;
 
   // Cargar desde tu servicio de departamentos
   departments: any[] = [];
@@ -29,29 +31,46 @@ export class PayrollAltaComponent implements OnInit {
   departmentSearch: string = '';
   selectedDepartment: string = '';
 
-  constructor(private payrollService: PayrollService, private employeesService: EmployeesService, private departmentsService: DepartmentsService) { }
-  ngOnInit(): void {
-    this.loadPayrolls();
-    this.departmentsService.allDepartmenst().subscribe({
-        next: (data) => {
-            console.log('Departamentos cargados:', data);
-            this.departments = data;
-            this.filteredDepartments = data;
-        },
-        error: (error) => console.error('Error cargando departamentos:', error)
-    });
+  constructor(private payrollService: PayrollService,
+    private employeesService: EmployeesService,
+    private departmentsService: DepartmentsService,
+    private authService: AuthService) { }
 
-    // Luego carga empleados
+  ngOnInit(): void {
+
+    const userId = this.authService.getUserId();
+    if (!userId) {
+      this.isLoaded = true;
+      this.isAdmin = false;
+      return;
+    }
+
     this.employeesService.getEmployees().subscribe({
-        next: (data) => {
-            console.log('Empleados cargados:', data);
-            this.employees = data.map(emp => {
-                // Asegúrate de que department_id sea número
-                emp.department_id = Number(emp.department_id);
-                return emp;
-            });
-        },
-        error: (error) => console.error('Error cargando empleados:', error)
+      next: (employees) => {
+        const employee = employees.find(emp => emp.id_user === userId);
+        this.isAdmin = !!employee && employee.department_id === 1;
+        this.isLoaded = true;
+
+        if (this.isAdmin) {
+          this.departmentsService.allDepartmenst().subscribe({
+            next: (data) => {
+              this.departments = data;
+              this.filteredDepartments = data;
+            },
+            error: (error) => console.error('Error cargando departamentos:', error)
+          });
+
+          this.employees = employees.map(emp => {
+            emp.department_id = Number(emp.department_id);
+            return emp;
+          });
+        }
+      },
+      error: (error) => {
+        this.isLoaded = true;
+        this.isAdmin = false;
+        console.error('Error cargando empleados:', error);
+      }
     });
   }
   //Verificar que el perido de inicio y final del calculo de la nomina sea el correcto
@@ -87,27 +106,27 @@ export class PayrollAltaComponent implements OnInit {
   }
 
   onDepartmentChange() {
-  if (this.selectedDepartment) {
-    // Convierte selectedDepartment a número para comparar correctamente
-    const departmentId = Number(this.selectedDepartment);
+    if (this.selectedDepartment) {
+      // Convierte selectedDepartment a número para comparar correctamente
+      const departmentId = Number(this.selectedDepartment);
 
-    this.filteredEmployees = this.employees.filter(emp =>
-      emp.department_id === departmentId
-    );
+      this.filteredEmployees = this.employees.filter(emp =>
+        emp.department_id === departmentId
+      );
 
-    // Depuración
-    console.log('Departamento ID:', departmentId);
-    console.log('Todos los empleados:', this.employees);
-    console.log('Empleados filtrados:', this.filteredEmployees);
+      // Depuración
+      console.log('Departamento ID:', departmentId);
+      console.log('Todos los empleados:', this.employees);
+      console.log('Empleados filtrados:', this.filteredEmployees);
 
-    // Reset los valores relacionados con el empleado
-    this.payroll.user_dni = '';
-    this.selectedEmployee = null;
-    this.payroll.base_salary = undefined;
-  } else {
-    this.filteredEmployees = [];
+      // Reset los valores relacionados con el empleado
+      this.payroll.user_dni = '';
+      this.selectedEmployee = null;
+      this.payroll.base_salary = undefined;
+    } else {
+      this.filteredEmployees = [];
+    }
   }
-}
   loadPayrolls() {
     this.payrollService.getPayrolls().subscribe(data => {
       this.payrolls = data;
@@ -174,5 +193,5 @@ export class PayrollAltaComponent implements OnInit {
       (p.irpf || 0);
     p.total = ingresos - deducciones;
   }
-  
+
 }

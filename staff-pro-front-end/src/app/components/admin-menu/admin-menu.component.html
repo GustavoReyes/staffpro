@@ -1,76 +1,139 @@
-<div class="min-h-screen bg-[#1e2226] p-4 flex items-center justify-center">
-  <div class="w-full max-w-7xl">
-    <!-- Contenedor principal -->
-    <div class="bg-[#23272A] p-6 rounded-lg shadow-lg">
-      <!-- Título centrado -->
-      <h1 class="text-2xl font-bold text-white mb-8 text-center">
-        Panel de Administrador
-      </h1>
+<div class="min-h-screen flex items-center justify-center bg-[#1e2226] p-2">
+  <div
+    class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6"
+  >
+    <ng-container *ngIf="isLoaded">
+      <ng-container *ngIf="isAdmin; else noPriv">
+        <!-- Contenedor principal -->
+        <div class="bg-[#23272A] p-6 rounded-lg shadow-lg">
+          <!-- Título centrado -->
+          <h1 class="text-2xl font-bold text-white mb-8 text-center">
+            Panel de Administrador
+          </h1>
 
-      <!-- Grid responsivo: 2 columnas en desktop, 1 en móvil -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
-        <!-- Opción: Mi Perfil -->
-        <a [routerLink]="['/userProfile']"
-           class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group">
-          <svg class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
-               fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M5.121 17.804A9 9 0 1112 21a9 9 0 01-6.879-3.196z"/>
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-          <h2 class="text-xl font-semibold text-gray-100 mb-2">Mi Perfil</h2>
-          <p class="text-gray-400 text-sm text-center">
-            Accede a tus datos personales
-          </p>
-        </a>
+          <!-- Grid responsivo: 2 columnas en desktop, 1 en móvil -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center"
+          >
+            <!-- Opción: Mi Perfil -->
+            <a
+              [routerLink]="['/userProfile']"
+              class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group"
+            >
+              <svg
+                class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M5.121 17.804A9 9 0 1112 21a9 9 0 01-6.879-3.196z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              <h2 class="text-xl font-semibold text-gray-100 mb-2">
+                Mi Perfil
+              </h2>
+              <p class="text-gray-400 text-sm text-center">
+                Accede a tus datos personales
+              </p>
+            </a>
 
-         <!-- Opción: Mi Nómina -->
-        <a [routerLink]="['/userPayroll']"
-           class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group">
-          <svg class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
-               fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 0V4m0 16v-4"/>
-          </svg>
-          <h2 class="text-xl font-semibold text-gray-100 mb-2">Mi Nómina</h2>
-          <p class="text-gray-400 text-sm text-center">
-            Visualiza tus recibos de sueldo y pagos
-          </p>
-        </a>
+            <!-- Opción: Mi Nómina -->
+            <a
+              [routerLink]="['/userPayroll']"
+              class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group"
+            >
+              <svg
+                class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 0V4m0 16v-4"
+                />
+              </svg>
+              <h2 class="text-xl font-semibold text-gray-100 mb-2">
+                Mi Nómina
+              </h2>
+              <p class="text-gray-400 text-sm text-center">
+                Visualiza tus recibos de sueldo y pagos
+              </p>
+            </a>
 
-        <!-- Opción: Mis Solicitudes -->
-        <a [routerLink]="['/userLeave']"
-           class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group">
-          <svg class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
-               fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M8 7V3m8 4V3m-9 8h10m-9 4h6m-7 4h8a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-          </svg>
-          <h2 class="text-xl font-semibold text-gray-100 mb-2">Mis Solicitudes</h2>
-          <p class="text-gray-400 text-sm text-center">
-            Gestiona tus licencias y permisos
-          </p>
-        </a>
+            <!-- Opción: Mis Solicitudes -->
+            <a
+              [routerLink]="['/userLeave']"
+              class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group"
+            >
+              <svg
+                class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8 7V3m8 4V3m-9 8h10m-9 4h6m-7 4h8a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              <h2 class="text-xl font-semibold text-gray-100 mb-2">
+                Mis Solicitudes
+              </h2>
+              <p class="text-gray-400 text-sm text-center">
+                Gestiona tus licencias y permisos
+              </p>
+            </a>
 
-        <!-- Opción: Gestión Empleados -->
-        <a [routerLink]="['/adminMenuGestion']"
-           class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group">
-          <svg class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
-               fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M9 20H4v-2a3 3 0 015.356-1.857M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75m8 4.12V21M8 14.999V21"/>
-          </svg>
-          <h2 class="text-xl font-semibold text-gray-100 mb-2">Gestión Empleados</h2>
-          <p class="text-gray-400 text-sm text-center">
-            Administra la plantilla y roles
-          </p>
-        </a>
-
-
-      </div>
-    </div>
-
-    <router-outlet></router-outlet>
+            <!-- Opción: Gestión Empleados -->
+            <a
+              [routerLink]="['/adminMenuGestion']"
+              class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group"
+            >
+              <svg
+                class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M9 20H4v-2a3 3 0 015.356-1.857M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75m8 4.12V21M8 14.999V21"
+                />
+              </svg>
+              <h2 class="text-xl font-semibold text-gray-100 mb-2">
+                Gestión Empleados
+              </h2>
+              <p class="text-gray-400 text-sm text-center">
+                Administra la plantilla y roles
+              </p>
+            </a>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noPriv>
+        <div
+          class="bg-[#23272A] p-8 rounded-lg shadow-lg text-center text-red-400 text-xl font-bold"
+        >
+          No tienes privilegios para ver esta sección
+        </div>
+        <router-outlet></router-outlet>
+      </ng-template>
+    </ng-container>
   </div>
 </div>
