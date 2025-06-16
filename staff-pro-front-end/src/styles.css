@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
-.btn_primary{
-  @apply block py-3 px-4 rounded-md text-white hover:bg-[#64C77B] hover:text-black transition text-center
+@tailwind utilities;
+
+@theme {
+  --color-primary: #64c77b;
+  --color-claro0: #ecfdf3;
+  --color-claro1: #d1fae5;
+  --color-claro2: #a7f3d0;
+  --color-claro3: #6ee7b7;
+  --color-claro4: #34d399;
+  --color-oscuro0: #059669;
+  --color-oscuro2: #047857;
+  --color-oscuro3: #065f46;
+  --color-oscuro4: #064e3b;
+
+}
+.btn_primary {
+  @apply block py-3 px-4 rounded-md text-white hover:bg-primary hover:text-black transition text-center;
+}
+.btn_blue {
+  @apply block py-3 px-4 rounded-md text-white hover:bg-blue-600 hover:text-black transition text-center;
+}
+.btn_red {
+  @apply block py-3 px-4 rounded-md text-white hover:bg-red-700 hover:text-black transition text-center;
+}
+
+.activeLink {
+  @apply bg-primary text-black;
 }

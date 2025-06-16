@@ -26,6 +26,7 @@
     </ng-container>
     <ng-template #closeIcon>
       <!-- Icono X -->
+      <!-- Botón cerrar (solo móvil) -->
       <svg
         class="w-7 h-7 text-white"
         fill="none"
@@ -50,51 +51,50 @@
       'md:!translate-x-0': true
     }"
   >
-    <!-- Botón cerrar (solo móvil) -->
     <div class="mb-6 mt-8 md:mt-0 px-5">
       <img src="logo.png" alt="Logo" class="object-fit tshadow-lg" />
     </div>
     <div class="flex-1 flex flex-col">
-      <nav class="flex flex-col gap-6 w-full px-6 mt-2 md:mt-0">
+      <nav class="flex flex-col gap-6 w-full px-6 mt-2 md:mt-2">
         <div class="text-white text-center text-sm" *ngIf="userName">
           Bienvenido,
-          <span class="font-bold text-green-300">{{ userName }}</span>
+          <span class="font-bold text-primary">{{ userName }}</span>
         </div>
         <a
           routerLink="/login"
           (click)="menuOpen = !menuOpen"
-          routerLinkActive="bg-green-400 text-black"
+          routerLinkActive="activeLink"
           class="btn_primary"
           >Login</a
         >
         <a
           routerLink="/register"
           (click)="menuOpen = !menuOpen"
-          routerLinkActive="bg-green-400 text-black"
+          routerLinkActive="activeLink"
           class="btn_primary"
           >Registar Usuario</a
         >
         <a
           routerLink="/payrollAlta"
-          routerLinkActive="bg-green-400 text-black"
+          routerLinkActive="activeLink"
           class="btn_primary"
           >Crear Nómina</a
         >
         <a
           routerLink="/payrollLista"
-          routerLinkActive="bg-green-400 text-black"
+          routerLinkActive="activeLink"
           class="btn_primary"
           >Nóminas</a
         >
         <a
           routerLink="/userMenu"
-          routerLinkActive="bg-green-400 text-black"
+          routerLinkActive="activeLink"
           class="btn_primary"
           >Menu Usuario</a
         >
         <a
           routerLink="/adminMenu"
-          routerLinkActive="bg-green-400 text-black"
+          routerLinkActive="activeLink"
           class="btn_primary"
           >Menu Admin</a
         >
