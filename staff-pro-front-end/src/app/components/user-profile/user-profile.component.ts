@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { EmployeesService } from '../../services/Employees/employees.service';
 import { Employee } from '../../model/employee';
 import { AuthService } from '../../services/Auth/auth.service';
@@ -19,10 +19,17 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private employeesService: EmployeesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
+    // Comprobación de login
+    if (!this.authService.getToken?.()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     const idUser = this.authService.getDecodedToken();
 
     if (idUser) {

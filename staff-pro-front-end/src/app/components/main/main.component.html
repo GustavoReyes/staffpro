@@ -61,6 +61,7 @@
           <span class="font-bold text-primary">{{ userName }}</span>
         </div>
         <a
+          *ngIf="!isLoggedIn"
           routerLink="/login"
           (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
@@ -68,6 +69,7 @@
           >Login</a
         >
         <a
+          *ngIf="!isLoggedIn"
           routerLink="/register"
           (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
@@ -75,38 +77,46 @@
           >Registar Usuario</a
         >
         <a
+          *ngIf="isLoggedIn"
           routerLink="/payrollAlta"
+          (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
           class="btn_primary"
           >Crear Nómina</a
         >
         <a
+          *ngIf="isLoggedIn"
           routerLink="/payrollLista"
+          (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
           class="btn_primary"
           >Nóminas</a
         >
         <a
+          *ngIf="isLoggedIn"
           routerLink="/userMenu"
+          (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
           class="btn_primary"
           >Menu Usuario</a
         >
         <a
+          *ngIf="isLoggedIn"
           routerLink="/adminMenu"
+          (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
           class="btn_primary"
           >Menu Admin</a
         >
       </nav>
     </div>
-   <button
-  *ngIf="userName"
-  (click)="logout()"
-  class="mt-2 px-3 py-1 rounded text-xs text-gray-300 bg-red-600 hover:bg-red-700 transition"
->
-  Cerrar sesión
-</button>
+    <button
+      *ngIf="userName"
+      (click)="logout()"
+      class="mt-2 px-3 py-1 rounded text-xs text-gray-300 bg-red-600 hover:bg-red-700 transition"
+    >
+      Cerrar sesión
+    </button>
     <div class="text-gray-500 text-xs px-6 text-center py-4">
       © 2025 StaffPro
     </div>

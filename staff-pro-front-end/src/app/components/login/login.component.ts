@@ -57,9 +57,11 @@ export class LoginComponent {
             if (department_id === 1) {
               localStorage.setItem('role', 'ADMIN');
               this.router.navigate(['/adminMenu']);
+              window.location.reload();
             } else {
               localStorage.setItem('role', 'USER');
               this.router.navigate(['/userMenu']);
+              window.location.reload();
             }
           },
           error: () => {

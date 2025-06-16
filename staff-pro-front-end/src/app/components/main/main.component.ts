@@ -12,10 +12,12 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 export class MainComponent {
   menuOpen = false;
   userName: string | null = null;
+  isLoggedIn = false;
 
   constructor(private router: Router, private authService:AuthService) {}
 
   ngOnInit() {
+    this.isLoggedIn = !!this.authService.getToken?.();
     this.userName = localStorage.getItem('userName');
   }
 
