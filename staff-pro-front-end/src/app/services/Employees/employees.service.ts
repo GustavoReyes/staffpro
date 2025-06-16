@@ -42,7 +42,7 @@ export class EmployeesService {
     const url: string = `${this.apiUrl}/alta/${email}`;
     return this.http.post<boolean>(url, datos, { headers: this.getAuthHeaders() })
       .pipe(map(() => true),
-        catchError(e => of(false)));
+        catchError(_e => of(false)));
   }
 
   updateEmployeeByEmail(email: string, datos: any): Observable<any> {

@@ -1,7 +1,6 @@
-import { Controller, Post, Body, Res, UseGuards, Get, Req } from '@nestjs/common';
+import { Controller, Post, Body, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { LoginService } from './login.service';
-import { LoginGuard } from './login.guard';
 import { UserDto } from 'src/users/dto/userDto';
 
 @Controller('login')

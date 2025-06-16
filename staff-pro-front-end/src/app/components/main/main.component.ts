@@ -1,6 +1,7 @@
+import { AuthService } from './../../services/Auth/auth.service';
 import { CommonModule, NgClass } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -10,6 +11,13 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class MainComponent {
   menuOpen = false;
+  userName: string | null = null;
+
+  constructor(private router: Router, private authService:AuthService) {}
+
+  ngOnInit() {
+    this.userName = localStorage.getItem('userName');
+  }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
@@ -23,5 +31,13 @@ export class MainComponent {
   onResize() {
     this.isDesktop = window.innerWidth >= 768;
   }
+
+  logout() {
+  this.authService.clearToken();
+  localStorage.clear();
+  this.router.navigate(['/login']).then(() => {
+    window.location.reload();
+  });
+}
 
 }

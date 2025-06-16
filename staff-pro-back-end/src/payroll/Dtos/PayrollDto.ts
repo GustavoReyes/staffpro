@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString, IsDateString, IsNotEmpty, IsDate } from 'class-validator';
+import { IsNumber, IsOptional, IsString, IsNotEmpty, IsDate } from 'class-validator';
 
 export class PayrollDto {
     

@@ -12,7 +12,6 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { EmployeeService } from './employee.service';
-import { Employee } from './employee.model';
 import { EmployeeAltaDto } from './dtos/employeeAltaDto';
 import { EmployeeDatosDto } from './dtos/employeeDatosDto';
 import { LoginGuard } from 'src/login/login.guard';

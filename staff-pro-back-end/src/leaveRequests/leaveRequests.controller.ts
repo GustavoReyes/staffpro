@@ -16,7 +16,6 @@ import { LeaveRequestDto } from './dto/leaveRequestDto';
 import { Response } from 'express';
 import { LoginGuard } from 'src/login/login.guard';
 import { RolesGuard } from 'src/login/roles.guard';
-import { Roles } from 'src/login/roles.decorator';
 
 @UseGuards(LoginGuard, RolesGuard)
 @Controller('leaveRequests')

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { EmployeesService } from '../../services/Employees/employees.service';
 import { LoginService } from '../../services/Login/login.service';
 import { AuthService } from '../../services/Auth/auth.service';
@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   providers: [AuthService],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'] // corregido: era "styleUrl"
@@ -49,6 +49,9 @@ export class LoginComponent {
             const department_id = Number(employee.department_id);
             if (employee && employee.dni) {
               localStorage.setItem('userDni', employee.dni);
+            }
+            if (employee && employee.name) {
+              localStorage.setItem('userName', employee.name);
             }
 
             if (department_id === 1) {

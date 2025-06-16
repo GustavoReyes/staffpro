@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { LeaveRequestsService } from '../../services/LeaveRequests/leave-requests.service';
 import { AuthService } from '../../services/Auth/auth.service';
 import { LeaveRequest } from '../../model/leaverequest';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-leave',
@@ -25,12 +26,18 @@ export class UserLeaveComponent implements OnInit {
 
   constructor(
     private leaveRequestsService: LeaveRequestsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router:Router
   ) {
     this.newLeave = this.createEmptyLeave();
   }
 
   ngOnInit() {
+    // Verifica si el usuario está logueado
+    if (!this.authService.getToken?.() || !this.getCurrentUserId()) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.fetchLeaves();
   }
 

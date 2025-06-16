@@ -36,6 +36,9 @@ export class AuthService {
     return localStorage.getItem('userDni');
   }
 
+  clearToken(): void {
+  localStorage.removeItem(this.tokenKey);
+}
 }
 
 
