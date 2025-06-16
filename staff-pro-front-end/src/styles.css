@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+.btn_primary{
+  @apply block py-3 px-4 rounded-md text-white hover:bg-[#64C77B] hover:text-black transition text-center
+}
