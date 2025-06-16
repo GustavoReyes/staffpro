@@ -1,6 +1,6 @@
 import { Employee } from "src/employee/employee.model";
 import { LeaveRequest } from "src/leaveRequests/leaveRequest.model";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("users")
 export class User {

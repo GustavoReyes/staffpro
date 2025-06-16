@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsStrongPassword, Length } from "class-validator";
+import { IsEmail, IsNotEmpty, Length } from "class-validator";
 
 export class UserDto {
     @IsNotEmpty()
@@ -8,9 +8,9 @@ export class UserDto {
     @Length(6)
     //@IsStrongPassword()
     password: string;
-    
+
     constructor(email: string, password: string) {
         this.email = email;
         this.password = password;
-    }   
+    }
 }   
