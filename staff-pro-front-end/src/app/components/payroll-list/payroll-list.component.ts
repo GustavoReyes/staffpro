@@ -56,7 +56,6 @@ ngOnInit(): void {
       this.isAdmin = false;
       return;
     }
-
     // Cargar empleados y verificar si el usuario es admin
     this.employeesService.getEmployees().subscribe({
       next: (employees) => {

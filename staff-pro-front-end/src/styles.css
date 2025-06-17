@@ -28,3 +28,7 @@
 .activeLink {
   @apply bg-primary text-black;
 }
+
+.btn_menus {
+  @apply flex flex-col items-center bg-[#181C1F] border border-primary rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all;
+}

@@ -4,6 +4,8 @@
   >
     <ng-container *ngIf="isLoaded">
       <ng-container *ngIf="isAdmin; else noPriv">
+        <div class="bg-green-50/5 p-6 rounded-lg shadow-lg mb-6">
+          <h2 class="text-2xl font-bold text-white text-center mb-6">Crear Nómina</h2>
         <form
           class="w-full space-y-8"
           (ngSubmit)="addPayroll()"
@@ -345,6 +347,7 @@
             </div>
           </div>
         </form>
+        </div>
       </ng-container>
       <ng-template #noPriv>
         <div

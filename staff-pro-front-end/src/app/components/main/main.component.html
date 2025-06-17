@@ -86,7 +86,7 @@
         >
         <a
           *ngIf="isLoggedIn"
-          routerLink="/payrollLista"
+          routerLink="/payrollList"
           (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
           class="btn_primary"
@@ -110,6 +110,7 @@
         >
       </nav>
     </div>
+    <div class="flex flex-col gap-6 w-full px-6 mt-2 md:mt-2">
     <button
       *ngIf="userName"
       (click)="logout()"
@@ -117,6 +118,7 @@
     >
       Cerrar sesión
     </button>
+    </div>
     <div class="text-gray-500 text-xs px-6 text-center py-4">
       © 2025 StaffPro
     </div>

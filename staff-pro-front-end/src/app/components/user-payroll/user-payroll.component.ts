@@ -5,6 +5,8 @@ import { PayrollService } from '../../services/Payroll/payroll.service';
 import { AuthService } from '../../services/Auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { EmployeesService } from '../../services/Employees/employees.service';
+import { Employee } from '../../model/employee';
 
 @Component({
   selector: 'app-user-payroll',
@@ -18,6 +20,9 @@ export class UserPayrollComponent implements OnInit {
   selectedYear: string = '';
   selectedMonth: string = '';
   availableYears: string[] = [];
+  employees: Employee[] = [];
+  userName: string | null = null;
+
   months = [
     { value: '1', label: 'Enero' },
     { value: '2', label: 'Febrero' },
@@ -36,7 +41,8 @@ export class UserPayrollComponent implements OnInit {
   constructor(
     private payrollService: PayrollService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private employeesService: EmployeesService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +51,8 @@ export class UserPayrollComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
+
+    this.userName = localStorage.getItem('userName');
 
     // Obtén el dni del usuario logeado (ajusta según tu AuthService)
     const userDni = this.authService.getUserDni?.() || localStorage.getItem('userDni');
@@ -96,5 +104,8 @@ export class UserPayrollComponent implements OnInit {
         return payrollMonth === this.selectedMonth;
       });
     }
+  }
+  getEmployeeName(dni: string): string {
+    return this.employees.find(emp => emp.dni === dni)?.name || dni;
   }
 }

@@ -1,19 +1,17 @@
-<div class="min-h-screen flex items-center justify-center bg-[#1e2226] p-2">
-  <div
-    class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6"
-  >
+<div class="flex items-center justify-center min-h-screen bg-[#1e2226] p-4">
+  <div class="w-full max-w-7xl">
     <!-- Contenedor principal con el mismo estilo que payroll-list -->
-        <div class="bg-green-50/5 p-6 rounded-lg shadow-lg">
+    <div class="bg-[#23272A] p-6 rounded-lg shadow-lg">
       <!-- Título centrado -->
       <h1 class="text-2xl font-bold text-white mb-8 text-center">
-        Bienvenido a tu página de Empleado
+        Menu de Gestión de Nóminas
       </h1>
 
       <!-- Grid responsivo: 3 columnas en desktop, 1 en móvil -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
-        <!-- Opción: Mi Perfil -->
-        <a [routerLink]="['/userProfile']"
-           class="btn_menus group">
+        <!-- Opción: Creación de Nómina -->
+        <a [routerLink]="['/payrollAlta']"
+           class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group">
           <svg class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -21,37 +19,37 @@
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
-          <h2 class="text-xl font-semibold text-gray-100 mb-2">Mi Perfil</h2>
+          <h2 class="text-xl font-semibold text-gray-100 mb-2">Crea una Nómina</h2>
           <p class="text-gray-400 text-sm text-center">
-            Consulta tu información personal
+            Crear una Nómina de Pago para un empleado
           </p>
         </a>
 
-        <!-- Opción: Mi Nómina -->
-        <a [routerLink]="['/userPayroll']"
-           class="btn_menus group">
+        <!-- Opción: Vizualizar las Nominas Existentes -->
+        <a [routerLink]="['/payrollList']"
+           class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group">
           <svg class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 0V4m0 16v-4"/>
           </svg>
-          <h2 class="text-xl font-semibold text-gray-100 mb-2">Mi Nómina</h2>
+          <h2 class="text-xl font-semibold text-gray-100 mb-2">Nóminas</h2>
           <p class="text-gray-400 text-sm text-center">
-            Visualiza tus recibos de sueldo y pagos
+            Visualizar todas las Nóminas
           </p>
         </a>
 
-        <!-- Opción: Mis Solicitudes -->
+        <!-- Opción: Editar Nóminas -->
         <a [routerLink]="['/userLeave']"
-           class="btn_menus group">
+           class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group">
           <svg class="w-16 h-16 text-green-300 mb-4 group-hover:text-green-400 transition"
                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M8 7V3m8 4V3m-9 8h10m-9 4h6m-7 4h8a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
-          <h2 class="text-xl font-semibold text-gray-100 mb-2">Mis Solicitudes</h2>
+          <h2 class="text-xl font-semibold text-gray-100 mb-2">Editar Nóminas</h2>
           <p class="text-gray-400 text-sm text-center">
-            Gestiona tus licencias y permisos
+            Edita los datos de una Nómina
           </p>
         </a>
       </div>
@@ -60,3 +58,4 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+

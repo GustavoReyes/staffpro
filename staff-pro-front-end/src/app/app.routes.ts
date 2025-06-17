@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { PayrollComponent } from './components/payroll/payroll.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PayrollAltaComponent } from './components/payroll-alta/payroll-alta.component';
@@ -13,6 +12,7 @@ import { AdminEmployeesComponent } from './components/admin-employees/admin-empl
 import { AdminPayrollsComponent } from './components/admin-payrolls/admin-payrolls.component';
 import { AdminLeavesComponent } from './components/admin-leaves/admin-leaves.component';
 import { AdminMenuGestionComponent } from './components/admin-menu-gestion/admin-menu-gestion.component';
+import { PayrollMenuComponent } from './components/payroll-menu/payroll-menu.component';
 
 export const routes: Routes = [
 
@@ -21,15 +21,15 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: "payroll",
-    component: PayrollComponent,
+    path: "payrollMenu",
+    component: PayrollMenuComponent,
   },
   {
     path: "payrollAlta",
     component: PayrollAltaComponent,
   },
 {
-    path: "payrollLista",
+    path: "payrollList",
     component: PayrollListComponent,
   },
   {
