@@ -1,7 +1,8 @@
-<div class="min-h-screen bg-[#1e2226] p-4 flex items-center justify-center">
-  <div class="w-full max-w-7xl">
-    <!-- Contenedor principal -->
-    <div class="bg-[#23272A] p-6 rounded-lg shadow-lg">
+<div class="min-h-screen flex items-center justify-center bg-[#1e2226] p-2">
+  <div
+    class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6"
+  >    <!-- Contenedor principal -->
+        <div class="bg-green-50/5 p-6 rounded-lg shadow-lg mb-6">
       <!-- Título centrado -->
       <h1 class="text-2xl font-bold text-white mb-8 text-center">
         Panel de Gestión Administrativa
@@ -11,7 +12,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
         <!-- Opción: Empleados -->
         <a [routerLink]="['/adminEmployees']"
-           class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group">
+           class="btn_menus group">
           <svg class="w-16 h-16 text-green-400 mb-4 group-hover:text-green-400 transition"
                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -25,7 +26,7 @@
 
         <!-- Opción: Nóminas -->
         <a [routerLink]="['/payrollMenu']"
-           class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group">
+           class="btn_menus group">
           <svg class="w-16 h-16 text-green-400 mb-4 group-hover:text-green-400 transition"
                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -39,7 +40,7 @@
 
         <!-- Opción: Solicitudes -->
         <a [routerLink]="['/adminLeaves']"
-           class="flex flex-col items-center bg-[#181C1F] border border-gray-700 rounded-lg shadow-lg p-6 w-full max-w-sm hover:bg-gray-700 transition-all group">
+           class="btn_menus group">
           <svg class="w-16 h-16 text-green-400 mb-4 group-hover:text-green-400 transition"
                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round"
