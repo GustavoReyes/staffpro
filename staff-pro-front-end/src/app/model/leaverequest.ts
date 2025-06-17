@@ -7,7 +7,10 @@ export class LeaveRequest {
   status?: 'pending' | 'approved' | 'rejected';
   user?:{
     id_user:number;
-  }
+  };
+  employee?: {
+  name?: string;
+  };
 
  constructor(
     id_user_fk: number,

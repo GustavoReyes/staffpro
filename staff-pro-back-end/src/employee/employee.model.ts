@@ -1,7 +1,9 @@
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
+
 import { Department } from 'src/departments/department.model';
+import { LeaveRequest } from 'src/leaveRequests/leaveRequest.model';
 import { Payroll } from 'src/payroll/payroll.model';
 import { User } from 'src/users/user.model';
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 
 @Entity("employees")
 export class Employee {
@@ -58,5 +60,8 @@ export class Employee {
     @OneToMany(() => Payroll, payroll => payroll.user_dni)
     @JoinColumn({ name: 'dni' })
     payrolls?: Payroll[];
+
+    @OneToMany(() => LeaveRequest, leaveRequest => leaveRequest.employee)
+    leaveRequests?: LeaveRequest[];
 
 }

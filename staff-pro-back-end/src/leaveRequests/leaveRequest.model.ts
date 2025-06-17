@@ -1,7 +1,7 @@
-// PERMISOS
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 import { User } from "src/users/user.model";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Employee } from "src/employee/employee.model";
 
 @Entity("leave_requests")
 export class LeaveRequest{
@@ -32,5 +32,9 @@ export class LeaveRequest{
         this.end_date=end_date || new Date();
         this.status=status
     }
+
+    @ManyToOne(() => Employee, employee => employee.leaveRequests)
+    @JoinColumn({ name: "id_user_fk", referencedColumnName: "id_user" })
+    employee?: Employee;
 
 }

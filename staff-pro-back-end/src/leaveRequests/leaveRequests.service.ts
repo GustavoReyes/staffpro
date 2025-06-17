@@ -10,13 +10,13 @@ export class LeaveRequestsService {
     @InjectRepository(LeaveRequest) private leaveRequestRepository: Repository<LeaveRequest>){}
 
   async findAll(): Promise<LeaveRequest[]> {
-    return this.leaveRequestRepository.find({ relations: ['user'] });
+    return this.leaveRequestRepository.find({ relations: ['user','employee'] });
   }
 
   async findOne(id: number): Promise<LeaveRequest | null> {
     return this.leaveRequestRepository.findOne({
       where: { id },
-      relations: ['user'],
+      relations: ['user','employee'],
     });
   }
 

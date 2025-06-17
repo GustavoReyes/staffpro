@@ -1,6 +1,7 @@
 import { IsNotEmpty } from "class-validator";
-import { Employee } from "src/employee/employee.model";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+
+import { Employee } from "src/employee/employee.model";
 
 @Entity("payroll")
 export class Payroll {

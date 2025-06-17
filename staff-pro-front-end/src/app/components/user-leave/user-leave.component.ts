@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LeaveRequestsService } from '../../services/LeaveRequests/leave-requests.service';
-import { AuthService } from '../../services/Auth/auth.service';
-import { LeaveRequest } from '../../model/leaverequest';
 import { Router } from '@angular/router';
+
+import { AuthService } from '../../services/Auth/auth.service';
+import { LeaveRequestsService } from '../../services/LeaveRequests/leave-requests.service';
+import { LeaveRequest } from '../../model/leaverequest';
 
 @Component({
   selector: 'app-user-leave',
