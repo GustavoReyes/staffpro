@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Department } from './../../model/department';
+import { Component, OnInit } from '@angular/core';
 import { EmployeesService } from '../../services/Employees/employees.service';
 import { Employee } from '../../model/employee';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DepartmentsService } from '../../services/Departments/departments.service';
 
 
 @Component({
@@ -12,14 +14,20 @@ import { RouterModule } from '@angular/router';
   templateUrl: './admin-employees.component.html',
   styleUrls: ['./admin-employees.component.css'],
 })
-export class AdminEmployeesComponent {
+export class AdminEmployeesComponent implements OnInit {
 
  email: string = '';
   employee: Partial<Employee> = {};
   empleadoExistente: boolean = false;
   cargando: boolean = false;
+  selectedDepartment: number = 0;
+  departments: Department[] = [];
+ngOnInit(): void {
+    this.cargarDepartamentos();
+  }
 
-  constructor(private employeesService: EmployeesService) {}
+  constructor(private employeesService: EmployeesService,
+              private departmentService: DepartmentsService ) {}
 
   buscarEmpleado() {
     if (!this.email) return;
@@ -39,6 +47,7 @@ export class AdminEmployeesComponent {
   }
 
   registrarEmpleado() {
+     this.employee.department_id = this.selectedDepartment;
     this.employeesService.registerEmployee(this.email, this.employee).subscribe({
       next: () => alert('Empleado registrado correctamente'),
       error: () => alert('Error al registrar empleado')
@@ -46,6 +55,7 @@ export class AdminEmployeesComponent {
   }
 
   actualizarEmpleado() {
+      this.employee.department_id = this.selectedDepartment;
     this.employeesService.updateEmployeeByEmail(this.email, this.employee).subscribe({
       next: () => alert('Empleado actualizado correctamente'),
       error: () => alert('Error al actualizar empleado')
@@ -65,7 +75,14 @@ export class AdminEmployeesComponent {
     });
   }
 
+cargarDepartamentos() {
+  this.departmentService.allDepartmenst().subscribe({
+    next: (departments) => {
+      this.departments = departments;
+      if (departments.length > 0) {
+        this.selectedDepartment = departments[0].id;
+      }
+}})
 
 }
-
-
+}

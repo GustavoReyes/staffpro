@@ -24,6 +24,10 @@ export class DepartmentsService {
   allDepartmenst(): Observable<Department[]> {
     return this.http.get<Department[]>(this.apiUrl+ 'allDepartments', { headers: this.getAuthHeaders() });
   }
+  departmentById(id: number): Observable<Department> {
+    return this.http.get<Department>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+  }
+  
 
   createDeparment(department: Department): Observable<Department> {
     return this.http.post<Department>(this.apiUrl, department, { headers: this.getAuthHeaders() });

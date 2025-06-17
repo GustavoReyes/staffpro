@@ -44,19 +44,23 @@
           class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600"
         />
       </div>
-      <div>
-        <label class="text-sm text-gray-300 mb-1 block">Departamento</label>
-        <input
-          title="Departamento"
-          [(ngModel)]="employee.department_id"
-          class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600"
-        />
-      </div>
+       <div>
+  <label class="text-sm text-gray-300 mb-1 block">Departamento</label>
+  <select
+    title="Selecciona Departamento"
+    [(ngModel)]="selectedDepartment"
+       class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
+  >
+    <option *ngFor="let dept of departments" [value]="dept.id">
+      {{ dept.name }}
+    </option>
+  </select>
+</div>
+
       <div>
         <label class="text-sm text-gray-300 mb-1 block">Jornada</label>
         <input
           title="Jornada"
-          type="number"
           [(ngModel)]="employee.work_day"
           class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600"
         />
@@ -65,8 +69,7 @@
         <label class="text-sm text-gray-300 mb-1 block">Horario</label>
         <input
           title="Horario"
-          type="number"
-          [(ngModel)]="employee.work_hour"
+           [(ngModel)]="employee.work_hour"
           class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600"
         />
       </div>
