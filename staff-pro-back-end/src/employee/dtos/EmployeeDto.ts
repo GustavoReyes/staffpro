@@ -6,8 +6,7 @@ export class EmployeeDto {
     dni: string;
     @IsNotEmpty()
     name: string;
-    //@IsNotEmpty()
-    //id_user: number;
+
     @IsNotEmpty()
     department_id: number;
     work_day: number;
@@ -23,7 +22,6 @@ export class EmployeeDto {
     constructor(
         dni: string,
         name: string,
-       // id_user: number,
         department_id: number,
         work_day?: number,
         work_hour?: number,
@@ -33,7 +31,6 @@ export class EmployeeDto {
     ) {
         this.dni = dni;
         this.name = name;
-        //this.id_user = id_user;
         this.department_id = department_id;
         this.work_day = work_day;
         this.work_hour = work_hour;
