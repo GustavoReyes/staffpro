@@ -74,6 +74,22 @@ async updateByEmail(
 ): Promise<EmployeeDatosDto> {
   return await this.employeeService.updateByEmail(email, updateData);
 }
+
+@UseGuards(LoginGuard, RolesGuard)
+@Roles('admin')
+@Patch('patchById/:id_user')
+  async updateById( @Param('id_user') id_user: number, @Body() updateData: Partial<EmployeeAltaDto>): Promise<EmployeeDatosDto> {
+    return await this.employeeService.updateById(id_user, updateData);
+  }
+
+@UseGuards(LoginGuard, RolesGuard)
+@Roles('admin')
+@Delete('deleteById/:id')
+async deleteById(@Param('id') id: number): Promise<{ deleted: boolean }> {
+  const success = await this.employeeService.deleteById(id);
+  return { deleted: success };
+}
+
 @UseGuards(LoginGuard, RolesGuard)
 @Roles('admin')
 @Delete('delete/:email')

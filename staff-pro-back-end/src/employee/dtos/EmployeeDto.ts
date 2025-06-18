@@ -6,7 +6,6 @@ export class EmployeeDto {
     dni: string;
     @IsNotEmpty()
     name: string;
-
     @IsNotEmpty()
     department_id: number;
     work_day: number;

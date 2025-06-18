@@ -89,6 +89,17 @@ export class EmployeeService {
     const updated = this.employeeRepository.merge(employee, updateData);
     return await this.employeeRepository.save(updated);
   }
+ async updateById(id: number, updateData: Partial<EmployeeAltaDto>): Promise<EmployeeDatosDto> {
+  const employee = await this.employeeRepository.findOne({
+    where: { id_user: id },
+    relations: ['user'],
+  });
+
+  if (!employee) throw new Error('Empleado no encontrado');
+
+  const updated = this.employeeRepository.merge(employee, updateData);
+  return await this.employeeRepository.save(updated);
+}
 
   async deleteByEmail(email: string): Promise<boolean> {
     const user = await this.userRepository.findOne({ where: { email } });
@@ -99,4 +110,9 @@ export class EmployeeService {
     const result = await this.employeeRepository.delete({ user: { id_user: user.id_user } });
     return result.affected > 0;
   }
+  async deleteById(id: number): Promise<boolean> {
+    const result = await this.employeeRepository.delete({ id_user: id });
+    return result.affected > 0;
+  }
+   
 }

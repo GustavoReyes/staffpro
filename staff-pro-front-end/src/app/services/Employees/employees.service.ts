@@ -65,5 +65,15 @@ export class EmployeesService {
     const url: string = `${this.apiUrl}/delete/${email}`;
     return this.http.delete(url, { headers: this.getAuthHeaders() });
   }
+  deleteById(id: number): Observable<any> {
+    const url: string = `${this.apiUrl}/deleteById/${id}`;
+    return this.http.delete(url, { headers: this.getAuthHeaders() });
+  }
+
+   
+  updateEmployeeById(id: number, datos: any): Observable<any> {
+    const url: string = `${this.apiUrl}/patchById/${id}`;
+    return this.http.patch(url, datos, { headers: this.getAuthHeaders() });
+  }
 
 }
