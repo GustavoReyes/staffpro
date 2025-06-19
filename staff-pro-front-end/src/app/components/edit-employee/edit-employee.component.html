@@ -1,3 +1,4 @@
+
 <div class="min-h-screen flex items-center justify-center bg-[#1e2226] p-2">
   <div
     class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6">
@@ -77,6 +78,7 @@
           title="FechaContrado"
           type="date"
           [(ngModel)]="employee.hire_date"
+
           class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600"
         />
       </div>
@@ -84,14 +86,24 @@
 
     <!-- Botones de acción -->
     <div class="flex justify-center gap-4">
-    
+
       <button
         (click)="actualizarEmpleado()"
         class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition"
       >
         Actualizar
       </button>
-
     </div>
+    <br>
+    <div class="flex justify-left gap-20">
+         <a
+                [routerLink]="['/adminEmployees']"
+                class="text-blue-400 hover:underline cursor-pointer"
+              >
+              Volver a Empleados
+              </a>
+    </div>
+
   </div>
+
 </div>

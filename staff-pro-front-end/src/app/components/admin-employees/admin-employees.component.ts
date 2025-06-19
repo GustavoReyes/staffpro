@@ -65,9 +65,7 @@ export class AdminEmployeesComponent implements OnInit {
     });
   }
 
-  goToEdit(id_user: number) {
-    this.router.navigate(['/edit-employee', id_user]);
-  }
+  
   getDepartmentName(deptId: number): string {
   const dept = this.departments.find(d => d.id === deptId);
   return dept ? dept.name : 'N/D';

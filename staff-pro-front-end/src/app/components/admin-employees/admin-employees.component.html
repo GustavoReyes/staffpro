@@ -1,10 +1,22 @@
 <div class="min-h-screen flex items-center justify-center bg-[#1e2226] p-2">
-  <div class="w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6">
+  <div class="w-full w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6">
     <div class="bg-green-50/5 p-6 rounded-lg shadow-lg">
 
       <h2 class="text-2xl font-bold text-green-300 mb-6 text-center">
-        Empleados
+        Fichas de empleados
       </h2>
+      <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold text-green-300 text-center md:text-left">
+      Empleados
+    </h2>
+
+    <a
+      [routerLink]="['/adminEmployeeRegister']"
+      class="bg-[#1a1d21] hover:bg-green-700 text-green-300 font-semibold px-5 py-2 rounded-lg shadow-md transition duration-200"
+    >
+      ➕ Registrar nuevo
+    </a>
+  </div>
 
       <!-- Select de departamentos -->
       <div class="mb-6">
@@ -24,14 +36,14 @@
       </div>
 
       <!-- Tabla de empleados -->
-      <div class="overflow-x-auto rounded-lg border border-gray-700">
+      <div class="w-full overflow-x-auto rounded-lg border border-gray-700">
         <table class="min-w-full text-left text-sm text-gray-300">
           <thead class="bg-[#1a1d21] text-green-300">
             <tr>
               <th class="px-4 py-3">Nombre</th>
               <th class="px-4 py-3">DNI</th>
               <th class="px-4 py-3">Departamento</th>
-              <th class="px-4 py-3">Jornada Diaria</th>
+              <th class="px-4 py-3">Jornada Semanal</th>
               <th class="px-4 py-3">Horario Diario</th>
               <th class="px-4 py-3">Sueldo Base</th>
                <th class="px-4 py-3">Cargo</th>
@@ -51,7 +63,7 @@
                 <td class="px-4 py-3">{{ emp.work_hour }}</td>
                   <td class="px-4 py-3">{{ emp.base_salary }}</td>
                     <td class="px-4 py-3">{{ emp.position }}</td>
-                    <td class="px-4 py-3">{{ emp.hire_date}}</td>
+                    <td class="px-4 py-3">{{ emp.hire_date | date:'yyyy-MM-dd'}}</td>
               <td class="px-4 py-3 text-center">
                 <button
                   (click)="deleteEmployee(emp.id_user)"
@@ -60,12 +72,13 @@
                 >
                   🗑️
                 </button>
+
                 <a
-                  (click)="goToEdit(emp.id_user)"
-                  class="text-blue-400 hover:underline cursor-pointer"
-                >
-                  Editar
-                </a>
+                [routerLink]="['/edit-employee', emp.id_user]"
+                class="text-blue-400 hover:underline cursor-pointer"
+              >
+              Editar
+              </a>
               </td>
             </tr>
             <tr *ngIf="filteredEmployees.length === 0">
@@ -76,6 +89,16 @@
           </tbody>
         </table>
       </div>
+      <br>
+
+       <div class="flex right gap-20">
+         <a
+                [routerLink]="['/adminMenuGestion']"
+                class="text-blue-400 hover:underline cursor-pointer"
+              >
+              Volver a Gestión <--
+              </a>
+    </div>
     </div>
   </div>
 </div>
