@@ -14,6 +14,7 @@ import { AdminLeavesComponent } from './components/admin-leaves/admin-leaves.com
 import { AdminMenuGestionComponent } from './components/admin-menu-gestion/admin-menu-gestion.component';
 import { PayrollMenuComponent } from './components/payroll-menu/payroll-menu.component';
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
+import { AdminEmployeeRegisterComponent } from './components/admin-employee-register/admin-employee-register.component';
 
 export const routes: Routes = [
 
@@ -76,5 +77,9 @@ export const routes: Routes = [
   {
     path: "edit-employee/:id_user",
     component: EditEmployeeComponent,
+  },
+   {
+    path: "adminEmployeeRegister",
+    component: AdminEmployeeRegisterComponent,
   },
 ];
