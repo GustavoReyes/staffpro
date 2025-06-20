@@ -13,12 +13,16 @@ export class MainComponent {
   menuOpen = false;
   userName: string | null = null;
   isLoggedIn = false;
+  isAdmin = false
 
   constructor(private router: Router, private authService:AuthService) {}
 
   ngOnInit() {
     this.isLoggedIn = !!this.authService.getToken?.();
     this.userName = localStorage.getItem('userName');
+    const departmentId = Number(localStorage.getItem('department_id'));
+    this.isAdmin = this.isLoggedIn && departmentId === 1;
+
   }
 
   toggleMenu() {

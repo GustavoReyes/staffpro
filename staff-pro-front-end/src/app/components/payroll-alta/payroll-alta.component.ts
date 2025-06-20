@@ -72,6 +72,8 @@ export class PayrollAltaComponent implements OnInit {
         console.error('Error cargando empleados:', error);
       }
     });
+
+
   }
   //Verificar que el perido de inicio y final del calculo de la nomina sea el correcto
   onPeriodChange() {
@@ -102,6 +104,21 @@ export class PayrollAltaComponent implements OnInit {
     const emp = this.filteredEmployees.find(e => e.dni === this.payroll.user_dni);
     this.selectedEmployee = emp || null;
     this.payroll.base_salary = emp ? emp.base_salary : undefined;
+    //BONOS y ADICIONES a NÓMINA
+    //Calculo de Antigüedad
+    this.payroll.bonus_1 = this.payroll.base_salary ? +(this.payroll.base_salary * 0.03).toFixed(2) : 0;
+    //Cálculo de Responsabilidad
+    this.payroll.bonus_2 = this.payroll.base_salary ? +(this.payroll.base_salary * 0.05).toFixed(2) : 0;
+
+
+    //DEDUCCIONES
+    //Calculo de IRPF
+    this.payroll.irpf = this.payroll.base_salary ? +(this.payroll.base_salary * 0.20).toFixed(2) : 0;
+    //Seguridad SOcial
+    let contComun = this.payroll.base_salary ? +(this.payroll.base_salary * 0.047).toFixed(2) : 0;
+    let desempleo = this.payroll.base_salary ? +(this.payroll.base_salary * 0.015).toFixed(2) : 0;
+    this.payroll.social_security = this.payroll.base_salary ? +(contComun + desempleo).toFixed(2) : 0;
+
     this.updateTotal();
   }
 
@@ -193,5 +210,11 @@ export class PayrollAltaComponent implements OnInit {
       (p.irpf || 0);
     p.total = ingresos - deducciones;
   }
-
+  currencySpace(value: number | null | undefined): string {
+    if (value == null) return '';
+    // Usa el pipe currency para formatear y luego reemplaza "€" por "€ "
+    const formatted = (value).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
+    // Asegura que haya un solo espacio después del símbolo
+    return formatted.replace('€', '€ ');
+  }
 }
