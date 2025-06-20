@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
   .setTitle('StaffPRO Swagger')
-  .setDescription('Documentación de Swagger para StaffPRO')
+  .setDescription('Documentación de la API en SwaggerUI para StaffPRO')
   .setVersion('1.0')
   .addTag('')
   .build();
