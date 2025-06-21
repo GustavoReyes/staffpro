@@ -38,12 +38,23 @@ export class EmployeesService {
       headers: this.getAuthHeaders()
     });
   }
-  registerEmployee(email: string, datos: any): Observable<boolean> {
+ /* registerEmployee(email: string, datos: any): Observable<boolean> {
     const url: string = `${this.apiUrl}/alta/${email}`;
     return this.http.post<boolean>(url, datos, { headers: this.getAuthHeaders() })
       .pipe(map(() => true),
         catchError(_e => of(false)));
-  }
+  }*/
+ registerEmployee(email: string, datos: any): Observable<{ success: boolean, error?: any }> {
+  const url: string = `${this.apiUrl}/alta/${email}`;
+  return this.http.post(url, datos, {
+  headers: this.getAuthHeaders(),
+  responseType: 'text' as 'json'  // 👈 Esto evita el error de parseo
+}).pipe(
+  map(() => ({ success: true })),
+  catchError(err => of({ success: false, error: err }))
+);
+}
+
 
   updateEmployeeByEmail(email: string, datos: any): Observable<any> {
     const url: string = `${this.apiUrl}/patch/${email}`;
@@ -70,7 +81,7 @@ export class EmployeesService {
     return this.http.delete(url, { headers: this.getAuthHeaders() });
   }
 
-   
+
   updateEmployeeById(id: number, datos: any): Observable<any> {
     const url: string = `${this.apiUrl}/patchById/${id}`;
     return this.http.patch(url, datos, { headers: this.getAuthHeaders() });

@@ -4,7 +4,7 @@ export class EmployeeDatosDto{
         id_user: number;
         department_id: number;
         work_day: number;
-        work_hour: number;
+        work_hour: string;
         base_salary: number;
         position: string;
         hire_date: Date;
@@ -15,7 +15,7 @@ export class EmployeeDatosDto{
             id_user: number,
             department_id: number,
             work_day?: number,
-            work_hour?: number,
+            work_hour?: string,
             base_salary?: number,
             position?: string,
             hire_date?: Date

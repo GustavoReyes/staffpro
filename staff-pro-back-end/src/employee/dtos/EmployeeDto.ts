@@ -9,7 +9,7 @@ export class EmployeeDto {
     @IsNotEmpty()
     department_id: number;
     work_day: number;
-    work_hour: number;
+    work_hour: string;
     @IsNumber()
     base_salary: number;
     @IsString()
@@ -23,7 +23,7 @@ export class EmployeeDto {
         name: string,
         department_id: number,
         work_day?: number,
-        work_hour?: number,
+        work_hour?: string,
         base_salary?: number,
         position?: string,
         hire_date?: Date

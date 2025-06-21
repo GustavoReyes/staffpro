@@ -18,7 +18,7 @@ export class Employee {
     @Column()
     work_day: number;
     @Column()
-    work_hour: number;
+    work_hour: string;
     @Column()
     base_salary: number;
     @Column()
@@ -33,7 +33,7 @@ export class Employee {
         id_user: number,
         department_id: number,
         work_day?: number,
-        work_hour?: number,
+        work_hour?: string,
         base_salary?: number,
         position?: string,
         hire_date?: Date

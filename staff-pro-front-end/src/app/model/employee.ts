@@ -7,7 +7,7 @@ export class Employee{
         work_hour: string;
         base_salary: number;
         position: string;
-        hire_date: Date;
+        hire_date: string;
 
            constructor(
             dni: string,
@@ -18,7 +18,7 @@ export class Employee{
             work_hour: string,
             base_salary: number,
             position: string,
-            hire_date: Date
+            hire_date: string
         ) {
             this.dni = dni;
             this.name = name;
