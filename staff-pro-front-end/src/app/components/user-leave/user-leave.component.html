@@ -66,32 +66,42 @@
       <div *ngIf="error" class="text-red-400 text-center mb-4">{{ error }}</div>
 
       <!-- Lista de solicitudes -->
-      <div class="grid grid-cols-1 gap-6 mb-8">
+      <div class="grid grid-cols-1 gap-3 mb-8">
         <div *ngFor="let leave of leaveRequests" class="bg-[#181C1F] border border-[#23272A] rounded-lg shadow-lg p-4">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+            <!-- ID del permiso -->
+            <div>
+              <label class="block text-base font-semibold text-gray-300 mb-1 text-center">ID de la solicitud</label>
+              <div
+                class="rounded bg-[#23272A] px-4 py-2 text-blue-300 font-semibold text-center text-base w-full flex items-center justify-center leading-none"
+                style="font-variant-numeric: tabular-nums;"
+              >
+                {{ leave.id }}
+              </div>
+            </div>
 
             <!-- Tipo -->
             <div>
-              <label class="block text-sm font-semibold text-gray-300 mb-1 text-center">Tipo</label>
-              <div class="rounded bg-[#23272A] px-4 py-2 text-green-300 font-semibold text-center">
+              <label class="block text-base font-semibold text-gray-300 mb-1 text-center">Tipo</label>
+              <div class="rounded bg-[#23272A] px-4 py-2 text-green-300 font-semibold text-center text-base w-full flex items-center justify-center leading-none">
                 {{ leave.type || "Sin tipo" }}
               </div>
             </div>
 
             <!-- Fecha -->
             <div>
-              <label class="block text-sm font-semibold text-gray-300 mb-1 text-center">Fecha</label>
-              <div class="rounded bg-[#23272A] px-4 py-2 text-green-300 font-semibold text-center">
-                {{ leave.start_date | date : "dd/MM/yyyy" }} -
-                {{ leave.end_date | date : "dd/MM/yyyy" }}
+              <label class="block text-base font-semibold text-gray-300 mb-1 text-center">Fecha</label>
+              <div class="rounded bg-[#23272A] px-4 py-2 text-green-300 font-semibold text-center text-base w-full flex items-center justify-center leading-none whitespace-nowrap">
+                {{ leave.start_date | date : "dd/MM/yyyy" }} - {{ leave.end_date | date : "dd/MM/yyyy" }}
               </div>
             </div>
 
             <!-- Status -->
             <div>
-              <label class="block text-sm font-semibold text-gray-300 mb-1 text-center">Status</label>
+              <label class="block text-base font-semibold text-gray-300 mb-1 text-center">Status</label>
               <div
-                class="rounded px-4 py-2 font-semibold text-center"
+                class="rounded px-4 py-2 font-semibold text-center text-base w-full flex items-center justify-center leading-none"
                 [ngClass]="{
                   'bg-yellow-100 text-yellow-800': leave.status === 'pending',
                   'bg-green-100 text-green-800': leave.status === 'approved',
