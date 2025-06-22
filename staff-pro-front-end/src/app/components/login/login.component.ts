@@ -56,7 +56,7 @@ export class LoginComponent {
 
             if (department_id === 1) {
               localStorage.setItem('role', 'ADMIN');
-              this.router.navigate(['/adminMenu']).then(() => window.location.reload());
+              this.router.navigate(['/userMenu']).then(() => window.location.reload());
 
             } else {
               localStorage.setItem('role', 'USER');
