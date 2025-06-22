@@ -1,39 +1,32 @@
 <div class="min-h-screen flex items-center justify-center bg-[#1e2226] p-2">
-  <div
-    class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6"
-  >        <div class="bg-green-50/5 p-6 rounded-lg shadow-lg">
-      <!-- Subtítulo para crear nueva solicitud -->
-      <h3 class="text-xl font-bold text-green-400 mb-4 mt-8 text-center">
-        Crear solicitud nueva
-      </h3>
+  <div class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6">
+  <div class="bg-green-50/5 p-6 rounded-lg shadow-lg">
+
+    <!-- Título para crear nueva solicitud -->
+    <h3 class="text-xl font-bold text-green-400 mb-4 mt-8 text-center">Crear solicitud nueva</h3>
+
       <!-- Formulario -->
-      <form
-        (ngSubmit)="createLeave()"
-        class="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-4"
-      >
+      <form (ngSubmit)="createLeave()" class="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-4">
+
         <!-- Tipo de permiso -->
         <div class="flex flex-col">
-          <label for="type" class="mb-1 text-white text-sm"
-            >Tipo de permiso</label
-          >
+          <label for="type" class="mb-1 text-white text-sm text-center">Tipo de permiso</label>
           <select
             [(ngModel)]="newLeave.type"
             name="type"
             id="type"
             required
-            class="px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
-          >
-            <option value="" disabled selected>Selecciona una razón...</option>
+            class="px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white">
+            <option value="" disabled selected hidden>Selecciona una razón...</option>
             <option *ngFor="let type of leaveTypes" [value]="type.value">
               {{ type.label }}
             </option>
           </select>
         </div>
+
         <!-- Fecha de inicio -->
         <div class="flex flex-col">
-          <label for="start_date" class="mb-1 text-white text-sm"
-            >Fecha de inicio</label
-          >
+          <label for="start_date" class="mb-1 text-white text-sm text-center">Fecha de inicio</label>
           <input
             [(ngModel)]="newLeave.start_date"
             name="start_date"
@@ -43,11 +36,10 @@
             class="px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
           />
         </div>
+
         <!-- Fecha de fin -->
         <div class="flex flex-col">
-          <label for="end_date" class="mb-1 text-white text-sm"
-            >Fecha de fin</label
-          >
+          <label for="end_date" class="mb-1 text-white text-sm text-center">Fecha de fin</label>
           <input
             [(ngModel)]="newLeave.end_date"
             name="end_date"
@@ -57,58 +49,47 @@
             class="px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
           />
         </div>
+
         <!-- Botón "Solicitar" -->
         <div class="flex flex-col justify-end">
-          <button
-            type="submit"
-            class="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition w-full"
-          >
-            Solicitar
-          </button>
+          <button type="submit" class="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition w-full">Solicitar</button>
         </div>
       </form>
-      <h2 class="text-2xl font-bold text-white text-center mb-4">
-        Mis solicitudes de permiso
-      </h2>
+
+      <!-- Título de la lista de solicitudes -->
+      <h2 class="text-2xl font-bold text-white text-center mb-4">Mis solicitudes de permiso</h2>
+
+      <!-- Subtítulo para la carga de solicitudes -->
       <div *ngIf="loading" class="text-center text-gray-300 mb-4">
         Cargando...
       </div>
       <div *ngIf="error" class="text-red-400 text-center mb-4">{{ error }}</div>
+
       <!-- Lista de solicitudes -->
       <div class="grid grid-cols-1 gap-6 mb-8">
-        <div
-          *ngFor="let leave of leaveRequests"
-          class="bg-[#181C1F] border border-[#23272A] rounded-lg shadow-lg p-4"
-        >
+        <div *ngFor="let leave of leaveRequests" class="bg-[#181C1F] border border-[#23272A] rounded-lg shadow-lg p-4">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
             <!-- Tipo -->
             <div>
-              <label class="block text-sm font-semibold text-gray-300 mb-1"
-                >Tipo</label
-              >
-              <div
-                class="rounded bg-[#23272A] px-4 py-2 text-green-300 font-semibold"
-              >
+              <label class="block text-sm font-semibold text-gray-300 mb-1 text-center">Tipo</label>
+              <div class="rounded bg-[#23272A] px-4 py-2 text-green-300 font-semibold text-center">
                 {{ leave.type || "Sin tipo" }}
               </div>
             </div>
+
             <!-- Fecha -->
             <div>
-              <label class="block text-sm font-semibold text-gray-300 mb-1"
-                >Fecha</label
-              >
-              <div
-                class="rounded bg-[#23272A] px-4 py-2 text-green-300 font-semibold"
-              >
+              <label class="block text-sm font-semibold text-gray-300 mb-1 text-center">Fecha</label>
+              <div class="rounded bg-[#23272A] px-4 py-2 text-green-300 font-semibold text-center">
                 {{ leave.start_date | date : "dd/MM/yyyy" }} -
                 {{ leave.end_date | date : "dd/MM/yyyy" }}
               </div>
             </div>
+
             <!-- Status -->
             <div>
-              <label class="block text-sm font-semibold text-gray-300 mb-1"
-                >Status</label
-              >
+              <label class="block text-sm font-semibold text-gray-300 mb-1 text-center">Status</label>
               <div
                 class="rounded px-4 py-2 font-semibold text-center"
                 [ngClass]="{
@@ -119,6 +100,7 @@
               >
                 {{ leave.status }}
               </div>
+
             </div>
           </div>
         </div>

@@ -12,6 +12,7 @@ import { LeaveRequest } from '../../model/leaverequest';
   standalone: true,
   imports: [CommonModule, FormsModule]
 })
+
 export class AdminLeavesComponent implements OnInit {
   leaveRequests: LeaveRequest[] = [];
   loading = false;
@@ -37,14 +38,22 @@ export class AdminLeavesComponent implements OnInit {
     });
   }
 
+  mensajeExito: string | null = null;
+  mensajeError: string | null = null;
+
   updateStatus(leave: LeaveRequest, newStatus: 'pending' | 'approved' | 'rejected') {
     const updated = { ...leave, status: newStatus };
     this.leaveRequestsService.update(leave.id!, updated).subscribe({
       next: () => {
         leave.status = newStatus;
+        this.mensajeExito = 'Estado de la solicitud actualizado correctamente.';
+        this.mensajeError = null;
+        setTimeout(() => this.mensajeExito = null, 4000);
       },
       error: () => {
-        this.error = 'Error al actualizar el estado';
+        this.mensajeError = 'Error al actualizar el estado de la solicitud';
+        this.mensajeExito = null;
+        setTimeout(() => this.mensajeError = null, 5000);
       }
     });
   }
