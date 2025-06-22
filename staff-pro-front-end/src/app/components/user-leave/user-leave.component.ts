@@ -25,6 +25,10 @@ export class UserLeaveComponent implements OnInit {
     { value: 'Asuntos propios', label: 'Asuntos propios' }
   ];
 
+  // Variables del mensaje de exito/error al crear la leaveRequest
+  mensajeExito: string | null = null;
+  mensajeError: string | null = null;
+
   constructor(
     private leaveRequestsService: LeaveRequestsService,
     private authService: AuthService,
@@ -33,8 +37,8 @@ export class UserLeaveComponent implements OnInit {
     this.newLeave = this.createEmptyLeave();
   }
 
+  // Verificacion de que el usuario tenga un login valido
   ngOnInit() {
-    // Verifica si el usuario está logueado
     if (!this.authService.getToken?.() || !this.getCurrentUserId()) {
       this.router.navigate(['/login']);
       return;
@@ -43,7 +47,6 @@ export class UserLeaveComponent implements OnInit {
   }
 
   getCurrentUserId(): number {
-    // Ajusta este método según cómo obtienes el id_user en tu AuthService
     const decoded = this.authService.getDecodedToken?.();
     return decoded?.id_user || Number(localStorage.getItem('id_user')) || 0;
   }
@@ -96,7 +99,7 @@ export class UserLeaveComponent implements OnInit {
       this.error = 'La fecha de fin no puede ser anterior a la fecha de inicio.';
       return;
     }
-    // 3. Status pendiente y 4. id_user_fk del usuario logeado
+    // 3. Al crear la solicitud es creada con el status pendiente y el id_user_fk del usuario.
     this.newLeave.status = 'pending';
     this.newLeave.id_user_fk = this.getCurrentUserId();
 
@@ -104,9 +107,15 @@ export class UserLeaveComponent implements OnInit {
       next: () => {
         this.fetchLeaves();
         this.newLeave = this.createEmptyLeave();
+        this.mensajeExito = 'Solicitud creada correctamente.';
+        this.mensajeError = null;
+        setTimeout(() => this.mensajeExito = null, 4000);
       },
       error: () => {
         this.error = 'Error al enviar la solicitud';
+        this.mensajeError = 'Error al crear la solicitud';
+        this.mensajeExito = null;
+        setTimeout(() => this.mensajeError = null, 5000);
       }
     });
   }

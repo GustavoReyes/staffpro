@@ -5,6 +5,18 @@
     <!-- Título para crear nueva solicitud -->
     <h3 class="text-xl font-bold text-green-400 mb-4 mt-8 text-center">Crear solicitud nueva</h3>
 
+      <!-- Popup de éxito/error -->
+      <div *ngIf="mensajeExito" class="fixed bottom-6 right-6 z-50 bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-xl shadow-lg animate-slide-in">
+        <p class="text-base font-medium flex items-center gap-2">
+          <span class="text-xl">✅</span> {{ mensajeExito }}
+        </p>
+      </div>
+      <div *ngIf="mensajeError" class="fixed bottom-6 right-6 z-50 bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-xl shadow-lg animate-slide-in">
+        <p class="text-base font-medium flex items-center gap-2">
+          <span class="text-xl">❌</span> {{ mensajeError }}
+        </p>
+      </div>
+
       <!-- Formulario -->
       <form (ngSubmit)="createLeave()" class="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-4">
 
