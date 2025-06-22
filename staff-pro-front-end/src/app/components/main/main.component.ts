@@ -20,8 +20,8 @@ export class MainComponent {
   ngOnInit() {
     this.isLoggedIn = !!this.authService.getToken?.();
     this.userName = localStorage.getItem('userName');
-    const departmentId = Number(localStorage.getItem('department_id'));
-    this.isAdmin = this.isLoggedIn && departmentId === 1;
+    const localStorageRole = localStorage.getItem('role');
+    this.isAdmin = this.isLoggedIn && localStorageRole === "ADMIN";
 
   }
 

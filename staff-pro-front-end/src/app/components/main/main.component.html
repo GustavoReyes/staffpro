@@ -91,7 +91,7 @@
           >Mi perfil</a
         >
         <a
-          *ngIf="isLoggedIn && !isAdmin"
+          *ngIf="isLoggedIn && isAdmin"
           routerLink="/adminMenuGestion"
           (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
