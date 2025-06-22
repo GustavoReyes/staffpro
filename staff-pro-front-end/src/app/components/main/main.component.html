@@ -63,8 +63,8 @@
     <div class="flex-1 flex flex-col">
       <nav class="flex flex-col gap-6 w-full px-6 mt-2 md:mt-2">
         <div class="text-white text-center text-sm" *ngIf="userName">
-          Bienvenido,
-          <span class="font-bold text-primary">{{ userName }}</span>
+          Bienvenido,<br>
+          <span class="font-bold text-primary">{{ userName }}</span>.
         </div>
         <a
           *ngIf="!isLoggedIn"
@@ -72,7 +72,7 @@
           (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
           class="btn_primary"
-          >Login</a
+          >Acceso</a
         >
         <a
           *ngIf="!isLoggedIn"
@@ -80,15 +80,7 @@
           (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
           class="btn_primary"
-          >Registar Usuario</a
-        >
-        <a
-          *ngIf="isLoggedIn && !isAdmin"
-          routerLink="/adminMenuGestion"
-          (click)="menuOpen = !menuOpen"
-          routerLinkActive="activeLink"
-          class="btn_primary"
-          >Menu Gestión</a
+          >Registro</a
         >
         <a
           *ngIf="isLoggedIn"
@@ -96,7 +88,15 @@
           (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
           class="btn_primary"
-          >Menu Usuario</a
+          >Mi perfil</a
+        >
+        <a
+          *ngIf="isLoggedIn && !isAdmin"
+          routerLink="/adminMenuGestion"
+          (click)="menuOpen = !menuOpen"
+          routerLinkActive="activeLink"
+          class="btn_primary"
+          >Panel de gestión</a
         >
       </nav>
     </div>
