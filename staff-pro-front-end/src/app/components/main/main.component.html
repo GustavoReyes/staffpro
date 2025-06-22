@@ -84,14 +84,14 @@
         >
         <a
           *ngIf="isLoggedIn && !isAdmin"
-          routerLink="/adminMenu"
+          routerLink="/adminMenuGestion"
           (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
           class="btn_primary"
-          >Menu Admin</a
+          >Menu Gestión</a
         >
         <a
-          *ngIf="isLoggedIn && isAdmin"
+          *ngIf="isLoggedIn"
           routerLink="/userMenu"
           (click)="menuOpen = !menuOpen"
           routerLinkActive="activeLink"
