@@ -25,6 +25,10 @@ export class PayrollService {
     return this.http.get<Payroll[]>(this.apiUrl, { headers: this.getAuthHeaders() });
   }
 
+  getPayrollsId(id: number):Observable<Payroll>{
+      return this.http.get<Payroll>(`${this.apiUrl}/${id}`, {headers: this.getAuthHeaders() });
+  }
+
   createPayroll(payroll: Payroll): Observable<Payroll> {
     return this.http.post<Payroll>(`${this.apiUrl}/alta`, payroll, { headers: this.getAuthHeaders() });
   }

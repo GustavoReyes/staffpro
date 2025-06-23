@@ -2,6 +2,8 @@
   <div
     class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6"
   >
+    <ng-container *ngIf="isLoaded">
+      <ng-container *ngIf="isAdmin; else noPriv">
     <div class="bg-green-50/5 p-6 rounded-lg shadow-lg">
       <h2 class="text-2xl font-bold text-primary mb-6 text-center">
         Editar datos del empleado
@@ -113,5 +115,12 @@
         </a>
       </div>
     </div>
+    </ng-container>
+      <ng-template #noPriv>
+        <div class="bg-green-50/5 p-8 rounded-lg shadow-lg text-center text-red-400 text-xl font-bold">
+          No tienes privilegios para ver esta sección
+        </div>
+      </ng-template>
+    </ng-container>
   </div>
 </div>

@@ -13,7 +13,7 @@ import { AdminPayrollsComponent } from './components/admin-payrolls/admin-payrol
 import { AdminLeavesComponent } from './components/admin-leaves/admin-leaves.component';
 import { AdminMenuGestionComponent } from './components/admin-menu-gestion/admin-menu-gestion.component';
 import { PayrollMenuComponent } from './components/payroll-menu/payroll-menu.component';
-import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
+import { AdminEmployeesEditComponent } from './components/admin-employees-edit/admin-employees-edit.component';
 import { AdminEmployeeRegisterComponent } from './components/admin-employee-register/admin-employee-register.component';
 import { AdminPayrollEditComponent } from './components/admin-payroll-edit/admin-payroll-edit/admin-payroll-edit.component';
 
@@ -31,7 +31,7 @@ export const routes: Routes = [
     path: "payrollAlta",
     component: PayrollAltaComponent,
   },
-{
+  {
     path: "payrollList",
     component: PayrollListComponent,
   },
@@ -39,7 +39,7 @@ export const routes: Routes = [
     path: "register",
     component: RegisterComponent,
   },
-   {
+  {
     path: "userMenu",
     component: UserMenuComponent
   },
@@ -55,23 +55,23 @@ export const routes: Routes = [
     path: "userPayroll",
     component: UserPayrollComponent,
   },
-    {
+  {
     path: "adminMenu",
     component: AdminMenuComponent,
   },
-    {
+  {
     path: "adminMenuGestion",
     component: AdminMenuGestionComponent,
   },
-    {
+  {
     path: "adminEmployees",
     component: AdminEmployeesComponent,
   },
-     {
+  {
     path: "adminLeaves",
     component: AdminLeavesComponent,
   },
-     {
+  {
     path: "adminPayrolls",
     component: AdminPayrollsComponent,
   },
@@ -80,10 +80,10 @@ export const routes: Routes = [
     component: AdminPayrollEditComponent,
   },
   {
-    path: "edit-employee/:id_user",
-    component: EditEmployeeComponent,
+    path: "adminEmployeesEdit/:id_user",
+    component: AdminEmployeesEditComponent,
   },
-   {
+  {
     path: "adminEmployeeRegister",
     component: AdminEmployeeRegisterComponent,
   },

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { LeaveRequestsService } from '../../services/LeaveRequests/leave-requests.service';
 import { LeaveRequest } from '../../model/leaverequest';
+import { Employee } from '../../model/employee';
+import { AuthService } from '../../services/Auth/auth.service';
+import { EmployeesService } from '../../services/Employees/employees.service';
+import { DepartmentsService } from '../../services/Departments/departments.service';
+import { Department } from '../../model/department';
 
 @Component({
   selector: 'app-admin-leaves',
@@ -18,10 +22,57 @@ export class AdminLeavesComponent implements OnInit {
   loading = false;
   error = '';
 
-  constructor(private leaveRequestsService: LeaveRequestsService) {}
+  isLoaded = false;
+  isAdmin = false;
+  filteredEmployees: Employee[] = [];
+  filteredDepartments: any[] = [];
+  selectedDepartment: string = '';
+  departments: Department[] = [];
+  employees: Employee[] = [];
+
+  constructor(private leaveRequestsService: LeaveRequestsService,
+    private authService: AuthService,
+    private employeesService: EmployeesService,
+    private departmentsService: DepartmentsService
+  ) { }
 
   ngOnInit() {
-    this.fetchLeaves();
+
+    const userId = this.authService.getUserId();
+    if (!userId) {
+      this.isLoaded = true;
+      this.isAdmin = false;
+      return;
+    }
+
+    this.employeesService.getEmployees().subscribe({
+      next: (employees) => {
+        const employee = employees.find(emp => emp.id_user === userId);
+        this.isAdmin = !!employee && employee.department_id === 1;
+        this.isLoaded = true;
+
+        if (this.isAdmin) {
+          this.fetchLeaves();
+          this.departmentsService.allDepartmenst().subscribe({
+            next: (data) => {
+              this.departments = data;
+              this.filteredDepartments = data;
+            },
+            error: (error) => console.error('Error cargando departamentos:', error)
+          });
+
+          this.employees = employees.map(emp => {
+            emp.department_id = Number(emp.department_id);
+            return emp;
+          });
+        }
+      },
+      error: (error) => {
+        this.isLoaded = true;
+        this.isAdmin = false;
+        console.error('Error cargando empleados:', error);
+      }
+    });
   }
 
   fetchLeaves() {

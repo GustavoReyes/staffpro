@@ -1,1 +1,187 @@
-<p>admin-payroll-edit works!</p>
+<div class="min-h-screen flex items-center justify-center bg-[#1e2226] p-2">
+  <div
+    class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl bg-[#23272A] p-6"
+  >
+    <ng-container *ngIf="isLoaded">
+      <ng-container *ngIf="isAdmin; else noPriv">
+        <div class="bg-green-50/5 p-6 rounded-lg shadow-lg">
+          <h2 class="text-2xl font-bold text-white text-center mb-6">
+            Editar Nómina
+          </h2>
+          <!-- Filtros -->
+          <form class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div>
+              <label class="block text-gray-300 mb-2">Departamento</label>
+              <select
+                title="Departamento"
+                [(ngModel)]="selectedDepartment"
+                name="department"
+                (change)="onDepartmentChange()"
+                class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
+              >
+                <option value="">Selecciona un departamento</option>
+                <option *ngFor="let dept of departments" [value]="dept.id">
+                  {{ dept.name }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-gray-300 mb-2">Empleado</label>
+              <select
+                title="Empleado"
+                [(ngModel)]="selectedEmployee"
+                name="employee"
+                (change)="onEmployeeChange()"
+                class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
+                [disabled]="!selectedDepartment"
+              >
+                <option value="">Selecciona un empleado</option>
+                <option *ngFor="let emp of filteredEmployees" [value]="emp.dni">
+                  {{ emp.name }}
+                </option>
+              </select>
+            </div>
+          </form>
+
+          <!-- Tabla de nóminas filtradas -->
+          <div class="overflow-x-auto rounded-lg border border-gray-700 mb-8">
+            <table class="min-w-full text-left text-sm text-gray-300">
+              <thead class="bg-[#1a1d21]">
+                <tr>
+                  <th class="px-4 py-3">Id</th>
+                  <th class="px-4 py-3">Empleado</th>
+                  <th class="px-4 py-3">Fecha</th>
+                  <th class="px-4 py-3">Total</th>
+                  <th class="px-4 py-3 text-center">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let payroll of filteredPayrolls">
+                  <td class="px-4 py-3">{{ payroll.id }}</td>
+                  <td class="px-4 py-3">
+                    {{
+                      payroll.user_dni ? getEmployeeName(payroll.user_dni) : ""
+                    }}
+                  </td>
+                  <td class="px-4 py-3">
+                    {{ payroll.date | date : "yyyy-MM-dd" }}
+                  </td>
+                  <td class="px-4 py-3">
+                    {{ payroll.total | currency : "EUR" : "symbol" : "1.2-2" }}
+                  </td>
+                  <td class="px-4 py-3 text-center">
+                    <button
+                      (click)="selectPayroll(payroll)"
+                      class="text-blue-400 hover:underline"
+                    >
+                      Editar
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="filteredPayrolls.length === 0">
+                  <td
+                    colspan="5"
+                    class="px-4 py-4 text-center text-gray-400 italic"
+                  >
+                    No hay nóminas para mostrar.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Formulario de edición -->
+          <form
+            *ngIf="selectedPayroll"
+            (ngSubmit)="updatePayroll()"
+            class="space-y-6"
+          >
+            <h3 class="text-xl font-bold text-white mb-4">
+              Editar Nómina de
+              {{
+                selectedPayroll.user_dni
+                  ? getEmployeeName(selectedPayroll.user_dni)
+                  : ""
+              }}
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label class="block text-gray-300 text-sm font-bold mb-2"
+                  >Fecha Nómina</label
+                >
+                <input
+                title="Fecha"
+                  type="number"
+                  [value]="selectedPayroll.id"
+                  name="edit_date"
+                  class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
+                  disabled
+                />
+              </div>
+              <div>
+                <label class="block text-gray-300 text-sm font-bold mb-2"
+                  >Fecha Nómina</label
+                >
+                <input
+                title="Fecha2"
+                  [value]="selectedPayroll.date"
+                  name="edit_date"
+                  class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
+                  disabled
+                />
+              </div>
+              <div>
+                <label class="block text-gray-300 text-sm font-bold mb-2"
+                  >Periodo Inicio</label
+                >
+                <input
+                title="fecha3"
+                  type="date"
+                  [(ngModel)]="selectedPayroll.period_in"
+                  name="edit_period_in"
+                  class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-gray-300 text-sm font-bold mb-2"
+                  >Periodo Fin</label
+                >
+                <input
+                title="Fecha4"
+                  type="date"
+                  [(ngModel)]="selectedPayroll.period_out"
+                  name="edit_period_out"
+                  class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
+                  required
+                />
+              </div>
+            </div>
+            <div class="flex gap-4 justify-end">
+              <button
+                type="button"
+                (click)="cancelEdit()"
+                class="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                class="px-8 py-2 bg-green-400 text-black font-medium rounded hover:bg-green-500 transition-colors"
+              >
+                Guardar Cambios
+              </button>
+            </div>
+          </form>
+        </div>
+      </ng-container>
+      <ng-template #noPriv>
+        <div
+          class="bg-green-50/5 p-8 rounded-lg shadow-lg text-center text-red-400 text-xl font-bold"
+        >
+          No tienes privilegios para ver esta sección
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
