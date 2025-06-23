@@ -1,5 +1,6 @@
 import { Type } from "class-transformer";
 import { IsDate, IsEnum, IsInt, IsOptional, IsString } from "class-validator";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export enum LeaveRequestStatus {
   ACCEPTED = 'accepted',
@@ -9,27 +10,33 @@ export enum LeaveRequestStatus {
 
 export class LeaveRequestDto {
 
+  @ApiProperty({example: 0, description:'ID del usuario solicitante'})
   @IsInt()
   id_user_fk: number;
 
+  @ApiPropertyOptional({ example: 0, description: 'ID de la solicitud de ausencia' })
   @IsOptional()
   @IsInt()
   id?: number;
 
+  @ApiPropertyOptional({ example: 'SwaggerTest', description: 'Tipo de ausencia' })
   @IsOptional()
   @IsString()
   type?: string;
 
+  @ApiPropertyOptional({ example: '2025-05-05', description: 'Fecha de inicio', type: String, format: 'date' })
   @IsOptional()
   @Type(() => Date)
   @IsDate()
   start_date?: Date;
 
+   @ApiPropertyOptional({ example: '2026-06-06', description: 'Fecha de fin', type: String, format: 'date' })
   @IsOptional()
   @Type(() => Date)
   @IsDate()
   end_date?: Date;
 
+   @ApiPropertyOptional({ enum: LeaveRequestStatus, description: 'Estado de la solicitud' })
   @IsOptional()
   @IsEnum(LeaveRequestStatus)
   status?: string;
