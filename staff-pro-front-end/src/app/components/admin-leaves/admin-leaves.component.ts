@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 
 import { LeaveRequestsService } from '../../services/LeaveRequests/leave-requests.service';
 import { LeaveRequest } from '../../model/leaverequest';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-leaves',
   templateUrl: './admin-leaves.component.html',
   styleUrl: './admin-leaves.component.css',
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, RouterLink]
 })
 
 export class AdminLeavesComponent implements OnInit {

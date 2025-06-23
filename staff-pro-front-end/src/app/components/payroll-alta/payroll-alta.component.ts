@@ -7,9 +7,10 @@ import { Employee } from '../../model/employee';
 import { EmployeesService } from '../../services/Employees/employees.service';
 import { DepartmentsService } from '../../services/Departments/departments.service';
 import { AuthService } from '../../services/Auth/auth.service';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-payroll-alta',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './payroll-alta.component.html',
   styleUrl: './payroll-alta.component.css'
 })
