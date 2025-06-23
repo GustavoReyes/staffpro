@@ -8,9 +8,10 @@ import { PayrollService } from '../../../services/Payroll/payroll.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/Auth/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink],
   selector: 'app-payroll-edit',
   templateUrl: './admin-payroll-edit.component.html',
   styleUrls: ['./admin-payroll-edit.component.css']
