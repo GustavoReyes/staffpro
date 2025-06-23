@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Payroll } from '../../model/payroll';
 import { PayrollService } from '../../services/Payroll/payroll.service';
 import { AuthService } from '../../services/Auth/auth.service';
@@ -10,7 +10,7 @@ import { Employee } from '../../model/employee';
 
 @Component({
   selector: 'app-user-payroll',
-  imports:[CommonModule, FormsModule],
+  imports:[CommonModule, FormsModule, RouterLink],
   templateUrl: './user-payroll.component.html',
   styleUrl: './user-payroll.component.css'
 })

@@ -7,10 +7,11 @@ import { Employee } from '../../model/employee';
 import { EmployeesService } from '../../services/Employees/employees.service';
 import { DepartmentsService } from '../../services/Departments/departments.service';
 import { AuthService } from '../../services/Auth/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-payroll-list',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './payroll-list.component.html',
   styleUrl: './payroll-list.component.css'
 })

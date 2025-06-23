@@ -8,13 +8,14 @@ import { AuthService } from '../../services/Auth/auth.service';
 import { EmployeesService } from '../../services/Employees/employees.service';
 import { DepartmentsService } from '../../services/Departments/departments.service';
 import { Department } from '../../model/department';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-leaves',
   templateUrl: './admin-leaves.component.html',
   styleUrl: './admin-leaves.component.css',
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, RouterLink]
 })
 
 export class AdminLeavesComponent implements OnInit {
