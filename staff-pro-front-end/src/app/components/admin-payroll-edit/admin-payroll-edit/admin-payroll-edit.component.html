@@ -107,13 +107,13 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label class="block text-gray-300 text-sm font-bold mb-2"
-                  >Fecha Nómina</label
+                  >Id Nómina</label
                 >
                 <input
-                title="Fecha"
+                title="idNomina"
                   type="number"
                   [value]="selectedPayroll.id"
-                  name="edit_date"
+                  name="edit_idNomina"
                   class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
                   disabled
                 />
@@ -124,7 +124,7 @@
                 >
                 <input
                 title="Fecha2"
-                  [value]="selectedPayroll.date"
+                  [value]="selectedPayroll.date | date : 'longDate'"
                   name="edit_date"
                   class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
                   disabled
@@ -135,12 +135,11 @@
                   >Periodo Inicio</label
                 >
                 <input
-                title="fecha3"
+                title="fechaInicial"
                   type="date"
                   [(ngModel)]="selectedPayroll.period_in"
                   name="edit_period_in"
                   class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
-                  required
                 />
               </div>
               <div>
@@ -148,12 +147,24 @@
                   >Periodo Fin</label
                 >
                 <input
-                title="Fecha4"
+                title="fechaFinal"
                   type="date"
                   [(ngModel)]="selectedPayroll.period_out"
                   name="edit_period_out"
                   class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white"
-                  required
+                />
+              </div>
+              <div>
+                <label class="block text-gray-300 text-sm font-bold mb-2"
+                  >IRPF</label
+                >
+                <input
+                title="IRPF"
+                  type="number"
+                  [(ngModel)]="selectedPayroll.irpf"
+                  value="{{ selectedPayroll.irpf }}"
+                  name="IRPF"
+                  class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white text-right"
                 />
               </div>
             </div>
