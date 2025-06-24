@@ -136,25 +136,8 @@
       </div>
     </div>
     </ng-container>
-          <!-- Botones de acción -->
-          <div class="flex justify-center gap-4">
-            <button
-              (click)="actualizarEmpleado()"
-              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition"
-            >
-              Actualizar
-            </button>
-          </div>
-          <br />
-          <div class="flex justify-left gap-20">
-            <a
-              [routerLink]="['/adminEmployees']"
-              class="text-blue-400 hover:underline cursor-pointer"
-            >
-              ← Volver
-            </a>
-          </div>
-     
+         
+
       <ng-template #noPriv>
         <div
           class="bg-green-50/5 p-8 rounded-lg shadow-lg text-center text-red-400 text-xl font-bold"
