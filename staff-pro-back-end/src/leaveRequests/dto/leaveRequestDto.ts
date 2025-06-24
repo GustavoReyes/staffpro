@@ -30,13 +30,13 @@ export class LeaveRequestDto {
   @IsDate()
   start_date?: Date;
 
-   @ApiPropertyOptional({ example: '2026-06-06', description: 'Fecha de fin', type: String, format: 'date' })
+  @ApiPropertyOptional({ example: '2026-06-06', description: 'Fecha de fin', type: String, format: 'date' })
   @IsOptional()
   @Type(() => Date)
   @IsDate()
   end_date?: Date;
 
-   @ApiPropertyOptional({ enum: LeaveRequestStatus, description: 'Estado de la solicitud' })
+  @ApiPropertyOptional({ enum: LeaveRequestStatus, description: 'Estado de la solicitud' })
   @IsOptional()
   @IsEnum(LeaveRequestStatus)
   status?: string;
