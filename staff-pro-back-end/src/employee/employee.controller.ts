@@ -78,9 +78,22 @@ async updateByEmail(
 @UseGuards(LoginGuard, RolesGuard)
 @Roles('admin')
 @Patch('patchById/:id_user')
-  async updateById( @Param('id_user') id_user: number, @Body() updateData: Partial<EmployeeAltaDto>): Promise<EmployeeDatosDto> {
-    return await this.employeeService.updateById(id_user, updateData);
+  async updateById( @Param('id_user') id_user: number, @Body() updateData: Partial<EmployeeAltaDto>){
+     try {
+    const empleadoActualizado = await this.employeeService.updateById(id_user, updateData);
+    return {
+      success: true,
+      data: empleadoActualizado
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message || 'Error al actualizar el empleado'
+    };
   }
+  }
+
+
 
 @UseGuards(LoginGuard, RolesGuard)
 @Roles('admin')

@@ -24,6 +24,8 @@ export class AdminEmployeesEditComponent {
   filteredEmployees: Employee[] = [];
   filteredDepartments: any[] = [];
   employees: Employee[] = [];
+  mensajeExito: string | null = null;
+  mensajeError: string | null = null;
 
 
   constructor(
@@ -108,14 +110,23 @@ export class AdminEmployeesEditComponent {
 
     this.employeesService.updateEmployeeById(this.id_user, this.employee).subscribe({
       next: (response) => {
-        console.log('Empleado actualizado:', response);
-        alert('Empleado actualizado correctamente');
-      },
-      error: (error) => {
-        console.error('Error actualizando empleado:', error);
-        alert('Error al actualizar el empleado');
+       if(response.success){
+        this.mensajeExito = '✅ El empleado ha sido editado correctamente.';
+        this.mensajeError = null;
+
+        setTimeout(() => this.mensajeExito = null, 3000);
+      } else {
+        this.mensajeError = '❌ No se ha podido editar el empleado. Inténtelo más tarde.';
+        this.mensajeExito = null;
+        setTimeout(() => this.mensajeError = null, 4000);
       }
-    });
-  }
+    },
+    error: (err) => {
+      this.mensajeError = '❌ Error inesperado al editar el empleado.';
+      this.mensajeExito = null;
+      setTimeout(() => this.mensajeError = null, 4000);
+    }
+  });
+}
 
 }
