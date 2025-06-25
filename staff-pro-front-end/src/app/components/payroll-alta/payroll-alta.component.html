@@ -229,18 +229,17 @@
                   </div>
                   <div>
                     <label class="block text-gray-300 text-sm font-bold mb-2"
-                      >Bono 3</label
+                      >Bono Extra</label
                     >
-                    <!--      <input
+                         <input
                       title="Bono3"
                       type="number"
                       name="bonus_3"
-                      disabled
                       [(ngModel)]="payroll.bonus_3"
                       (change)="updateTotal()"
                       class="inputPayroll"
-                    /> -->
-                    <div
+                    />
+                    <!-- <div
                       class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white text-right min-h-[40px]"
                     >
                       {{
@@ -249,7 +248,7 @@
                             | currency : "EUR" : "symbol" : "1.2-2")
                           : "\u00A0"
                       }}
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -263,15 +262,15 @@
                     <label class="block text-gray-300 text-sm font-bold mb-2"
                       >Deducción 1</label
                     >
-                    <!--   <input
+                      <input
                       title="Deducción1"
                       type="number"
                       name="deduction_1"
                       [(ngModel)]="payroll.deduction_1"
                       (change)="updateTotal()"
                       class="inputPayroll"
-                    /> -->
-                    <div
+                    />
+                    <!-- <div
                       class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white text-right min-h-[40px]"
                     >
                       {{
@@ -280,21 +279,21 @@
                             | currency : "EUR" : "symbol" : "1.2-2")
                           : "\u00A0"
                       }}
-                    </div>
+                    </div> -->
                   </div>
                   <div>
                     <label class="block text-gray-300 text-sm font-bold mb-2"
                       >Deducción 2</label
                     >
-                    <!-- <input
+                    <input
                       title="Deducción2"
                       type="number"
                       name="deduction_2"
                       [(ngModel)]="payroll.deduction_2"
                       (change)="updateTotal()"
                       class="inputPayroll"
-                    /> -->
-                    <div
+                    />
+                   <!--  <div
                       class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white text-right min-h-[40px]"
                     >
                       {{
@@ -303,22 +302,22 @@
                             | currency : "EUR" : "symbol" : "1.2-2")
                           : "\u00A0"
                       }}
-                    </div>
+                    </div> -->
                   </div>
 
                   <div>
                     <label class="block text-gray-300 text-sm font-bold mb-2"
                       >Anticipo</label
                     >
-                    <!-- <input
+                    <input
                       title="Anticipo"
                       type="number"
                       name="advance"
                       [(ngModel)]="payroll.advance"
                       (change)="updateTotal()"
                       class="inputPayroll"
-                    /> -->
-                    <div
+                    />
+                    <!-- <div
                       class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white text-right min-h-[40px]"
                     >
                       {{
@@ -327,7 +326,7 @@
                             | currency : "EUR" : "symbol" : "1.2-2")
                           : "\u00A0"
                       }}
-                    </div>
+                    </div> -->
                   </div>
                   <div>
                     <label class="block text-gray-300 text-sm font-bold mb-2"
@@ -367,12 +366,6 @@
                     <div
                       class="w-full px-4 py-2 rounded bg-[#181C1F] border border-[#23272A] text-white text-right min-h-[40px]"
                     >
-                      {{
-                        payroll.social_security
-                          ? (payroll.social_security
-                            | currency : "EUR" : "symbol" : "1.2-2")
-                          : "\u00A0"
-                      }}
                       {{
                         payroll.irpf
                           ? (payroll.irpf
