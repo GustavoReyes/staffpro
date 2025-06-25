@@ -13,7 +13,7 @@ export class Payroll {
     @Column()
     user_dni: string;
 
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     base_salary: number
 
     @Column({ nullable: true })
@@ -25,34 +25,34 @@ export class Payroll {
     @Column()
     period_out: Date;
 
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     social_security: number;
     
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     irpf: number;
-    
-    @Column({ nullable: true })
+
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     bonus_1?: number;
 
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     bonus_2?: number;
 
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     bonus_3?: number;
 
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     advance?: number;
 
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     deduction_1?: number;
 
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     deduction_2?: number;
 
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     deduction_3?: number;
 
-    @Column()
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     total?: number;
 
     @ManyToOne(() => Employee, employee => employee.payrolls)

@@ -26,7 +26,6 @@ export class PayrollAltaComponent implements OnInit {
   isAdmin = false;
   isLoaded = false;
 
-  // Cargar desde tu servicio de departamentos
   departments: any[] = [];
   filteredDepartments: any[] = [];
   departmentSearch: string = '';
@@ -95,6 +94,7 @@ export class PayrollAltaComponent implements OnInit {
       this.periodoInvalido = false;
       this.diasPeriodo = 0;
     }
+    this.updateTotal();
   }
   filterDepartments() {
     this.filteredDepartments = this.departments.filter(dept =>
@@ -102,6 +102,7 @@ export class PayrollAltaComponent implements OnInit {
     );
   }
   onEmployeeChange() {
+    if (!this.payroll) return;
     const emp = this.filteredEmployees.find(e => e.dni === this.payroll.user_dni);
     this.selectedEmployee = emp || null;
     this.payroll.base_salary = emp ? emp.base_salary : undefined;
@@ -110,11 +111,15 @@ export class PayrollAltaComponent implements OnInit {
     this.payroll.bonus_1 = this.payroll.base_salary ? +(this.payroll.base_salary * 0.03).toFixed(2) : 0;
     //Cálculo de Responsabilidad
     this.payroll.bonus_2 = this.payroll.base_salary ? +(this.payroll.base_salary * 0.05).toFixed(2) : 0;
+    //Calculo de Dedicacion
+    this.payroll.bonus_3 = this.payroll.base_salary ? +(this.payroll.base_salary * 0.01).toFixed(2) : 0;
+
 
 
     //DEDUCCIONES
     //Calculo de IRPF
-    this.payroll.irpf = this.payroll.base_salary ? +(this.payroll.base_salary * 0.20).toFixed(2) : 0;
+    this.payroll.irpf =  +(((this.payroll.base_salary ?? 0) * (this.selectedEmployee?.irpf_idx ?? 0)).toFixed(2));
+    
     //Seguridad SOcial
     let contComun = this.payroll.base_salary ? +(this.payroll.base_salary * 0.047).toFixed(2) : 0;
     let desempleo = this.payroll.base_salary ? +(this.payroll.base_salary * 0.015).toFixed(2) : 0;
@@ -132,11 +137,6 @@ export class PayrollAltaComponent implements OnInit {
         emp.department_id === departmentId
       );
 
-      // Depuración
-      console.log('Departamento ID:', departmentId);
-      console.log('Todos los empleados:', this.employees);
-      console.log('Empleados filtrados:', this.filteredEmployees);
-
       // Reset los valores relacionados con el empleado
       this.payroll.user_dni = '';
       this.selectedEmployee = null;
@@ -145,6 +145,7 @@ export class PayrollAltaComponent implements OnInit {
       this.filteredEmployees = [];
     }
   }
+
   loadPayrolls() {
     this.payrollService.getPayrolls().subscribe(data => {
       this.payrolls = data;
@@ -197,25 +198,25 @@ export class PayrollAltaComponent implements OnInit {
     const p = this.payroll;
     // Suma de ingresos
     const ingresos =
-      (p.base_salary || 0) +
-      (p.bonus_1 || 0) +
-      (p.bonus_2 || 0) +
-      (p.bonus_3 || 0) +
-      (p.advance || 0);
+      (p.base_salary ?? 0) +
+      (p.bonus_1 ?? 0) +
+      (p.bonus_2 ?? 0) +
+      (p.bonus_3 ?? 0) +
+      (p.advance ?? 0);
     // Suma de deducciones
     const deducciones =
-      (p.deduction_1 || 0) +
-      (p.deduction_2 || 0) +
-      (p.deduction_3 || 0) +
-      (p.social_security || 0) +
-      (p.irpf || 0);
-    p.total = ingresos - deducciones;
+      (p.deduction_1 ?? 0) +
+      (p.deduction_2 ?? 0) +
+      (p.deduction_3 ?? 0) +
+      (p.social_security ?? 0) +
+      (p.irpf ?? 0);
+    p.total = +(ingresos - deducciones).toFixed(2);
   }
-  currencySpace(value: number | null | undefined): string {
-    if (value == null) return '';
-    // Usa el pipe currency para formatear y luego reemplaza "€" por "€ "
-    const formatted = (value).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
-    // Asegura que haya un solo espacio después del símbolo
-    return formatted.replace('€', '€ ');
-  }
+  /*   currencySpace(value: number | null | undefined): string {
+      if (value == null) return '';
+      // Usa el pipe currency para formatear y luego reemplaza "€" por "€ "
+      const formatted = (value).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
+      // Asegura que haya un solo espacio después del símbolo
+      return formatted.replace('€', '€ ');
+    } */
 }

@@ -100,11 +100,19 @@
             class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600"
           />
         </div>
-        <div class="md:col-span-2">
+        <div>
           <label class="text-sm text-gray-300 mb-1 block">Cargo</label>
           <input
             title="Cargo"
             [(ngModel)]="employee.position"
+            class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600"
+          />
+        </div>
+        <div>
+          <label class="text-sm text-gray-300 mb-1 block">% IRPF</label>
+          <input
+            title="IRPF"
+            [(ngModel)]="employee.irpf_idx"
             class="w-full bg-[#181C1F] text-green-300 px-4 py-2 rounded-lg border border-gray-600"
           />
         </div>

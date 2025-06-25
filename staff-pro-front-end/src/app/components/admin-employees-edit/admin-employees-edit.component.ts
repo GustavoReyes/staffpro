@@ -5,7 +5,7 @@ import { Employee } from '../../model/employee';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Department } from '../../model/department';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/Auth/auth.service';
 
 @Component({
@@ -32,7 +32,6 @@ export class AdminEmployeesEditComponent {
     private route: ActivatedRoute,
     private employeesService: EmployeesService,
     private departmentsService: DepartmentsService,
-    private router: Router,
     private authService: AuthService
   ) { }
 
@@ -73,7 +72,6 @@ export class AdminEmployeesEditComponent {
       }
     });
 
-
     this.id_user = Number(this.route.snapshot.paramMap.get('id_user'));
 
     if (isNaN(this.id_user)) {
@@ -96,8 +94,6 @@ export class AdminEmployeesEditComponent {
       next: (response) => {
         this.employee = response;
         this.selectedDepartment = response.department_id;
-
-
       },
       error: (error) => {
         console.error('Error al obtener el empleado:', error);
@@ -110,23 +106,23 @@ export class AdminEmployeesEditComponent {
 
     this.employeesService.updateEmployeeById(this.id_user, this.employee).subscribe({
       next: (response) => {
-       if(response.success){
-        this.mensajeExito = '✅ El empleado ha sido editado correctamente.';
-        this.mensajeError = null;
+        if (response.success) {
+          this.mensajeExito = '✅ El empleado ha sido editado correctamente.';
+          this.mensajeError = null;
 
-        setTimeout(() => this.mensajeExito = null, 3000);
-      } else {
-        this.mensajeError = '❌ No se ha podido editar el empleado. Inténtelo más tarde.';
+          setTimeout(() => this.mensajeExito = null, 3000);
+        } else {
+          this.mensajeError = '❌ No se ha podido editar el empleado. Inténtelo más tarde.';
+          this.mensajeExito = null;
+          setTimeout(() => this.mensajeError = null, 4000);
+        }
+      },
+      error: () => {
+        this.mensajeError = '❌ Error inesperado al editar el empleado.';
         this.mensajeExito = null;
         setTimeout(() => this.mensajeError = null, 4000);
       }
-    },
-    error: (err) => {
-      this.mensajeError = '❌ Error inesperado al editar el empleado.';
-      this.mensajeExito = null;
-      setTimeout(() => this.mensajeError = null, 4000);
-    }
-  });
-}
+    });
+  }
 
 }

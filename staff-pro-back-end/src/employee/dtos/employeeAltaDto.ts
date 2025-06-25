@@ -1,4 +1,4 @@
-import { IsAlphanumeric, IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsAlphanumeric, IsDate, IsDecimal, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class EmployeeAltaDto {
     @IsNotEmpty()
@@ -12,12 +12,14 @@ export class EmployeeAltaDto {
     work_day: number;
     
     work_hour: string;
-    @IsNumber()
+    @IsDecimal()
     base_salary: number;
     @IsString()
     position: string;
     @IsDate()
     hire_date: Date;
+    @IsDecimal()
+    irpf_idx?:number;
  
 
     constructor(
@@ -28,7 +30,8 @@ export class EmployeeAltaDto {
         work_hour?: string,
         base_salary?: number,
         position?: string,
-        hire_date?: Date
+        hire_date?: Date,
+        irpf_idx?:number
     ) {
         this.dni = dni;
         this.name = name; 
@@ -38,6 +41,7 @@ export class EmployeeAltaDto {
         this.base_salary = base_salary;
         this.position = position;
         this.hire_date = hire_date;
+        this.irpf_idx= irpf_idx;
     }
     
 }

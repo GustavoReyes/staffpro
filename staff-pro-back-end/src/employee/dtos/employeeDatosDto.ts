@@ -8,6 +8,7 @@ export class EmployeeDatosDto{
         base_salary: number;
         position: string;
         hire_date: Date;
+        irpf_idx?: number;
     
            constructor(
             dni: string,
@@ -18,7 +19,8 @@ export class EmployeeDatosDto{
             work_hour?: string,
             base_salary?: number,
             position?: string,
-            hire_date?: Date
+            hire_date?: Date,
+            irpf_idx?:number
         ) {
             this.dni = dni;
             this.name = name;
@@ -29,5 +31,6 @@ export class EmployeeDatosDto{
             this.base_salary = base_salary;
             this.position = position;
             this.hire_date = hire_date;
+            this.irpf_idx = irpf_idx;
         }
 }

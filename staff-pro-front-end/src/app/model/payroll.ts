@@ -43,7 +43,7 @@ export class Payroll {
     this.period_in=period_in;
     this.period_out=period_out;
     this.social_security = social_security;
-    this.irpf = irpf;
+    this.irpf = irpf || undefined;
     this.bonus_1 = bonus_1;
     this.bonus_2 = bonus_2;
     this.bonus_3 = bonus_3;

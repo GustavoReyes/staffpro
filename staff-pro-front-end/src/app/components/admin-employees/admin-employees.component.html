@@ -47,10 +47,11 @@
             <tr>
               <th class="px-4 py-3">Nombre</th>
               <th class="px-4 py-3">DNI</th>
-              <th class="px-4 py-3">Departamento</th>
+              <th class="px-4 py-3">Depto.</th>
               <th class="px-4 py-3">Jornada Semanal</th>
               <th class="px-4 py-3">Horario Diario</th>
               <th class="px-4 py-3">Sueldo Base</th>
+              <th class="px-4 py-3">% Irpf</th>
               <th class="px-4 py-3">Cargo</th>
               <th class="px-4 py-3">Fecha de contratación</th>
               <th class="px-4 py-3 text-center">Acciones</th>
@@ -69,6 +70,7 @@
               <td class="px-4 py-3">{{ emp.work_day }}</td>
               <td class="px-4 py-3">{{ emp.work_hour }}</td>
               <td class="px-4 py-3">{{ emp.base_salary }}</td>
+              <td class="px-4 py-3">{{ emp.irpf_idx * 100 }}%</td>
               <td class="px-4 py-3">{{ emp.position }}</td>
               <td class="px-4 py-3">
                 {{ emp.hire_date | date : "yyyy-MM-dd" }}
@@ -176,6 +178,10 @@
             <div>
               <span class="font-semibold">Sueldo Base:</span>
               {{ emp.base_salary }}
+            </div>
+            <div>
+              <span class="font-semibold">% Irpf:</span>
+              {{ emp.irpf_idx }}
             </div>
             <div>
               <span class="font-semibold">Cargo:</span> {{ emp.position }}
