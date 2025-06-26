@@ -14,23 +14,23 @@
             class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"
           >
             <div>
-              <label class="text-sm text-gray-300 mb-1 block">DNI</label>
+              <label class="text-sm text-gray-300 text-center mb-1 block">DNI</label>
               <input
                 title="DNI"
                 [(ngModel)]="employee.dni"
-                class="w-full bg-[#181C1F] text-primary px-4 py-2 rounded-lg border border-gray-600"
+                class="w-full bg-[#181C1F] text-primary text-center px-4 py-2 rounded-lg border border-gray-600"
               />
             </div>
             <div>
-              <label class="text-sm text-gray-300 mb-1 block">Nombre</label>
+              <label class="text-sm text-gray-300 text-center mb-1 block">Nombre</label>
               <input
                 title="Nombre"
                 [(ngModel)]="employee.name"
-                class="w-full bg-[#181C1F] text-primary px-4 py-2 rounded-lg border border-gray-600"
+                class="w-full bg-[#181C1F] text-primary text-center px-4 py-2 rounded-lg border border-gray-600"
               />
             </div>
             <div>
-              <label class="text-sm text-gray-300 mb-1 block"
+              <label class="text-sm text-gray-300 text-center mb-1 block"
                 >Departamento</label
               >
               <select
@@ -45,34 +45,34 @@
             </div>
 
             <div>
-              <label class="text-sm text-gray-300 mb-1 block">Jornada</label>
+              <label class="text-sm text-gray-300 text-center mb-1 block">Jornada Semanal</label>
               <input
-                title="Jornada Diaria"
+                title="Jornada Semanal"
                 [(ngModel)]="employee.work_day"
-                class="w-full bg-[#181C1F] text-primary text-right px-4 py-2 rounded-lg border border-gray-600"
+                class="w-full bg-[#181C1F] text-primary text-center px-4 py-2 rounded-lg border border-gray-600"
               />
             </div>
             <div>
-              <label class="text-sm text-gray-300 mb-1 block">Horario</label>
+              <label class="text-sm text-gray-300 text-center mb-1 block">Horario</label>
               <input
                 title="Horario"
                 [(ngModel)]="employee.work_hour"
-                class="w-full bg-[#181C1F] text-primary px-4 py-2 rounded-lg border border-gray-600"
+                class="w-full bg-[#181C1F] text-primary text-center px-4 py-2 rounded-lg border border-gray-600"
               />
             </div>
             <div>
-              <label class="text-sm text-gray-300 mb-1 block"
+              <label class="text-sm text-gray-300 text-center mb-1 block"
                 >Salario base (€)</label
               >
               <input
                 title="Salario"
                 type="number"
                 [(ngModel)]="employee.base_salary"
-                class="w-full bg-[#181C1F] text-primary text-right px-4 py-2 rounded-lg border border-gray-600"
+                class="w-full bg-[#181C1F] text-primary text-center px-4 py-2 rounded-lg border border-gray-600"
               />
             </div>
             <div class="md:col-span-2">
-              <label class="text-sm text-gray-300 mb-1 block">Cargo</label>
+              <label class="text-sm text-gray-300 text-center mb-1 block">Cargo</label>
               <input
                 title="Cargo"
                 [(ngModel)]="employee.position"
@@ -80,7 +80,7 @@
               />
             </div>
             <div class="md:col-span-2">
-              <label class="text-sm text-white mb-1 block"
+              <label class="text-sm text-white text-center mb-1 block"
                 >Fecha de contratación</label
               >
               <input
@@ -89,8 +89,8 @@
                 disabled
                 class="w-full bg-[#181C1F] text-primary text-center px-4 py-2 mb-4 rounded-lg border border-gray-600"
               />
-              <label class="text-sm text-white mb-1 block"
-                >Cambiar Fecha de contratación</label
+              <label class="text-sm text-white text-center mb-1 block"
+                >Cambiar fecha de contratación</label
               >
               <input
                 title="FechaContrado"
@@ -136,7 +136,7 @@
       </div>
     </div>
     </ng-container>
-         
+
 
       <ng-template #noPriv>
         <div

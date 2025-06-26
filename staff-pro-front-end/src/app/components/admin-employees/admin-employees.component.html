@@ -43,13 +43,13 @@
         class="w-full overflow-x-auto rounded-lg border border-gray-700 hidden sm:block"
       >
         <table class="min-w-full text-left text-sm text-gray-300">
-          <thead class="bg-[#1a1d21] text-primary">
+          <thead class="bg-[#1a1d21] text-primary text-center">
             <tr>
               <th class="px-4 py-3">Nombre</th>
               <th class="px-4 py-3">DNI</th>
               <th class="px-4 py-3">Departamento</th>
               <th class="px-4 py-3">Jornada Semanal</th>
-              <th class="px-4 py-3">Horario Diario</th>
+              <th class="px-4 py-3">Horario</th>
               <th class="px-4 py-3">Sueldo Base</th>
               <th class="px-4 py-3">Cargo</th>
               <th class="px-4 py-3">Fecha de contratación</th>
@@ -59,7 +59,7 @@
           <tbody>
             <tr
               *ngFor="let emp of filteredEmployees"
-              class="border-t border-gray-700 hover:bg-[#2a2e32]"
+              class="border-t border-gray-700 text-center hover:bg-[#2a2e32]"
             >
               <td class="px-4 py-3">{{ emp.name }}</td>
               <td class="px-4 py-3">{{ emp.dni }}</td>

@@ -17,7 +17,7 @@
             <!-- Sección: Selección de Departamento y Empleado -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <label class="block text-gray-300 text-base font-bold mb-2"
+                <label class="block text-gray-300 text-base text-center font-bold mb-2"
                   >Departamento</label
                 >
                 <select
@@ -40,7 +40,7 @@
                 </select>
               </div>
               <div>
-                <label class="block text-gray-300 text-base font-bold mb-2"
+                <label class="block text-gray-300 text-base text-center font-bold mb-2"
                   >Empleado</label
                 >
                 <!-- Selector de empleados -->
@@ -72,12 +72,12 @@
 
             <!-- Sección: Información del Empleado -->
             <div class="bg-[#181C1F] p-6 rounded-lg shadow-inner">
-              <h3 class="text-lg font-semibold text-white mb-4">
+              <h3 class="text-lg font-semibold text-white text-center mb-4">
                 Información del Empleado
               </h3>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <label class="block text-gray-300 text-sm font-bold mb-2"
+                  <label class="block text-gray-300 text-sm text-center font-bold mb-2"
                     >Nombre</label
                   >
                   <input
@@ -85,11 +85,11 @@
                     type="text"
                     [value]="selectedEmployee?.name || ''"
                     readonly
-                    class="w-full px-4 py-2 rounded bg-[#23272A] border border-[#23272A] text-white opacity-70"
+                    class="w-full px-4 py-2 rounded bg-[#23272A] border border-[#23272A] text-white text-center opacity-70"
                   />
                 </div>
                 <div>
-                  <label class="block text-gray-300 text-sm font-bold mb-2"
+                  <label class="block text-gray-300 text-sm text-center font-bold mb-2"
                     >DNI</label
                   >
                   <input
@@ -97,11 +97,11 @@
                     type="text"
                     [value]="selectedEmployee?.dni || ''"
                     readonly
-                    class="w-full px-4 py-2 rounded bg-[#23272A] border border-[#23272A] text-white opacity-70"
+                    class="w-full px-4 py-2 rounded bg-[#23272A] border border-[#23272A] text-white text-center opacity-70"
                   />
                 </div>
                 <div>
-                  <label class="block text-gray-300 text-sm font-bold mb-2"
+                  <label class="block text-gray-300 text-sm text-center font-bold mb-2"
                     >Salario Base</label
                   >
                   <input
@@ -109,7 +109,7 @@
                     type="number"
                     [value]="selectedEmployee?.base_salary || ''"
                     readonly
-                    class="w-full px-4 py-2 rounded bg-[#23272A] border border-[#23272A] text-white opacity-70"
+                    class="w-full px-4 py-2 rounded bg-[#23272A] border border-[#23272A] text-white text-center opacity-70"
                   />
                 </div>
               </div>
@@ -118,7 +118,7 @@
             <!-- Sección: Fechas y días trabajados -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
-                <label class="block text-gray-300 text-sm font-bold mb-2"
+                <label class="block text-gray-300 text-sm font-bold text-center mb-2"
                   >Fecha Nómina</label
                 >
                 <input
@@ -130,7 +130,7 @@
                 />
               </div>
               <div>
-                <label class="block text-gray-300 text-sm font-bold mb-2"
+                <label class="block text-gray-300 text-sm font-bold text-center mb-2"
                   >Periodo Inicio</label
                 >
                 <input
@@ -143,7 +143,7 @@
                 />
               </div>
               <div>
-                <label class="block text-gray-300 text-sm font-bold mb-2"
+                <label class="block text-gray-300 text-sm font-bold text-center mb-2"
                   >Periodo Fin</label
                 >
                 <input
