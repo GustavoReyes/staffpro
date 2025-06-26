@@ -28,6 +28,9 @@ export class AdminPayrollEditComponent implements OnInit {
   selectedDepartment: string = '';
   selectedEmployee: string = '';
 
+  mensajeExito: string | null = null;
+  mensajeError: string | null = null;
+
   selectedPayroll: Payroll | null = null;
 
   constructor(
@@ -132,9 +135,14 @@ export class AdminPayrollEditComponent implements OnInit {
         if (idx > -1) this.payrolls[idx] = updated;
         this.onEmployeeChange();
         this.selectedPayroll = null;
+        this.mensajeExito = 'Nómina actualizada correctamente.';
+        this.mensajeError = null;
+        setTimeout(() => this.mensajeExito = null, 4000);
       },
       error: () => {
-        alert('Error al actualizar la nómina');
+        this.mensajeError = 'Error al actualizar la nómina';
+        this.mensajeExito = null;
+        setTimeout(() => this.mensajeError = null, 5000);
       }
     });
   }
