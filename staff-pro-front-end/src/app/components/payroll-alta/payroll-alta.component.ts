@@ -151,11 +151,24 @@ export class PayrollAltaComponent implements OnInit {
     });
   }
 
+  mensajeExito: string | null = null;
+  mensajeError: string | null = null;
+
   addPayroll() {
-    this.payrollService.createPayroll(this.payroll).subscribe(() => {
-      this.loadPayrolls();
-      this.payroll = new Payroll(0, '');
-      this.resetForm();
+    this.payrollService.createPayroll(this.payroll).subscribe({
+      next: () => {
+        this.loadPayrolls();
+        this.payroll = new Payroll(0, '');
+        this.resetForm();
+        this.mensajeExito = 'Nómina creada correctamente.';
+        this.mensajeError = null;
+        setTimeout(() => this.mensajeExito = null, 4000);
+      },
+      error: () => {
+        this.mensajeError = 'Error al crear la nómina.';
+        this.mensajeExito = null;
+        setTimeout(() => this.mensajeError = null, 5000);
+      }
     });
   }
 
