@@ -12,8 +12,11 @@ import { RouterLink } from '@angular/router';
 })
 export class RegisterComponent {
 
- registerData = { email: '', password: '', confirmPassword: '' };
-users: any[] = [];
+  registerData = { email: '', password: '', confirmPassword: '' };
+  users: any[] = [];
+
+  mensajeExito: string | null = null;
+  mensajeError: string | null = null;
 
   constructor(private registerService:RegisterService){}
 
@@ -25,8 +28,15 @@ users: any[] = [];
     this.registerService.register(this.registerData).subscribe({
       next: () => {
         this.registerData = { email: '', password: '', confirmPassword: '' };
+        this.mensajeExito = 'Usuario registrado correctamente.';
+        this.mensajeError = null;
+        setTimeout(() => this.mensajeExito = null, 4000);
       },
-      error: err => alert(err.error.message || 'Error al registrar')
+      error: err => {
+        this.mensajeError = err.error.message || 'Error al registrar';
+        this.mensajeExito = null;
+        setTimeout(() => this.mensajeError = null, 4000);
+      }
     });
   }
 }
