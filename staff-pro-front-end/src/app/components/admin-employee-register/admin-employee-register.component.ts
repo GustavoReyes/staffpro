@@ -70,29 +70,34 @@ export class AdminEmployeeRegisterComponent  {
 
     this.cargarDepartamentos();
   }
+
   mensajeExito: string | null = null;
   mensajeError: string | null = null;
 
   registrarEmpleado() {
     this.employee.department_id = this.selectedDepartment;
-    this.employeesService.registerEmployee(this.email, this.employee).subscribe((res) => {
-      if (res.success) {
-        this.mensajeExito = '✅ Empleado registrado correctamente.';
-        this.mensajeError = null;
-        this.resetFormulario();
-        setTimeout(() => this.mensajeExito = null, 3000);
-      } else {
-        const err = res.error;
-        console.error(err);
-
-        if (err?.status === 404) {
-          this.mensajeError = '❌ Dirección de registro no encontrada (404)';
-        } else if (err?.status === 409) {
-          this.mensajeError = '⚠️ Ya existe un empleado con ese email.';
+    this.employeesService.registerEmployee(this.email, this.employee).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.mensajeExito = 'Empleado registrado correctamente.';
+          this.mensajeError = null;
+          this.resetFormulario();
+          setTimeout(() => this.mensajeExito = null, 4000);
         } else {
-          this.mensajeError = '❌ No se pudo registrar el empleado. Todos los campos son obligatorios.';
+          const err = res.error;
+          if (err?.status === 404) {
+            this.mensajeError = 'Dirección de registro no encontrada (404)';
+          } else if (err?.status === 409) {
+            this.mensajeError = 'Ya existe un empleado con ese email.';
+          } else {
+            this.mensajeError = 'No se pudo registrar el empleado. Todos los campos son obligatorios.';
+          }
+          this.mensajeExito = null;
+          setTimeout(() => this.mensajeError = null, 4000);
         }
-
+      },
+      error: () => {
+        this.mensajeError = 'Error inesperado al registrar el empleado.';
         this.mensajeExito = null;
         setTimeout(() => this.mensajeError = null, 4000);
       }
