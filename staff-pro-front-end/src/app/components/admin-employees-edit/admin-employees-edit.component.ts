@@ -111,18 +111,17 @@ export class AdminEmployeesEditComponent {
     this.employeesService.updateEmployeeById(this.id_user, this.employee).subscribe({
       next: (response) => {
        if(response.success){
-        this.mensajeExito = '✅ El empleado ha sido editado correctamente.';
+        this.mensajeExito = 'El empleado ha sido editado correctamente.';
         this.mensajeError = null;
-
         setTimeout(() => this.mensajeExito = null, 3000);
       } else {
-        this.mensajeError = '❌ No se ha podido editar el empleado. Inténtelo más tarde.';
+        this.mensajeError = 'No se ha podido editar el empleado. Datos erroneos.';
         this.mensajeExito = null;
         setTimeout(() => this.mensajeError = null, 4000);
       }
     },
     error: (err) => {
-      this.mensajeError = '❌ Error inesperado al editar el empleado.';
+      this.mensajeError = 'Error inesperado al editar el empleado.';
       this.mensajeExito = null;
       setTimeout(() => this.mensajeError = null, 4000);
     }
