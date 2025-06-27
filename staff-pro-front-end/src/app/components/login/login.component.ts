@@ -33,7 +33,6 @@ export class LoginComponent {
           alert("Token no recibido");
           return;
         }
-        console.log(token);
         this.authService.saveToken(token);
 
         const decoded = this.authService.getDecodedToken();

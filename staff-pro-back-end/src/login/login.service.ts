@@ -32,7 +32,6 @@ export class LoginService {
     } 
     const payload = { sub: user.id_user, email: user.email };
     const token = this.jwtService.sign(payload);
-    console.log("Accediste");
     return { access_token: token };
   }
 }

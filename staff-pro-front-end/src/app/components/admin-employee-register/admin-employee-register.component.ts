@@ -15,7 +15,7 @@ import { AuthService } from '../../services/Auth/auth.service';
   styleUrl: './admin-employee-register.component.css'
 })
 
-export class AdminEmployeeRegisterComponent  {
+export class AdminEmployeeRegisterComponent {
   email: string = '';
   employee: Partial<Employee> = {};
   empleadoExistente: boolean = false;
@@ -75,6 +75,10 @@ export class AdminEmployeeRegisterComponent  {
 
   registrarEmpleado() {
     this.employee.department_id = this.selectedDepartment;
+    //hacer que el % de IRPF se guarde correctamente.
+    if (this.employee.irpf_idx !== undefined && this.employee.irpf_idx !== null) {
+      this.employee.irpf_idx = +this.employee.irpf_idx / 100;
+    }
     this.employeesService.registerEmployee(this.email, this.employee).subscribe((res) => {
       if (res.success) {
         this.mensajeExito = '✅ Empleado registrado correctamente.';
