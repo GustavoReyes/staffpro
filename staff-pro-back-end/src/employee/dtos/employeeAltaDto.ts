@@ -9,16 +9,17 @@ export class EmployeeAltaDto {
     @IsNotEmpty()
     @IsNumber()
     department_id:number;
+    @IsNumber()
     work_day: number;
-    
+    @IsString()
     work_hour: string;
-    @IsDecimal()
+    @IsNumber()
     base_salary: number;
     @IsString()
     position: string;
     @IsDate()
     hire_date: Date;
-    @IsDecimal()
+    @IsNumber()
     irpf_idx?:number;
  
 

@@ -9,6 +9,7 @@ export class EmployeeDto {
     name: string;
     @IsNotEmpty()
     department_id: number;
+    @IsNumber()
     work_day: number;
     work_hour: string;
     @IsNumber()
@@ -20,7 +21,6 @@ export class EmployeeDto {
     @IsDecimal()
     @Type(()=>Number)
     irpf_idx?: number;
-
 
     constructor(
         dni: string,

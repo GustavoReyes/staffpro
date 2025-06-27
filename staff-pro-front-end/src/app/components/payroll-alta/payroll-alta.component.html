@@ -321,13 +321,10 @@
                 <label class="text-gray-300 font-bold text-lg">Total</label>
                 <input
                   title="Total"
-                  type="text"
+                  type="number"
                   (click)="updateTotal()"
-                  [value]="
-                    ( payroll.total ?? 0) | currency : 'EUR' : 'symbol' : '1.2-2'
-                  "
-                  readonly
-                  class="w-full mr-0 md:w-48 px-2 py-1.5 rounded bg-[#181C1F] border-2 border-green-400 text-primary text-xl font-bold opacity-90 cursor-not-allowed text-right"
+                  [(ngModel)]="payroll.total"
+                  class="w-full mr-0 md:w-48 px-2 py-1.5 rounded bg-[#181C1F] border-2 border-green-400 text-primary text-xl font-bold opacity-90 text-right"
                 />
               </div>
               <!-- Botones -->
