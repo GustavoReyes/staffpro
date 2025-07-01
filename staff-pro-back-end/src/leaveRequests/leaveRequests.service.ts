@@ -43,6 +43,7 @@ async create(dto: LeaveRequestDto): Promise<{success: boolean; message: string; 
       }
     };
   } catch (error) {
+     console.error('Error creando la solicitud de permiso:', error)
     return {
       success: false,
       message: 'No se creó la solicitud. (create_error)'

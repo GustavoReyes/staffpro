@@ -11,7 +11,8 @@ export class EmployeeDto {
     department_id: number;
     @IsNumber()
     work_day: number;
-    work_hour: string;
+    @IsString()
+    schedule: string;
     @IsNumber()
     base_salary: number;
     @IsString()
@@ -27,7 +28,7 @@ export class EmployeeDto {
         name: string,
         department_id: number,
         work_day?: number,
-        work_hour?: string,
+        schedule?: string,
         base_salary?: number,
         position?: string,
         hire_date?: Date,
@@ -37,7 +38,7 @@ export class EmployeeDto {
         this.name = name;
         this.department_id = department_id;
         this.work_day = work_day;
-        this.work_hour = work_hour;
+        this.schedule = schedule;
         this.base_salary = base_salary;
         this.position = position;
         this.hire_date = hire_date;

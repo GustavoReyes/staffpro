@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 
 import { DepartmentsService } from './departments.service';
-import { Department } from './department.model';
 import { DepartmentDto } from './dtos/DepartmentDto';
 import { RolesGuard } from 'src/login/roles.guard';
 import { LoginGuard } from 'src/login/login.guard';
@@ -21,7 +20,7 @@ import { Roles } from 'src/login/roles.decorator';
 export class DepartmentsController {
   constructor(private readonly departmentsService: DepartmentsService) { }
 
-@Roles('admin')
+  @Roles('admin')
   @Post("alta")
   create(@Body() department: DepartmentDto) {
     this.departmentsService.create(department);
@@ -50,6 +49,6 @@ export class DepartmentsController {
   delete(@Param('id') id: number) {
     return this.departmentsService.delete(id);
   }
-  
+
 }
 

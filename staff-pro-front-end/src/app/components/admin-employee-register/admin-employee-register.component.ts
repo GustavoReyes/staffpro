@@ -110,7 +110,7 @@ export class AdminEmployeeRegisterComponent {
       dni: '',
       hire_date: undefined,
       work_day: 0,
-      work_hour: " ",
+      schedule: " ",
       department_id: this.departments.length > 0 ? this.departments[0].id : 0,
       irpf_idx: 0
     };

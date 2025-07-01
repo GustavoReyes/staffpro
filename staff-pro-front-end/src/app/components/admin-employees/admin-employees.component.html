@@ -68,7 +68,7 @@
                 {{ getDepartmentName(emp.department_id) }}
               </td>
               <td class="px-4 py-3">{{ emp.work_day }}</td>
-              <td class="px-4 py-3">{{ emp.work_hour }}</td>
+              <td class="px-4 py-3">{{ emp.schedule }}</td>
               <td class="px-4 py-3">{{ emp.base_salary }}</td>
               <td class="px-4 py-3">{{ emp.irpf_idx * 100 }}%</td>
               <td class="px-4 py-3">{{ emp.position }}</td>
@@ -173,7 +173,7 @@
             </div>
             <div>
               <span class="font-semibold">Horario Diario:</span>
-              {{ emp.work_hour }}
+              {{ emp.schedule }}
             </div>
             <div>
               <span class="font-semibold">Sueldo Base:</span>
